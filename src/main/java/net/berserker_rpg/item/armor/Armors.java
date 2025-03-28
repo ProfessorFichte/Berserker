@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 
 import java.util.ArrayList;
@@ -76,13 +77,16 @@ public class Armors {
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults) {
+    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
+                                      Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
                 id,
                 durability,
                 factory,
-                defaults);
+                defaults,
+                Equipment.LootProperties.of(tier)
+        );
         entries.add(entry);
         return entry;
     }
@@ -114,7 +118,7 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T1),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
                                     ))
-                    ))
+                    ),1)
                     .armorSet();
 
     public static final Armor.Set northlingArmorSet =
@@ -148,7 +152,7 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     ))
-                    ))
+                    ),2)
                     .armorSet();
 
     public static final Armor.Set netheriteNorthlingArmorSet =
@@ -182,7 +186,7 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     ))
-                    ))
+                    ),3)
                     .armorSet();
 
     public static void register(Map<String, ArmorSetConfig> configs) {

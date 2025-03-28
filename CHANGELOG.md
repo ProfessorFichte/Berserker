@@ -1,3 +1,7 @@
+# 2.4.1 - 1.21.1
+- Spell Engine 1.6 Update
+- changed some tags
+
 # 2.4.0 - 1.21.1
 - Spell Engine 1.5 Update
 - increase berserker Better Combat range to 3.0

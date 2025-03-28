@@ -22,6 +22,9 @@
 		],
 		"modmenu": [
 			"net.spell_engine.client.compatibility.ModMenuCompatibility"
+		],
+		"fabric-datagen": [
+			"net.berserker_rpg.BerserkerDataGen"
 		]
 	},
 	"mixins": [

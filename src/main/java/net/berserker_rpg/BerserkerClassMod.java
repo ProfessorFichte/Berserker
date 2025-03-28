@@ -12,6 +12,7 @@ import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.config.EffectsConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -61,6 +62,10 @@ public class BerserkerClassMod implements ModInitializer {
 	public void onInitialize() {
 		itemConfig.refresh();
 		effectsConfig.refresh();
+		tweaksConfig.refresh();
+		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+			tweaksConfig.value.ignore_items_required_mods = true;
+		}
 		BerserkerItems.registerModItems();
 		BerserkerSpellSchool.initialize();
 		Effects.register();

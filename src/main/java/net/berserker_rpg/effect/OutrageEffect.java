@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import static net.berserker_rpg.BerserkerClassMod.effectsConfig;
 import static net.more_rpg_classes.util.CustomMethods.clearNegativeEffects;
 
 public class OutrageEffect extends StatusEffect {
@@ -18,7 +17,7 @@ public class OutrageEffect extends StatusEffect {
         if (entity.hasStatusEffect(Effects.RAGE.registryEntry)) {
             final int amp_rage = entity.getStatusEffect(Effects.RAGE.registryEntry).getAmplifier();
             final int dura_rage = entity.getStatusEffect(Effects.RAGE.registryEntry).getDuration();
-            int rage_amplifier_max = effectsConfig.value.rage_max_amplifier_stack - 1;
+            int rage_amplifier_max = 9;
             if(amp_rage == rage_amplifier_max && !entity.getWorld().isClient() && entity instanceof ServerPlayerEntity){
                 clearNegativeEffects(entity,true);
                 entity.addStatusEffect(new StatusEffectInstance(Effects.RAGE.registryEntry, dura_rage + 10,rage_amplifier_max,false,false,true));

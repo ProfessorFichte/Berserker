@@ -24,12 +24,14 @@
     },
     "particles": [
       {
-        "particle_id": "spell_engine:weakness_smoke",
+        "particle_id": "spell_engine:smoke_medium",
+        "color_rgba": 3208659199,
         "shape": "SPHERE",
         "origin": "CENTER",
         "count": 10.0,
         "min_speed": 0.3,
         "max_speed": 0.4
+
       }
     ]
   },
@@ -48,7 +50,8 @@
       },
       "particles": [
         {
-          "particle_id": "spell_engine:weakness_smoke",
+          "particle_id": "spell_engine:smoke_medium",
+          "color_rgba": 3208659199,
           "shape": "SPHERE",
           "origin": "CENTER",
           "count": 10.0,
