@@ -1,9 +1,14 @@
 package net.berserker_rpg.item.weapons;
 
+import more_rpg_loot.item.Group;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
+import net.berserker_rpg.item.BerserkerItems;
+import net.berserker_rpg.item.armor.Armors;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
@@ -17,12 +22,14 @@ import net.spell_engine.api.item.weapon.Weapon;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
 public class WeaponsRegister {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
+    public static final ArrayList<Weapon.Entry> entriesLNE = new ArrayList<>();
 
     private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Item item, ItemConfig.Weapon defaults) {
         return entry(null, name, material, item, defaults);
@@ -70,6 +77,9 @@ public class WeaponsRegister {
     private static Weapon.Entry elder_guardian_berserker_axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage, boolean fireproof ) {
         var settings = new Item.Settings().fireproof().rarity(Rarity.EPIC);
         Item item = new ElderGuardianRaidAxe(material,settings);
+        ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
+            content.add(item);
+        });
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, berserker_axe_attackSpeed));
     }
 
@@ -78,6 +88,9 @@ public class WeaponsRegister {
     private static Weapon.Entry ender_dragon_berserker_axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage, boolean fireproof ) {
         var settings = new Item.Settings().fireproof().rarity(Rarity.EPIC);
         Item item = new DragonRaidAxe(material,settings);
+        ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
+            content.add(item);
+        });
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, berserker_axe_attackSpeed));
     }
 
@@ -86,6 +99,9 @@ public class WeaponsRegister {
     private static Weapon.Entry glacial_berserker_axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage, boolean fireproof ) {
         var settings = new Item.Settings().fireproof().rarity(Rarity.EPIC);
         Item item = new GlacialRaidAxe(material,settings);
+        ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
+            content.add(item);
+        });
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, berserker_axe_attackSpeed));
     }
 
@@ -94,6 +110,9 @@ public class WeaponsRegister {
     private static Weapon.Entry wither_berserker_axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage, boolean fireproof ) {
         var settings = new Item.Settings().fireproof().rarity(Rarity.EPIC);
         Item item = new WitherRaidAxe(material,settings);
+        ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
+            content.add(item);
+        });
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, berserker_axe_attackSpeed));
     }
 
@@ -165,6 +184,9 @@ public class WeaponsRegister {
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, frostMonarchRepair),lneAxeAttackDamage, true)
                     .attribute(ItemConfig.Attribute.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.08F))
                     .attribute(ItemConfig.Attribute.bonus(SpellSchools.FROST.id, lneWeaponSpellPower));
+
+
+
         }
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
