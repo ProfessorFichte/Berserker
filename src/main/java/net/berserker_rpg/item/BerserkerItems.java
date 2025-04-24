@@ -1,5 +1,6 @@
 package net.berserker_rpg.item;
 
+import more_rpg_loot.item.Group;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
@@ -31,8 +32,7 @@ public class BerserkerItems {
     public static void registerModItems(){
         SpellBooks.createAndRegister(new Identifier(BerserkerClassMod.MOD_ID,"berserker"), BerserkerGroup.BERSERKER_KEY);
 
-        ItemGroupEvents.modifyEntriesEvent(BerserkerGroup.BERSERKER_KEY).register((content) -> {
-        });
+
 
         BerserkerClassMod.LOGGER.info("Registering Mod Items for " + BerserkerClassMod.MOD_ID);
     }

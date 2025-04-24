@@ -1,3 +1,7 @@
+1.2.3 - 1.20.1
+- add LNE-Axes to LNE Item Group
+- Item Retextures
+
 1.2.2 - 1.20.1
 - fix northling armor renderer
 
