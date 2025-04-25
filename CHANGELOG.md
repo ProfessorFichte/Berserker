@@ -1,3 +1,6 @@
+# 2.4.3 - 1.21.1
+- fix broken sword enchanting
+
 # 2.4.2 - 1.21.1
 - Update item textures
 - Removed the special axes, they will be reintroduced with the 1.21 Loot & Explore Mod
