@@ -1,0 +1,40 @@
+{
+  "values": [
+    {
+      "id": "berserker_rpg:flint_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:stone_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:iron_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:golden_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:diamond_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:netherite_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:ruby_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:aeternium_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:aether_berserker_axe",
+      "required": false
+    }
+  ]
+}

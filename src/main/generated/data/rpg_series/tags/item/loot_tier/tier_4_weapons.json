@@ -1,8 +1,5 @@
 {
   "values": [
-    "berserker_rpg:frozen_berserker_axe",
-    "berserker_rpg:thunder_berserker_axe",
-    "berserker_rpg:soul_berserker_axe",
     {
       "id": "berserker_rpg:ruby_berserker_axe",
       "required": false

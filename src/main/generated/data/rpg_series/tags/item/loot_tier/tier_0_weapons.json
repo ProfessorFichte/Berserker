@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "berserker_rpg:flint_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:stone_berserker_axe",
+      "required": false
+    }
+  ]
+}

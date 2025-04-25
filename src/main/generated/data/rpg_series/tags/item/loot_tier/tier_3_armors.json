@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "berserker_rpg:netherite_northling_head",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:netherite_northling_chest",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:netherite_northling_legs",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:netherite_northling_feet",
+      "required": false
+    }
+  ]
+}
