@@ -50,7 +50,7 @@ public class BerserkerClassMod implements ModInitializer {
 
 	private void registerItemGroup() {
 		BerserkerGroup.BERSERKER = FabricItemGroup.builder()
-				.icon(() -> new ItemStack(Armors.northlingArmorSet.chest.asItem()))
+				.icon(() -> new ItemStack(Armors.wildlingArmorSet.head.asItem()))
 				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
 				.build();
 		Registry.register(Registries.ITEM_GROUP, BerserkerGroup.BERSERKER_KEY, BerserkerGroup.BERSERKER);

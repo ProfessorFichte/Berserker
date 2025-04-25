@@ -15,7 +15,6 @@ import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.weapon.SpellSwordItem;
 import net.spell_engine.api.item.weapon.Weapon;
-import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -80,22 +79,6 @@ public class WeaponsRegister {
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 12.0F)
             .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.05F))
             .loot(Equipment.LootProperties.of(3));
-    public static final Weapon.Entry frozen_berserker_axe = berserker_axes("frozen_berserker_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.DIAMOND)),11.5F)
-            .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.075F))
-            .attribute(AttributeModifier.bonus(SpellSchools.FROST.id, 3))
-            .loot(Equipment.LootProperties.of(4));
-    public static final Weapon.Entry thunder_berserker_axe = berserker_axes("thunder_berserker_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.DIAMOND)),11.5F)
-            .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.075F))
-            .attribute(AttributeModifier.bonus(SpellSchools.LIGHTNING.id, 3))
-            .loot(Equipment.LootProperties.of(4));
-    public static final Weapon.Entry soul_berserker_axe = berserker_axes("soul_berserker_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)),12.5F)
-            .attribute(AttributeModifier.bonus(SpellSchools.SOUL.id, 4))
-            .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:lifesteal_modifier")),0.10F))
-            .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
-            .loot(Equipment.LootProperties.of(4));
 
     private static final String BETTER_END = "betterend";
     private static final String BETTER_NETHER = "betternether";
