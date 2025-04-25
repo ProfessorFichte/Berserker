@@ -1,3 +1,10 @@
+# 2.4.2 - 1.21.1
+- Update item textures
+- Removed the special axes, they will be reintroduced with the 1.21 Loot & Explore Mod
+- Update Mod Icon
+- Add Berserker Spell Scroll and renamed it
+- Add smelting recipes for disassembling weapons and armor pieces
+
 # 2.4.1 - 1.21.1
 - Spell Engine 1.6 Update
 - changed some tags
