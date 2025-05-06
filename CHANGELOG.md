@@ -1,3 +1,6 @@
+# 2.4.4 - 1.21.1
+- Add armor meta type tags
+
 # 2.4.3 - 1.21.1
 - fix broken sword enchanting
 
