@@ -1,10 +1,11 @@
 {
-  "school": "BERSERKER_MELEE",
+  "school": "FROST",
   "range": 0.0,
   "range_mechanic": "MELEE",
-  "tier": 4,
+  "tier": 5,
 
   "active": {
+    "scroll": {},
     "cast": {
       "duration": 0.5,
       "movement_speed": 1.2,
@@ -57,6 +58,21 @@
 
   "impacts": [
     {
+      "target_conditions": [
+        {
+          "entity_type": "#minecraft:freeze_hurts_extra_types",
+          "modifier": {
+            "power_multiplier": 0.3
+          }
+        },
+        {
+          "entity_type": "#minecraft:freeze_immune_entity_types",
+          "modifier": {
+            "power_multiplier": -0.3
+          }
+        }
+      ],
+      "attribute": "minecraft:generic.attack_damage",
       "action": {
         "type": "DAMAGE",
         "damage": {
@@ -81,29 +97,6 @@
     {
       "target_conditions": [
         {
-          "entity_type": "#minecraft:freeze_hurts_extra_types",
-          "modifier": {
-            "power_multiplier": 0.3
-          }
-        },
-        {
-          "entity_type": "#minecraft:freeze_immune_entity_types",
-          "modifier": {
-            "power_multiplier": -0.3
-          }
-        }
-      ],
-      "action": {
-        "school": "FROST",
-        "type": "DAMAGE",
-        "damage": {
-          "spell_power_coefficient": 0.5
-        }
-      }
-    },
-    {
-      "target_conditions": [
-        {
           "entity_type": "#minecraft:freeze_immune_entity_types",
           "allow_action": false
         }
@@ -112,9 +105,10 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "more_rpg_classes:frosted",
-          "duration": 15.0,
+          "duration": 8.0,
           "apply_mode": "ADD",
-          "amplifier": 4,
+          "amplifier_cap": 4,
+          "amplifier": 1,
           "show_particles": false
         }
       }

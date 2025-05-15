@@ -1,10 +1,12 @@
 {
   "range": 10.0,
-  "school": "BERSERKER_MELEE",
-  "tier": 4,
+  "school": "LIGHTNING",
+  "tier": 5,
 
   "type": "ACTIVE",
-  "active": {},
+  "active": {
+    "scroll": {}
+  },
 
   "target": {
     "type": "AIM",
@@ -68,6 +70,7 @@
       }
     },
     {
+      "attribute": "minecraft:generic.attack_damage",
       "action": {
         "type": "DAMAGE",
         "damage": {
@@ -102,7 +105,7 @@
 
   "cost": {
     "cooldown":{
-      "duration": 16,
+      "duration": 25,
       "haste_affected": "false"
     },
     "exhaust": 1.0,

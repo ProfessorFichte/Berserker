@@ -61,9 +61,10 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "berserker_rpg:rage",
-          "amplifier": 9,
-          "duration": 15,
-          "refresh_duration": false,
+          "amplifier": 1,
+          "duration": 10,
+          "amplifier_cap": 10,
+          "refresh_duration": true,
           "apply_mode": "ADD"
         }
       }
