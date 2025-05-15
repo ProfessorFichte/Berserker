@@ -1,3 +1,8 @@
+# 2.4.5 - 1.21.1
+- update to newest spell engine api
+- add LNE Berserker Axe Variants
+- Structures and Treasure Spells will be added later
+
 # 2.4.4 - 1.21.1
 - Add armor meta type tags
 

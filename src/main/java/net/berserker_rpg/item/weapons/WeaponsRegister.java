@@ -1,7 +1,10 @@
 package net.berserker_rpg.item.weapons;
 
+import more_rpg_loot.RPGLoot;
+import more_rpg_loot.item.Group;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -10,11 +13,14 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.weapon.SpellSwordItem;
 import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,9 +31,8 @@ import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
 public class WeaponsRegister {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
-
-    private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType type) {
-        var entry = new Weapon.Entry(MOD_ID, name, material, factory, defaults, type);
+    private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType weaponType) {
+        var entry = new Weapon.Entry(MOD_ID, name, material, factory, defaults, weaponType);
         entry.castSpell();
         entries.add(entry);
         return entry;
@@ -54,7 +59,6 @@ public class WeaponsRegister {
     private static Weapon.Entry berserker_axes(String name, Weapon.CustomMaterial material, float damage) {
         return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, berserker_axe_attackSpeed), Equipment.WeaponType.SWORD);
     }
-
 
     public static final Weapon.Entry flint_berserker_axe = berserker_axes("flint_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.WOOD, () -> Ingredient.ofItems(Items.FLINT)), 7.0F)
@@ -83,6 +87,14 @@ public class WeaponsRegister {
     private static final String BETTER_END = "betterend";
     private static final String BETTER_NETHER = "betternether";
     private static final String AETHER = "aether";
+    private static final String LNE = "loot_n_explore";
+    private static final float lneWeaponSpellPower = 2.0F;
+    private static final float lneAxeAttackDamage = 15.0F;
+    ///PASSIVE SPELLS
+    public static Identifier dragonclaw = Identifier.of(RPGLoot.MOD_ID, "dragonclaw");
+    public static Identifier avalanche = Identifier.of(RPGLoot.MOD_ID, "avalanche");
+    public static Identifier waterbomb = Identifier.of(RPGLoot.MOD_ID, "waterbomb");
+    public static Identifier wither_pulse = Identifier.of(RPGLoot.MOD_ID, "wither_pulse");
     //Registration
     public static void register(Map<String, WeaponConfig> configs) {
         if(FabricLoader.getInstance().isModLoaded(BETTER_NETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
@@ -105,8 +117,45 @@ public class WeaponsRegister {
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of("aether"));
+        }
+        if(FabricLoader.getInstance().isModLoaded(LNE)|| BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
+            berserker_axes( "ender_dragon_berserker_axe",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)),lneAxeAttackDamage)
+                    .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
+                    .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, lneWeaponSpellPower))
+                    .spell(dragonclaw)
+                    .rarity = Rarity.RARE;
+            berserker_axes( "elder_guardian_berserker_axe",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)),lneAxeAttackDamage)
+                    .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
+                    .attribute(AttributeModifier.bonus(MoreSpellSchools.WATER.id, lneWeaponSpellPower))
+                    .spell(waterbomb)
+                    .rarity = Rarity.RARE;
+            berserker_axes( "wither_berserker_axe",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)),lneAxeAttackDamage)
+                    .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
+                    .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, lneWeaponSpellPower))
+                    .spell(wither_pulse)
+                    .rarity = Rarity.RARE;
+            berserker_axes( "glacial_berserker_axe",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.ICE)),lneAxeAttackDamage)
+                    .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
+                    .attribute(AttributeModifier.bonus(SpellSchools.FROST.id, lneWeaponSpellPower))
+                    .spell(avalanche)
+                    .rarity = Rarity.RARE;
 
+            Identifier itemIdG = Identifier.of("loot_n_explore", "elder_guardia_axe");
+            Identifier itemId0 = Identifier.of("berserker_rpg", "ender_dragon_berserker_axe");
+            Identifier itemId1 = Identifier.of("berserker_rpg", "glacial_berserker_axe");
+            Identifier itemId2 = Identifier.of("berserker_rpg", "wither_berserker_axe");
+            Identifier itemId3 = Identifier.of("berserker_rpg", "elder_guardian_berserker_axe");
 
+            ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
+                content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId0));
+                content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId1));
+                content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId2));
+                content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId3));
+            });
         }
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
