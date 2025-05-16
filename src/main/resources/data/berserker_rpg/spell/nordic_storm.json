@@ -58,15 +58,23 @@
 
   "impacts": [
     {
-      "target_conditions": [
+      "target_modifiers": [
         {
-          "entity_type": "#minecraft:freeze_hurts_extra_types",
+          "conditions": [
+            {
+              "entity_type": "#minecraft:freeze_hurts_extra_types"
+            }
+          ],
           "modifier": {
             "power_multiplier": 0.3
           }
         },
         {
-          "entity_type": "#minecraft:freeze_immune_entity_types",
+          "conditions": [
+            {
+              "entity_type": "#minecraft:freeze_immune_entity_types"
+            }
+          ],
           "modifier": {
             "power_multiplier": -0.3
           }
@@ -95,10 +103,14 @@
       }
     },
     {
-      "target_conditions": [
+      "target_modifiers": [
         {
-          "entity_type": "#minecraft:freeze_immune_entity_types",
-          "allow_action": false
+          "conditions": [
+            {
+              "entity_type": "#minecraft:freeze_immune_entity_types"
+            }
+          ],
+          "execute": "DENY"
         }
       ],
       "action": {

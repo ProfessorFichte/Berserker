@@ -1,3 +1,6 @@
+# 2.4.6 - 1.21.1
+- fixe some target modifiers in Passive Spell Impact
+
 # 2.4.5 - 1.21.1
 - update to newest spell engine api
 - add LNE Berserker Axe Variants
