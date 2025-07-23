@@ -19,7 +19,7 @@ public class OutrageEffect extends StatusEffect {
             final int dura_rage = entity.getStatusEffect(Effects.RAGE.registryEntry).getDuration();
             int rage_amplifier_max = 9;
             if(amp_rage == rage_amplifier_max && !entity.getWorld().isClient() && entity instanceof ServerPlayerEntity){
-                clearNegativeEffects(entity,true);
+                clearNegativeEffects(entity,false);
                 entity.addStatusEffect(new StatusEffectInstance(Effects.RAGE.registryEntry, dura_rage + 10,rage_amplifier_max,false,false,true));
             }
         }
