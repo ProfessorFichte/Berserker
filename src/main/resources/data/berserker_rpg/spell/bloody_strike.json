@@ -98,10 +98,9 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "more_rpg_classes:bleeding",
-          "duration": 3,
+          "duration": 5,
           "apply_mode": "SET",
           "amplifier_power_multiplier": 0.2,
-          "amplifier": 0,
           "show_particles": false
         }
       }

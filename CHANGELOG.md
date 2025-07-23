@@ -1,3 +1,7 @@
+# 2.4.7 - 1.21.1
+- Spell Engine 1.7 update
+- Fix Crash with Outrage Spell
+
 # 2.4.6 - 1.21.1
 - fixe some target modifiers in Passive Spell Impact
 
