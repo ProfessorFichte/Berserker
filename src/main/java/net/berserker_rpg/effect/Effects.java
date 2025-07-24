@@ -28,8 +28,6 @@ public class Effects {
         Synchronized.configure(SOUL_DEVOURER,true);
         Synchronized.configure(BLOOD_RECKONING,true);
 
-        HealthImpacting.configureDamageTaken(RAGE,effectsConfig.value.rage_increased_incoming_damage_per_stack);
-
         int berserker_effect_id = 5400;
         Registry.register(Registries.STATUS_EFFECT, berserker_effect_id++, new Identifier(MOD_ID, "rage").toString(), RAGE);
         Registry.register(Registries.STATUS_EFFECT, berserker_effect_id++, new Identifier(MOD_ID, "soul_devourer").toString(), SOUL_DEVOURER);

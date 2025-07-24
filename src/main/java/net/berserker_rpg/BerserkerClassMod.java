@@ -34,7 +34,7 @@ public class BerserkerClassMod implements ModInitializer {
 			.build();
 
 	public static ConfigManager<EffectsConfig> effectsConfig = new ConfigManager<EffectsConfig>
-			("effects_v3", new EffectsConfig())
+			("effects_v4", new EffectsConfig())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -47,8 +47,6 @@ public class BerserkerClassMod implements ModInitializer {
 				.build();
 		Registry.register(Registries.ITEM_GROUP, BerserkerGroup.BERSERKER_KEY, BerserkerGroup.BERSERKER);
 	}
-
-
 
 	@Override
 	public void onInitialize() {

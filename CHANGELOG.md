@@ -1,3 +1,7 @@
+1.2.4 - 1.20.1
+- Nerf Rage Status Effect
+- Reset Effect Config -> v4
+
 1.2.3 - 1.20.1
 - add LNE-Axes to LNE Item Group
 - Item Retextures
