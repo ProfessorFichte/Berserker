@@ -1,7 +1,7 @@
 {
   "range": 0.0,
   "range_mechanic": "MELEE",
-  "school": "BERSERKER_MELEE",
+  "school": "berserker_rpg:berserker_melee",
   "tier": 3,
   "learn": {},
 

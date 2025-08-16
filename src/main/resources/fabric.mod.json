@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "berserker-rpg",
+	"id": "berserker_rpg",
 	"version": "${version}",
 	"name": "Berserker Class Mod",
 	"description": "Enter a wild, relentless battle trance as a Berserker! Spell Engine Add-On",

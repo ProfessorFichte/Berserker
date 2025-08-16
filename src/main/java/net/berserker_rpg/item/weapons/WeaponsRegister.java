@@ -1,10 +1,7 @@
 package net.berserker_rpg.item.weapons;
 
-import more_rpg_loot.RPGLoot;
-import more_rpg_loot.item.Group;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -91,10 +88,10 @@ public class WeaponsRegister {
     private static final float lneWeaponSpellPower = 2.0F;
     private static final float lneAxeAttackDamage = 15.0F;
     ///PASSIVE SPELLS
-    public static Identifier dragonclaw = Identifier.of(RPGLoot.MOD_ID, "dragonclaw");
-    public static Identifier avalanche = Identifier.of(RPGLoot.MOD_ID, "avalanche");
-    public static Identifier waterbomb = Identifier.of(RPGLoot.MOD_ID, "waterbomb");
-    public static Identifier wither_pulse = Identifier.of(RPGLoot.MOD_ID, "wither_pulse");
+    public static Identifier dragonclaw = Identifier.of("loot_n_explore", "dragonclaw");
+    public static Identifier avalanche = Identifier.of("loot_n_explore", "avalanche");
+    public static Identifier waterbomb = Identifier.of("loot_n_explore", "waterbomb");
+    public static Identifier wither_pulse = Identifier.of("loot_n_explore", "wither_pulse");
     //Registration
     public static void register(Map<String, WeaponConfig> configs) {
         if(FabricLoader.getInstance().isModLoaded(BETTER_NETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
@@ -144,11 +141,16 @@ public class WeaponsRegister {
                     .spell(avalanche)
                     .rarity = Rarity.RARE;
 
-            Identifier itemIdG = Identifier.of("loot_n_explore", "elder_guardia_axe");
+
+
+// ADD THIS IN LNE OR BERSERKER LNE MOD
+            /*
+            Identifier itemIdG = Identifier.of("loot_n_explore", "elder_guardian_axe");
             Identifier itemId0 = Identifier.of("berserker_rpg", "ender_dragon_berserker_axe");
             Identifier itemId1 = Identifier.of("berserker_rpg", "glacial_berserker_axe");
             Identifier itemId2 = Identifier.of("berserker_rpg", "wither_berserker_axe");
             Identifier itemId3 = Identifier.of("berserker_rpg", "elder_guardian_berserker_axe");
+
 
             ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
                 content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId0));
@@ -156,6 +158,7 @@ public class WeaponsRegister {
                 content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId2));
                 content.addAfter(Registries.ITEM.get(itemIdG),Registries.ITEM.get(itemId3));
             });
+            */
         }
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }

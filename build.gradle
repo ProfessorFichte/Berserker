@@ -85,7 +85,6 @@ dependencies {
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0-rc.4")))
 	modImplementation("mod.azure.azurelibarmor:azurelibarmor-fabric-${project.azure_mc_version}:${project.azure_lib_version}")
 
-	modImplementation("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}")
 	include(modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}"))
 
 }

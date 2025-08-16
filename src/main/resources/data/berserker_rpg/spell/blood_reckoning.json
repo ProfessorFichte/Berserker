@@ -1,5 +1,5 @@
 {
-  "school": "BERSERKER_MELEE",
+  "school": "berserker_rpg:berserker_melee",
   "range": 5,
   "tier": 2,
   "learn": {},
@@ -62,15 +62,11 @@
     },
     {
       "action": {
-        "type": "STATUS_EFFECT",
-        "status_effect": {
-          "effect_id": "berserker_rpg:blood_reckoning",
-          "duration": 8,
-          "apply_mode": "SET",
-          "amplifier": 0,
-          "show_particles": false
-        },
-        "apply_to_caster": true
+        "type": "CUSTOM",
+        "custom": {
+          "intent": "HARMFUL",
+          "handler": "berserker_rpg:blood_reckoning"
+        }
       }
     }
   ],

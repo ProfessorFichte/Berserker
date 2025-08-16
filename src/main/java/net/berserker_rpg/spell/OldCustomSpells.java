@@ -1,22 +1,6 @@
-package net.berserker_rpg.custom.custom_spells;
+package net.berserker_rpg.spell;
 
-import net.berserker_rpg.effect.Effects;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.util.Identifier;
-import net.spell_engine.api.spell.event.SpellHandlers;
-import net.spell_engine.api.spell.registry.SpellRegistry;
-import net.spell_engine.internals.SpellHelper;
-import net.spell_power.api.SpellSchool;
-
-import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
-import static net.berserker_rpg.BerserkerClassMod.effectsConfig;
-import static net.more_rpg_classes.util.CustomMethods.clearNegativeEffects;
-
-public class CustomSpells {
+public class OldCustomSpells {
     public static void register() {
         /*
         /// OUTRAGE

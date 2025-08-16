@@ -2,14 +2,15 @@ package net.berserker_rpg;
 
 import net.berserker_rpg.client.particle.Particles;
 import net.berserker_rpg.config.Default;
-import net.berserker_rpg.custom.custom_spells.BerserkerSpellSchool;
-import net.berserker_rpg.custom.custom_spells.CustomSpells;
-import net.berserker_rpg.effect.Effects;
+import net.berserker_rpg.spell.BerserkerSpellSchool;
+import net.berserker_rpg.spell.CustomSpellImpacts;
+import net.berserker_rpg.spell.OldCustomSpells;
+import net.berserker_rpg.effect.BerserkerEffects;
 import net.berserker_rpg.item.BerserkerGroup;
 import net.berserker_rpg.item.BerserkerItems;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
-import net.berserker_rpg.config.EffectsConfig;
+import net.berserker_rpg.sounds.BerserkerSounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.loader.api.FabricLoader;
@@ -35,14 +36,14 @@ public class BerserkerClassMod implements ModInitializer {
 			.sanitize(true)
 			.build();
 
-	public static ConfigManager<EffectsConfig> effectsConfig = new ConfigManager<EffectsConfig>
-			("effects_v3", new EffectsConfig())
+	public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
+			("effects_v4", new ConfigFile.Effects())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
 			.build();
 	public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
-			("tweaks", new TweaksConfig())
+			("tweaks_v1", new TweaksConfig())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -68,13 +69,16 @@ public class BerserkerClassMod implements ModInitializer {
 		}
 		BerserkerItems.registerModItems();
 		BerserkerSpellSchool.initialize();
-		Effects.register();
+		BerserkerSounds.register();
+		CustomSpellImpacts.registerCustomImpacts();
+		BerserkerEffects.register(effectsConfig.value);
 		Particles.register();
 		BerserkerGroup.registerItemGroups();
-		CustomSpells.register();
+		OldCustomSpells.register();
 		WeaponsRegister.register(itemConfig.value.weapons);
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();
 		registerItemGroup();
+		effectsConfig.save();
 	}
 }

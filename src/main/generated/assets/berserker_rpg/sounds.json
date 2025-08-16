@@ -1,0 +1,12 @@
+{
+  "outrage": {
+    "sounds": [
+      "berserker_rpg:outrage"
+    ]
+  },
+  "wild_rage": {
+    "sounds": [
+      "berserker_rpg:wild_rage"
+    ]
+  }
+}

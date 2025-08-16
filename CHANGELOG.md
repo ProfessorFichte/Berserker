@@ -1,3 +1,14 @@
+# 2.4.8 - 1.21.1
+### IMPROVEMENTS
+- Added new SFX for the Spells
+### FIXES
+- Fix a Crash without LNE in dev environment
+- Fix Berserker Melee spell school double counting sharpness enchantment
+### TECHNICAL & INTERNAL CHANGES
+- Add Spell Datagen
+- Project Clean Up
+- Removed Frostiful & EnviromentZ Compat (Extra Datapack will be released)
+
 # 2.4.7 - 1.21.1
 - Spell Engine 1.7 update
 - Fix Crash with Outrage Spell

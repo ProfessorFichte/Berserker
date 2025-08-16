@@ -1,0 +1,89 @@
+{
+  "school": "berserker_rpg:berserker_melee",
+  "range": 0.0,
+  "range_mechanic": "MELEE",
+  "tier": 4,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": "more_rpg_classes:two_handed_roar",
+    "particles": [
+      {
+        "particle_id": "crimson_spore",
+        "origin": "CENTER",
+        "shape": "PIPE",
+        "count": 20.0,
+        "min_speed": 0.01,
+        "max_speed": 0.1
+      },
+      {
+        "particle_id": "spell_engine:buff_rage",
+        "origin": "FEET",
+        "shape": "WIDE_PIPE",
+        "count": 15.0,
+        "min_speed": 0.1
+      }
+    ],
+    "particles_scaled_with_ranged": [
+      {
+        "particle_id": "spell_engine:area_swirl",
+        "origin": "CENTER",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "max_speed": 0.0,
+        "color_rgba": 3208659199,
+        "scale": 0.25,
+        "follow_entity": true
+      }
+    ],
+    "sound": {
+      "id": "berserker_rpg:outrage"
+    }
+  },
+  "deliver": {
+    "type": "STASH_EFFECT",
+    "stash_effect": {
+      "id": "berserker_rpg:outrage",
+      "amplifier": 5,
+      "duration": 12.0,
+      "triggers": [
+        {
+          "target_override": "CASTER",
+          "type": "MELEE_IMPACT"
+        }
+      ]
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.75,
+          "knockback": 0.1
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "berserker_rpg:rage",
+          "duration": 10,
+          "refresh_duration": true
+        }
+      }
+    }
+  ],
+  "area_impact": {
+    "radius": 2.5,
+    "area": {
+      "distance_dropoff": "SQUARED"
+    }
+  },
+  "cost": {
+    "cooldown": {
+      "duration": 35.0
+    }
+  }
+}
