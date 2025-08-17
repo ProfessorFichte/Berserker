@@ -16,6 +16,9 @@
 - Blood Reckoning now uses a custom spell impact instead of a status effect (configurable in tweaks config)
 - already added Armory Compat Code (just awaiting Armor Model & Texture for release)
 - slightly increase bettercombat attack range of berserker axes
+- Outrage Spell Changed -> is now a Stash Effect
+- you gain additional Attack Speed, Harmful Effects get cleared when the effect is applied
+- your melee hits deal extra damage and inflict the grievous wounds effect
 
 # 2.4.7 - 1.21.1
 - Spell Engine 1.7 update
