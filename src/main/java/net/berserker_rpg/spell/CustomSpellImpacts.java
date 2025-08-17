@@ -1,6 +1,7 @@
 package net.berserker_rpg.spell;
 
 import net.berserker_rpg.spell.custom_spell_impacts.BloodReckoningImpact;
+import net.berserker_rpg.spell.custom_spell_impacts.LightningStrikeImpact;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.event.SpellHandlers;
 
@@ -12,6 +13,10 @@ public class CustomSpellImpacts {
         SpellHandlers.registerCustomImpact(
                 Identifier.of(MOD_ID, "blood_reckoning"),
                 new BloodReckoningImpact()
+        );
+        SpellHandlers.registerCustomImpact(
+                Identifier.of(MOD_ID, "lightning"),
+                new LightningStrikeImpact()
         );
     }
 }

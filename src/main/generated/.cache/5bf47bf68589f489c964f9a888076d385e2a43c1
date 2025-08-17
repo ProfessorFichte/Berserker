@@ -1,3 +1,7 @@
-// 1.21.1	2025-08-16T10:14:06.8616224	Berserker Class Mod/Spell Generator
-4712ba9aa881a97c0e930bd93350a834fdc28765 data\berserker_rpg\spell\outrage.json
-2227bf722420ac7e480f20f88550c1cc047f3716 data\berserker_rpg\spell\wild_rage.json
+// 1.21.1	2025-08-17T13:06:49.731899	Berserker Class Mod/Spell Generator
+af4bf66ff5ca03b21462445bfce059668484e21c data\berserker_rpg\spell\bloody_strike.json
+6a1e60feb94614b77c6043e10321069088bf8c49 data\berserker_rpg\spell\outrage.json
+5cbacf24bf403ace93c9eb75317d3c513eb57090 data\berserker_rpg\spell\improved_bloody_strike.json
+2f00aa946a6077a2cd27ca2d8584900f89483c0b data\berserker_rpg\spell\wild_rage.json
+5f61295baee46b2d21847097984eeed999b4f801 data\berserker_rpg\spell\blood_reckoning.json
+7a04acc7da2d141fd7126150461540bf42d057a9 data\berserker_rpg\spell\carve.json

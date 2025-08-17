@@ -1,13 +1,21 @@
 # 2.4.8 - 1.21.1
-### IMPROVEMENTS
-- Added new SFX for the Spells
+### New Content
+- **Added New Tier 5 Weapons!**
+- [DISCLAIMER] These are available if Arsenal (RPG-Series) is installed or the config is enabled
+- Sword: Skofnung
+- Berserker Axe: Black Cleaver
+- New Melee Passive Carve: Chance to reduce Armor and increasing incoming damage, stacking up to amplifier 5
 ### FIXES
 - Fix a Crash without LNE in dev environment
 - Fix Berserker Melee spell school double counting sharpness enchantment
 ### TECHNICAL & INTERNAL CHANGES
-- Add Spell Datagen
 - Project Clean Up
+- Added new SFX for the Spells
+- Add Spell Datagen
 - Removed Frostiful & EnviromentZ Compat (Extra Datapack will be released)
+- Blood Reckoning now uses a custom spell impact instead of a status effect (configurable in tweaks config)
+- already added Armory Compat Code (just awaiting Armor Model & Texture for release)
+- slightly increase bettercombat attack range of berserker axes
 
 # 2.4.7 - 1.21.1
 - Spell Engine 1.7 update

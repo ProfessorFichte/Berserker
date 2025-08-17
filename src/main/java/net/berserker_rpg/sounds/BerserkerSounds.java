@@ -70,6 +70,7 @@ public class BerserkerSounds {
     public static final Entry OUTRAGE = add(new Entry("outrage"));
     public static final Entry BLOODY_STRIKE = add(new Entry("bloody_strike"));
     public static final Entry BLOOD_RECKONING = add(new Entry("blood_reckoning"));
+    public static final Entry CARVE = add(new Entry("carve"));
 
     public static void register() {
         for (var entry: entries) {

@@ -1,7 +1,20 @@
 {
   "values": [
-    "berserker_rpg:wildling_legs",
-    "berserker_rpg:northling_legs",
-    "berserker_rpg:netherite_northling_legs"
+    {
+      "id": "berserker_rpg:wildling_legs",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:northling_legs",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:netherite_northling_legs",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_legs",
+      "required": false
+    }
   ]
 }

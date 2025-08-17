@@ -1,17 +1,19 @@
-// 1.21.1	2025-08-16T10:14:06.8606213	Berserker Class Mod/Tags for minecraft:item
+// 1.21.1	2025-08-17T13:06:49.7278953	Berserker Class Mod/Tags for minecraft:item
+c2d28afc3b4d2aefbf51779299a3f2025911ba74 data\minecraft\tags\item\foot_armor.json
 0d9ce724332e03b9c68f5ae2e66ed1ad2438b6fc data\rpg_series\tags\item\loot_theme\golden_weapon.json
-ee32a75e3f836852143d3c1df353003cd2f561d9 data\minecraft\tags\item\foot_armor.json
 14ed85a01e30d74f97ffe32d9d1ec249316b9d5c data\rpg_series\tags\item\loot_theme\aether.json
-0a5707fcbdad077895734053e6684751ed771f6d data\minecraft\tags\item\head_armor.json
-1e7f95319e387378367200fa7169e48580c68d69 data\rpg_series\tags\item\weapon_type\sword.json
+bc0d079513523f1fbec180394535d3ab7143863d data\minecraft\tags\item\head_armor.json
+b8acc32128f17b8080c65c19f6b2d9801a98ab0a data\rpg_series\tags\item\loot_tier\tier_5_armors.json
+57aac75a58579ec2259e63bef0ddb04f74966f61 data\rpg_series\tags\item\weapon_type\sword.json
 1361eae169d9c2ff9d75c2657470140cb2dce6c3 data\rpg_series\tags\item\loot_tier\tier_4_weapons.json
 1b675ee1947fde014f43d531a0b797b79c815bc1 data\rpg_series\tags\item\loot_tier\tier_3_weapons.json
-7480da3f18e0021ca137b5b5f47186315d08a508 data\minecraft\tags\item\chest_armor.json
 d4a29c4a18d46d7992699e9e7d72549e850321ea data\rpg_series\tags\item\loot_tier\tier_2_weapons.json
-e207d482aaa260533d73ed8b06e95a5fc7e46af9 data\minecraft\tags\item\leg_armor.json
+49f99539205e0686703a76eaa119689cafe8f85c data\minecraft\tags\item\chest_armor.json
+fbe5aa8b970b63d524bfc390187a5cec75227ed6 data\minecraft\tags\item\leg_armor.json
 941626a51eae9ebd2a2fe44142c42bfb16d91f96 data\rpg_series\tags\item\loot_tier\tier_2_armors.json
-e354df51625569069f315d52762c4ad481a09e66 data\rpg_series\tags\item\armor_type\melee.json
+e7e84723107748a79ab2d7cef6ad6f6696d16cf5 data\rpg_series\tags\item\armor_type\melee.json
 db31e015229578ac99a13eece2892e7d942869e0 data\rpg_series\tags\item\loot_tier\tier_3_armors.json
 c5fb7bcb96d5b2d14aa36698cf8b41e5eb170f81 data\rpg_series\tags\item\loot_tier\tier_0_weapons.json
 64cf39a80439c7a8120ca7fe16c499bbfdbe114a data\rpg_series\tags\item\loot_tier\tier_1_weapons.json
 00f7a33b7991b7fb31eb9915ab157d55bd43077b data\rpg_series\tags\item\loot_tier\tier_1_armors.json
+dda082e58655529ca696780f6d4769755366dcd3 data\rpg_series\tags\item\weapon_type\double_axe.json

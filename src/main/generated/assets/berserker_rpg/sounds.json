@@ -1,4 +1,19 @@
 {
+  "blood_reckoning": {
+    "sounds": [
+      "berserker_rpg:blood_reckoning"
+    ]
+  },
+  "bloody_strike": {
+    "sounds": [
+      "berserker_rpg:bloody_strike"
+    ]
+  },
+  "carve": {
+    "sounds": [
+      "berserker_rpg:carve"
+    ]
+  },
   "outrage": {
     "sounds": [
       "berserker_rpg:outrage"

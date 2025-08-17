@@ -13,7 +13,7 @@ import static net.spell_power.api.SpellPowerMechanics.PERCENT_ATTRIBUTE_BASELINE
 
 public class BerserkerSpellSchool {
     public static final SpellSchool BERSERKER_MELEE = new SpellSchool(SpellSchool.Archetype.MELEE,
-            Identifier.of(MOD_ID, "berserker_melee"),
+            Identifier.of(SpellPowerMod.ID, "berserker_melee"),
             0xb3b3b3,
             DamageTypes.PLAYER_ATTACK,
             EntityAttributes.GENERIC_ATTACK_DAMAGE);

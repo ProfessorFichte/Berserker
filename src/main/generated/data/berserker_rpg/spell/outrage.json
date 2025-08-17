@@ -1,5 +1,5 @@
 {
-  "school": "berserker_rpg:berserker_melee",
+  "school": "spell_power:berserker_melee",
   "range": 0.0,
   "range_mechanic": "MELEE",
   "tier": 4,
@@ -17,11 +17,14 @@
         "max_speed": 0.1
       },
       {
-        "particle_id": "spell_engine:buff_rage",
+        "particle_id": "spell_engine:magic_stripe_float",
         "origin": "FEET",
         "shape": "WIDE_PIPE",
-        "count": 15.0,
-        "min_speed": 0.1
+        "count": 30.0,
+        "min_speed": 0.1,
+        "max_speed": 0.4,
+        "extent": -0.2,
+        "color_rgba": 3208659199
       }
     ],
     "particles_scaled_with_ranged": [
@@ -44,14 +47,13 @@
     "type": "STASH_EFFECT",
     "stash_effect": {
       "id": "berserker_rpg:outrage",
-      "amplifier": 5,
       "duration": 12.0,
       "triggers": [
         {
-          "target_override": "CASTER",
           "type": "MELEE_IMPACT"
         }
-      ]
+      ],
+      "consume": 0
     }
   },
   "impacts": [
@@ -59,7 +61,7 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.75,
+          "spell_power_coefficient": 0.2,
           "knockback": 0.1
         }
       }
@@ -68,20 +70,26 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "berserker_rpg:rage",
-          "duration": 10,
-          "refresh_duration": true
+          "effect_id": "more_rpg_classes:grievous_wounds",
+          "amplifier": 1,
+          "amplifier_cap": 7,
+          "apply_mode": "ADD"
         }
-      }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:dripping_blood",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 10.0,
+          "min_speed": 0.05,
+          "max_speed": 0.3
+        }
+      ]
     }
   ],
-  "area_impact": {
-    "radius": 2.5,
-    "area": {
-      "distance_dropoff": "SQUARED"
-    }
-  },
   "cost": {
+    "exhaust": 0.3,
     "cooldown": {
       "duration": 35.0
     }

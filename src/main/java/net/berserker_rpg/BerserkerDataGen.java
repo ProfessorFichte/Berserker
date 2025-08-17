@@ -1,25 +1,38 @@
 package net.berserker_rpg;
 
 import net.berserker_rpg.item.armor.Armors;
+import net.berserker_rpg.item.armor.ArmoryCompat;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.sounds.BerserkerSounds;
 import net.berserker_rpg.spell.BerserkerSpells;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
+import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -32,7 +45,9 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(SpellGen::new);
+        pack.addProvider(SpellTagGenerator::new);
         pack.addProvider(SoundGen::new);
+        pack.addProvider(ModelProvider::new);
     }
 
     public static class SpellGen extends SpellGenerator {
@@ -48,15 +63,90 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
         }
     }
 
+    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
+        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, SpellRegistry.KEY, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getOrCreateTagBuilder(TagKey.of(SpellRegistry.KEY, Identifier.of("arsenal", "melee")))
+                    .addOptional(BerserkerSpells.carve_melee.id())
+            ;
+        }
+    }
+
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
         public ItemTagGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
+        public void armorTags(List<Armor.Entry> armors) {
+            this.armorTags(armors, EnumSet.noneOf(RPGSeriesItemTags.ArmorMetaType.class));
+        }
+
+        public void armorTags(List<Armor.Entry> armors, RPGSeriesItemTags.ArmorMetaType metaType) {
+            this.armorTags(armors, EnumSet.of(metaType));
+        }
+
+        public void armorTags(List<Armor.Entry> armors, EnumSet<RPGSeriesItemTags.ArmorMetaType> metaTypes) {
+            Iterator var3 = armors.iterator();
+
+            while(var3.hasNext()) {
+                Armor.Entry armor = (Armor.Entry)var3.next();
+                Armor.Set set = armor.armorSet();
+                FabricTagProvider<Item>.FabricTagBuilder headTag = this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR);
+                headTag.addOptional(set.idOf(set.head));
+                FabricTagProvider<Item>.FabricTagBuilder chestTag = this.getOrCreateTagBuilder(ItemTags.CHEST_ARMOR);
+                chestTag.addOptional(set.idOf(set.chest));
+                FabricTagProvider<Item>.FabricTagBuilder legsTag = this.getOrCreateTagBuilder(ItemTags.LEG_ARMOR);
+                legsTag.addOptional(set.idOf(set.legs));
+                FabricTagProvider<Item>.FabricTagBuilder feetTag = this.getOrCreateTagBuilder(ItemTags.FOOT_ARMOR);
+                feetTag.addOptional(set.idOf(set.feet));
+                int tier = armor.lootProperties().tier();
+                Iterator var12;
+                if (tier >= 0) {
+                    FabricTagProvider<Item>.FabricTagBuilder tierTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.LootTiers.get(tier, RPGSeriesItemTags.LootCategory.ARMORS));
+                    var12 = armor.armorSet().pieceIds().iterator();
+
+                    while(var12.hasNext()) {
+                        Object id = var12.next();
+                        tierTag.addOptional((Identifier)id);
+                    }
+                }
+
+                String lootTheme = armor.lootProperties().theme();
+                if (lootTheme != null && !lootTheme.isEmpty()) {
+                    FabricTagProvider<Item>.FabricTagBuilder themeTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.LootThemes.get(lootTheme));
+                    Iterator var19 = armor.armorSet().pieceIds().iterator();
+
+                    while(var19.hasNext()) {
+                        Object id = var19.next();
+                        themeTag.addOptional((Identifier)id);
+                    }
+                }
+
+                var12 = metaTypes.iterator();
+
+                while(var12.hasNext()) {
+                    RPGSeriesItemTags.ArmorMetaType metaType = (RPGSeriesItemTags.ArmorMetaType)var12.next();
+                    FabricTagProvider<Item>.FabricTagBuilder metaTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.ArmorType.get(metaType));
+                    Iterator var15 = armor.armorSet().pieceIds().iterator();
+
+                    while(var15.hasNext()) {
+                        Object id = var15.next();
+                        metaTag.addOptional((Identifier)id);
+                    }
+                }
+            }
+
+        }
+
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             generateWeaponTags(WeaponsRegister.entries);
-            generateArmorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
+            armorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
+            armorTags(ArmoryCompat.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
         }
     }
 
@@ -146,6 +236,31 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
                                     .toList()
                     )
             );
+        }
+    }
+
+    public static class ModelProvider extends FabricModelProvider {
+        public ModelProvider(FabricDataOutput output) {
+            super(output);
+        }
+
+        @Override
+        public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+
+        }
+
+        @Override
+        public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+            ArmoryCompat.entries.forEach(entry -> {
+                for (var piece: entry.armorSet().pieces()) {
+                    itemModelGenerator.register((Item) piece, Models.GENERATED);
+                }
+            });
+            Armors.entries.forEach(entry -> {
+                for (var piece: entry.armorSet().pieces()) {
+                    itemModelGenerator.register((Item) piece, Models.GENERATED);
+                }
+            });
         }
     }
 }

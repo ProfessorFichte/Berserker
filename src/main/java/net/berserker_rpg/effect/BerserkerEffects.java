@@ -9,6 +9,7 @@ import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.spell_engine.api.config.EffectConfig;
 import net.spell_engine.api.effect.*;
+import net.spell_engine.api.entity.SpellEngineAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,29 @@ public class BerserkerEffects {
             "",
             new OutrageEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString(),
+                            0.1F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
+            ))
+    ));
+    public static final Effects.Entry CARVE = add(new Effects.Entry(
+            Identifier.of(MOD_ID, "carve"),
+            "",
+            "",
+            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xf70000),
+            new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_ARMOR.getIdAsString(),
+                            -0.1F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            SpellEngineAttributes.DAMAGE_TAKEN.id.toString(),
+                            -0.05F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
             ))
     ));
 
