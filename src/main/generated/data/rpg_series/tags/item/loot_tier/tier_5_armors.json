@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "berserker_rpg:warlord_head",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_chest",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_legs",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_feet",
+      "required": false
+    }
+  ]
+}
