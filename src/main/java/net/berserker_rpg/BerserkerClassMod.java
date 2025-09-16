@@ -2,8 +2,6 @@ package net.berserker_rpg;
 
 import net.berserker_rpg.client.particle.Particles;
 import net.berserker_rpg.config.Default;
-import net.berserker_rpg.item.armor.ArmoryCompat;
-import net.berserker_rpg.spell.BerserkerSpellSchool;
 import net.berserker_rpg.spell.CustomSpellImpacts;
 import net.berserker_rpg.effect.BerserkerEffects;
 import net.berserker_rpg.item.BerserkerGroup;
@@ -13,15 +11,12 @@ import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.sounds.BerserkerSounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.berserker_rpg.config.TweaksConfig;
-import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.tinyconfig.ConfigManager;
 import org.slf4j.Logger;
@@ -71,7 +66,6 @@ public class BerserkerClassMod implements ModInitializer {
 			tweaksConfig.value.ignore_items_required_mods = true;
 		}
 		BerserkerItems.registerModItems();
-		BerserkerSpellSchool.initialize();
 		BerserkerSounds.register();
 		CustomSpellImpacts.registerCustomImpacts();
 		BerserkerEffects.register(effectsConfig.value);

@@ -1,3 +1,9 @@
+# 2.4.9 - 1.21.1
+- Delete Berserker Spell School, its now provided by the More RPG Library
+- Change Blood Reckoning, its no longer an area damage effect
+- It only heals and converts absorption to health
+- - Overhaul Advancements
+
 # 2.4.8 - 1.21.1
 ### New Content
 - **Added New Tier 5 Weapons!**

@@ -5,6 +5,7 @@ import net.berserker_rpg.sounds.BerserkerSounds;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.ExternalSpellSchools;
@@ -86,8 +87,8 @@ public class BerserkerSpells {
         modifier.conditions = List.of(condition);
         return modifier;
     }
-    private static void bleedImmuneDeny(Spell.Impact impact) {
-        var modifier = createImpactModifier("#minecraft:undead");
+    private static void bleedingDeny(Spell.Impact impact) {
+        var modifier = createImpactModifier("#more_rpg_classes:bleeding_immune");
         modifier.execute = TriState.DENY;
         impact.target_modifiers = List.of(modifier);
     }
@@ -108,7 +109,7 @@ public class BerserkerSpells {
         var title = "Improved Bloody Strike";
         var description = "Increases power multiplier of Bloody Strike by {power_multiplier}";
         var spell = modifierSpellBase();
-        spell.school = BerserkerSpellSchool.BERSERKER_MELEE;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
 
         var modifier = new Spell.Modifier();
         modifier.spell_pattern = "berserker_rpg:bloody_strike";
@@ -178,7 +179,7 @@ public class BerserkerSpells {
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0;
         spell.tier = 1;
-        spell.school = BerserkerSpellSchool.BERSERKER_MELEE;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
         SpellTooltip.DescriptionMutator mutator = (args) -> {
             var modifier = effect.config().attributes().get(1);
             var modifier2 = effect.config().attributes().get(0);
@@ -237,9 +238,9 @@ public class BerserkerSpells {
         var title = "";
         var description = "";
         var spell = SpellBuilder.createSpellActive();
-        spell.range = 5;
+        spell.range = 0;
         spell.tier = 2;
-        spell.school = BerserkerSpellSchool.BERSERKER_MELEE;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
 
         spell.release.animation = "more_rpg_classes:two_handed_roar";
         spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
@@ -258,9 +259,7 @@ public class BerserkerSpells {
                         15, 0.1F, 0.5F)
         };
 
-        spell.target.type = Spell.Target.Type.AREA;
-        spell.target.area = new Spell.Target.Area();
-        spell.target.area.vertical_range_multiplier = 0.5F;
+        spell.target.type = Spell.Target.Type.CASTER;
 
         var custom = new Spell.Impact();
         custom.action = new Spell.Impact.Action();
@@ -269,18 +268,7 @@ public class BerserkerSpells {
         custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
         custom.action.custom.handler = "berserker_rpg:blood_reckoning";
 
-        var damage = damageImpact(0.2F, 0.1F);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.05F, 0.3F),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.2F, 0.4F)
-                        .color(Color.RAGE.toRGBA()),
-        };
-
-        spell.impacts = List.of(custom, damage);
+        spell.impacts = List.of(custom);
         spell.cost.exhaust = 0.3F;
 
         configureCooldown(spell, 20);
@@ -297,7 +285,7 @@ public class BerserkerSpells {
         spell.range = 0.5F;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.tier = 3;
-        spell.school = BerserkerSpellSchool.BERSERKER_MELEE;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
 
         spell.release.animation = "berserker_rpg:berserker_axe_both";
 
@@ -318,7 +306,7 @@ public class BerserkerSpells {
         };
 
         var debuff = createEffectImpact(debuffEffect.id, 5);
-        bleedImmuneDeny(debuff);
+        bleedingDeny(debuff);
         debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
         debuff.action.status_effect.show_particles = false;
         debuff.action.status_effect.amplifier_power_multiplier = 0.2F;
@@ -352,7 +340,7 @@ public class BerserkerSpells {
         var description = "Clears harmful effects, increases attack speed by {bonus}. Deal extra {damage} damage per hit and stack grievous wounds.";
         var spell = SpellBuilder.createSpellActive();
         var effect = BerserkerEffects.OUTRAGE;
-        spell.school = BerserkerSpellSchool.BERSERKER_MELEE;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.range = 0;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.tier = 4;

@@ -97,7 +97,6 @@ public class WeaponsRegister {
     public static Identifier avalanche = Identifier.of("loot_n_explore", "avalanche");
     public static Identifier waterbomb = Identifier.of("loot_n_explore", "waterbomb");
     public static Identifier wither_pulse = Identifier.of("loot_n_explore", "wither_pulse");
-    public static Identifier carve = Identifier.of("berserker_rpg", "carve");
     //Registration
     public static void register(Map<String, WeaponConfig> configs) {
         if(FabricLoader.getInstance().isModLoaded(BETTER_NETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
