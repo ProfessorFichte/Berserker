@@ -65,7 +65,7 @@
   "spell.berserker_rpg.outrage.name": "Outrage",
   "spell.berserker_rpg.outrage.description": "Clears harmful effects, increases attack speed by {bonus}. Deal extra {damage} damage per hit and stack grievous wounds.",
   "spell.berserker_rpg.blood_reckoning.name": "Blood Reckoning",
-  "spell.berserker_rpg.blood_reckoning.description": "Dealing {damage} physical-damage around you and converting absorption to health. Also increases Rage duration.",
+  "spell.berserker_rpg.blood_reckoning.description": "The caster heals himself and converts absorption to health.",
   "spell.berserker_rpg.improved_bloody_strike.name": "Improved Bloody Strike",
   "spell.berserker_rpg.improved_bloody_strike.description": "Increases power multiplier of Bloody Strike by {power_multiplier}",
   "spell.berserker_rpg.carve.name": "Carve",
@@ -73,10 +73,12 @@
 
   "equipment_set.berserker_rpg.warlord": "Raging Warlord",
 
-  "advancements.more_rpg_content.raid_axe.title": "To the ships!",
-  "advancements.more_rpg_content.raid_axe.description": "Obtain a Iron Raid Axe",
-  "advancements.more_rpg_content.berserker_spells.title": "Path of the Berserker",
-  "advancements.more_rpg_content.berserker_spells.description": "Obtain all Berserker Spells",
-  "advancements.rpg_classes.northling.title": "Wild Rage on the skin",
-  "advancements.rpg_classes.northling.description": "Obtain all Northling Set Parts."
+  "advancements.more_rpg_content.path_choose_berserker.title": "Path of the Berserker",
+  "advancements.more_rpg_content.path_choose_berserker.description": "Create the Ancient Rune Tome",
+  "advancements.more_rpg_content.spell_novice_berserker.title": "To the Ships!",
+  "advancements.more_rpg_content.spell_novice_berserker.description": "Obtain your first Berserker skill",
+  "advancements.more_rpg_content.spell_master_berserker.title": "Relentless Raider",
+  "advancements.more_rpg_content.spell_master_berserker.description": "Complete the Ancient Rune Tome",
+  "advancements.more_rpg_content.spell_cast_berserker_book.title": "Berserking",
+  "advancements.more_rpg_content.spell_cast_berserker_book.description": "Use a skill from the Ancient Rune Tome"
 }

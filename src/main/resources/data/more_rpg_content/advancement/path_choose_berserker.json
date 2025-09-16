@@ -4,29 +4,28 @@
       "id": "berserker_rpg:berserker_spell_book"
     },
     "title": {
-      "translate": "advancements.more_rpg_content.berserker_spells.title"
+      "translate": "advancements.more_rpg_content.path_choose_berserker.title"
     },
     "description": {
-      "translate": "advancements.more_rpg_content.berserker_spells.description"
+      "translate": "advancements.more_rpg_content.path_choose_berserker.description"
     },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "more_rpg_content:raid_axe",
+  "parent": "more_rpg_content:root",
   "criteria": {
-    "cast": {
-      "trigger": "spell_engine:spell_binding",
+    "book": {
+      "trigger": "spell_engine:spell_book_creation",
       "conditions": {
-        "complete": true,
         "spell_pool": "berserker_rpg:berserker"
       }
     }
   },
   "requirements": [
     [
-      "cast"
+      "book"
     ]
   ]
 }
