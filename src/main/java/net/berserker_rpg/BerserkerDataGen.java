@@ -1,7 +1,6 @@
 package net.berserker_rpg;
 
 import net.berserker_rpg.item.armor.Armors;
-import net.berserker_rpg.item.armor.ArmoryCompat;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.sounds.BerserkerSounds;
 import net.berserker_rpg.spell.BerserkerSpells;
@@ -146,7 +145,6 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             generateWeaponTags(WeaponsRegister.entries);
             armorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
-            armorTags(ArmoryCompat.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
         }
     }
 
@@ -251,11 +249,6 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-            ArmoryCompat.entries.forEach(entry -> {
-                for (var piece: entry.armorSet().pieces()) {
-                    itemModelGenerator.register((Item) piece, Models.GENERATED);
-                }
-            });
             Armors.entries.forEach(entry -> {
                 for (var piece: entry.armorSet().pieces()) {
                     itemModelGenerator.register((Item) piece, Models.GENERATED);

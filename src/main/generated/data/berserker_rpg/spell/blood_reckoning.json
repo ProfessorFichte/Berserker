@@ -1,6 +1,6 @@
 {
-  "school": "spell_power:berserker_melee",
-  "range": 5.0,
+  "school": "spell_power:rage_melee",
+  "range": 0.0,
   "tier": 2,
   "learn": {},
   "active": {},
@@ -39,49 +39,14 @@
       "id": "berserker_rpg:blood_reckoning"
     }
   },
-  "target": {
-    "type": "AREA",
-    "area": {
-      "vertical_range_multiplier": 0.5
-    }
-  },
   "impacts": [
     {
       "action": {
         "type": "CUSTOM",
         "custom": {
-          "intent": "HARMFUL",
           "handler": "berserker_rpg:blood_reckoning"
         }
       }
-    },
-    {
-      "action": {
-        "type": "DAMAGE",
-        "damage": {
-          "spell_power_coefficient": 0.2,
-          "knockback": 0.1
-        }
-      },
-      "particles": [
-        {
-          "particle_id": "spell_engine:dripping_blood",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.05,
-          "max_speed": 0.3
-        },
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.2,
-          "max_speed": 0.4,
-          "color_rgba": 3208659199
-        }
-      ]
     }
   ],
   "cost": {

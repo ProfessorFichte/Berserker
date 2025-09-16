@@ -75,7 +75,6 @@ public class BerserkerClassMod implements ModInitializer {
 		Armors.register(itemConfig.value.armor_sets);
 		/*
 		if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
-			ArmoryCompat.register(itemConfig.value.armor_sets);
 			FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
 				ResourceManagerHelper.registerBuiltinResourcePack(
 						Identifier.of(MOD_ID, "berserker_armory_compat"),

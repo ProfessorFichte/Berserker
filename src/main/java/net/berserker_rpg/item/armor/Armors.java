@@ -1,6 +1,9 @@
 package net.berserker_rpg.item.armor;
 
+import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
@@ -11,11 +14,14 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.spell.SpellDataComponents;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +39,16 @@ public class Armors {
             Items.IRON_INGOT, Items.CHAIN, MRPGCItems.POLAR_BEAR_FUR
     );
 
+    public static Identifier warlord_passive = Identifier.of(MOD_ID, "warlord");
+
+    private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
+        return Armor.ItemSettingsTweaker.standard(itemSettings -> {
+            itemSettings
+                    .component(SpellDataComponents.EQUIPMENT_SET, equipmentSetId)
+                    .component(DataComponentTypes.RARITY, Rarity.RARE);
+        });
+    }
+
     public static final float berserker_atkspeed_T1 = 0.02F;
     public static final float berserker_rage_T1 = 0.025F;
     public static final float berserker_atkspeed_T2 = 0.02F;
@@ -41,6 +57,9 @@ public class Armors {
     public static final float berserker_atkspeed_T3 = 0.02F;
     public static final float berserker_rage_T3 = 0.075F;
     public static final float berserker_atkdamage_T3 = 0.05F;
+    public static final float warlord_atkspeed = 0.025F;
+    public static final float warlord_rage = 0.075F;
+    public static final float warlord_atkdamage = 0.06F;
 
 
     public static RegistryEntry<ArmorMaterial> material(String name,
@@ -75,17 +94,23 @@ public class Armors {
             2, 4, 4, 2,
             20,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+    public static RegistryEntry<ArmorMaterial> material_warlord = material(
+            "warlord",
+            2, 4, 4, 2,
+            20,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
     private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
-                                      Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
+                                      Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier, Armor.ItemSettingsTweaker settings) {
         var entry = Armor.Entry.create(
                 material,
                 id,
                 durability,
                 factory,
                 defaults,
-                Equipment.LootProperties.of(tier)
+                Equipment.LootProperties.of(tier),
+                settings
         );
         entries.add(entry);
         return entry;
@@ -118,7 +143,7 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T1),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
                                     ))
-                    ),1)
+                    ),1,null)
                     .armorSet();
 
     public static final Armor.Set northlingArmorSet =
@@ -152,7 +177,7 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     ))
-                    ),2)
+                    ),2,null)
                     .armorSet();
 
     public static final Armor.Set netheriteNorthlingArmorSet =
@@ -186,10 +211,46 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     ))
-                    ),3)
+                    ),3,null)
                     .armorSet();
 
+    public static Armor.Entry warlordArmorSet;
     public static void register(Map<String, ArmorSetConfig> configs) {
+        if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
+            warlordArmorSet = create(
+                    material_warlord,
+                    Identifier.of(MOD_ID, "warlord"),
+                    40,
+                    Armor.CustomItem::new,
+                    ArmorSetConfig.with(
+                            new ArmorSetConfig.Piece(2)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
+                                    )),
+                            new ArmorSetConfig.Piece(2)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
+                                    ))
+                    ),5,
+                    commonSettings(warlord_passive)
+            );
+        }
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 }

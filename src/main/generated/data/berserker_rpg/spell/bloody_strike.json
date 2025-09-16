@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:berserker_melee",
+  "school": "spell_power:rage_melee",
   "range": 0.5,
   "range_mechanic": "MELEE",
   "tier": 3,
@@ -21,7 +21,7 @@
         {
           "conditions": [
             {
-              "entity_type": "#minecraft:undead"
+              "entity_type": "#more_rpg_classes:bleeding_immune"
             }
           ],
           "execute": "DENY"

@@ -1,8 +1,12 @@
 # 2.4.9 - 1.21.1
 - Delete Berserker Spell School, its now provided by the More RPG Library
+- Overhaul Advancements
+- Fix Armory Compat for upcoming T5 Armor Set
+- Rebalanced some spells for the upcoming skill tree add-on
 - Change Blood Reckoning, its no longer an area damage effect
-- It only heals and converts absorption to health
-- - Overhaul Advancements
+- It only heals and converts absorption hearts to health now
+- Outrage no longer deals damage per hit and adds grievous wounds
+- Outrage now only clears all harmful effects, increases attack speed & damage, and doubles the rage effect duration if its active
 
 # 2.4.8 - 1.21.1
 ### New Content

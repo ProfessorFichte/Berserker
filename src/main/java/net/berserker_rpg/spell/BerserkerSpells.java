@@ -265,7 +265,7 @@ public class BerserkerSpells {
         custom.action = new Spell.Impact.Action();
         custom.action.custom = new Spell.Impact.Action.Custom();
         custom.action.type = Spell.Impact.Action.Type.CUSTOM;
-        custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
+        custom.action.custom.intent = SpellTarget.Intent.HELPFUL;
         custom.action.custom.handler = "berserker_rpg:blood_reckoning";
 
         spell.impacts = List.of(custom);
@@ -307,9 +307,11 @@ public class BerserkerSpells {
 
         var debuff = createEffectImpact(debuffEffect.id, 5);
         bleedingDeny(debuff);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
+        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
         debuff.action.status_effect.show_particles = false;
-        debuff.action.status_effect.amplifier_power_multiplier = 0.2F;
+        debuff.action.status_effect.amplifier = 1;
+        debuff.action.status_effect.amplifier_cap = 5;
+        debuff.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
         debuff.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
@@ -337,7 +339,7 @@ public class BerserkerSpells {
     private static Entry outrage() {
         var id = Identifier.of(MOD_ID, "outrage");
         var title = "Outrage";
-        var description = "Clears harmful effects, increases attack speed by {bonus}. Deal extra {damage} damage per hit and stack grievous wounds.";
+        var description = "Clears harmful effects, increases active rage effect duration and increases attack speed and damage by {bonus} for {effect_duration}.";
         var spell = SpellBuilder.createSpellActive();
         var effect = BerserkerEffects.OUTRAGE;
         spell.school = MoreSpellSchools.RAGE_MELEE;
@@ -374,31 +376,13 @@ public class BerserkerSpells {
                         .followEntity(true).color(Color.RAGE.toRGBA())
         };
 
-        spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
-        var stash = new Spell.Delivery.StashEffect();
-        stash.id = effect.id.toString();
-        stash.duration = 12;
-        stash.amplifier = 0;
-        stash.consume = 0;
-        var meleeTrigger = new Spell.Trigger();
-        meleeTrigger.type = Spell.Trigger.Type.MELEE_IMPACT;
-        stash.triggers = List.of(meleeTrigger);
-        spell.deliver.stash_effect = stash;
+        spell.target.type = Spell.Target.Type.CASTER;
 
-        var effectDebuff = MRPGCEffects.GRIEVOUS_WOUNDS;
-        var debuff = createEffectImpact(effectDebuff.id, 10);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-        debuff.action.status_effect.amplifier = 1;
-        debuff.action.status_effect.amplifier_cap = 7;
-        debuff.action.status_effect.refresh_duration = true;
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.05F, 0.3F)
-        };
+        var buff = createEffectImpact(effect.id, 10);
+        buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
+        buff.action.status_effect.amplifier = 0;
 
-        var damage = damageImpact(0.2F, 0.1F);
-        spell.impacts = List.of(damage, debuff);
+        spell.impacts = List.of(buff);
 
         configureCooldown(spell, 35);
         spell.cost.exhaust = 0.3F;

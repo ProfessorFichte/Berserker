@@ -64,6 +64,11 @@ public class BerserkerEffects {
                             EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString(),
                             0.1F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(),
+                            0.1F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));

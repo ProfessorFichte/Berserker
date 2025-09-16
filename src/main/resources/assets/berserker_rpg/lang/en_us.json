@@ -46,7 +46,7 @@
   "effect.berserker_rpg.blood_sacrifice": "Blood Sacrifice",
   "effect.berserker_rpg.blood_sacrifice.description": "Converts your health to absorption hearts.",
   "effect.berserker_rpg.outrage": "Outrage",
-  "effect.berserker_rpg.outrage.description": "Clears harmful status effects when applied.",
+  "effect.berserker_rpg.outrage.description": "Clears harmful status effects when applied, increases attack speed & damage.",
   "effect.berserker_rpg.carve": "Carve",
   "effect.berserker_rpg.carve.description": "Reduces armor and increases incoming damage.",
 
@@ -63,7 +63,7 @@
   "spell.berserker_rpg.soulaxe_drain.name": "Sacrifice Drain",
   "spell.berserker_rpg.soulaxe_drain.description": "Damages yourself, drains the souls of targets dealing {damage} soul-damage per second.",
   "spell.berserker_rpg.outrage.name": "Outrage",
-  "spell.berserker_rpg.outrage.description": "Clears harmful effects, increases attack speed by {bonus}. Deal extra {damage} damage per hit and stack grievous wounds.",
+  "spell.berserker_rpg.outrage.description": "Clears harmful effects, increases attack speed and damage by {bonus}.",
   "spell.berserker_rpg.blood_reckoning.name": "Blood Reckoning",
   "spell.berserker_rpg.blood_reckoning.description": "The caster heals himself and converts absorption to health.",
   "spell.berserker_rpg.improved_bloody_strike.name": "Improved Bloody Strike",
