@@ -1,3 +1,9 @@
+# 2.5.0 - 1.21.1
+- Move to Architectury Enviroment for Multiloader
+- NeoForge Beta!
+- Changed Spell Book Textures to be more in line with the RPG-Series Books
+- Improve Armor Model Assets (by Slepykat, Thanks!)
+
 # 2.4.9 - 1.21.1
 - Delete Berserker Spell School, its now provided by the More RPG Library
 - Overhaul Advancements

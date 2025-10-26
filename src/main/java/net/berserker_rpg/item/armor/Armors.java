@@ -216,6 +216,7 @@ public class Armors {
 
     public static Armor.Entry warlordArmorSet;
     public static void register(Map<String, ArmorSetConfig> configs) {
+        /*
         if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
             warlordArmorSet = create(
                     material_warlord,
@@ -251,6 +252,7 @@ public class Armors {
                     commonSettings(warlord_passive)
             );
         }
+         */
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 }
