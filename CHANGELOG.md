@@ -1,3 +1,7 @@
+1.2.5 - 1.20.1
+- Changed Spell Book Texture to be more in line with the RPG-Series Books (by SirGhaith, Thanks!)
+- Improve Armor Model Assets (by Slepykat, Thanks!)
+
 1.2.4 - 1.20.1
 - Nerf Rage Status Effect
 - Reset Effect Config -> v4
