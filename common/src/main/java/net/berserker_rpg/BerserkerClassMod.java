@@ -18,12 +18,12 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.berserker_rpg.config.TweaksConfig;
 import net.spell_engine.api.config.ConfigFile;
-import net.tinyconfig.ConfigManager;
+import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class BerserkerClassMod implements ModInitializer {
+public class BerserkerClassMod {
 	public static final String MOD_ID = "berserker_rpg";
 	public static final Logger LOGGER = LoggerFactory.getLogger("berserker_rpg");
 
@@ -47,33 +47,26 @@ public class BerserkerClassMod implements ModInitializer {
 			.sanitize(true)
 			.build();
 
-	private void registerItemGroup() {
-		BerserkerGroup.BERSERKER = FabricItemGroup.builder()
-				.icon(() -> new ItemStack(Armors.wildlingArmorSet.head.asItem()))
-				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
-				.build();
-		Registry.register(Registries.ITEM_GROUP, BerserkerGroup.BERSERKER_KEY, BerserkerGroup.BERSERKER);
-	}
-
-
-
-	@Override
-	public void onInitialize() {
+	public static void init() {
 		itemConfig.refresh();
 		effectsConfig.refresh();
 		tweaksConfig.refresh();
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			tweaksConfig.value.ignore_items_required_mods = true;
 		}
-		BerserkerItems.registerModItems();
-		BerserkerSounds.register();
 		CustomSpellImpacts.registerCustomImpacts();
-		BerserkerEffects.register(effectsConfig.value);
-		Particles.register();
+	}
+	public static void registerItems() {
+		BerserkerItems.registerModItems();
 		BerserkerGroup.registerItemGroups();
+		BerserkerGroup.BERSERKER = FabricItemGroup.builder()
+				.icon(() -> new ItemStack(Armors.wildlingArmorSet.head.asItem()))
+				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
+				.build();
+		Registry.register(Registries.ITEM_GROUP, BerserkerGroup.BERSERKER_KEY, BerserkerGroup.BERSERKER);
 		WeaponsRegister.register(itemConfig.value.weapons);
 		Armors.register(itemConfig.value.armor_sets);
-		/*
+				/*
 		if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
 			FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
 				ResourceManagerHelper.registerBuiltinResourcePack(
@@ -85,7 +78,16 @@ public class BerserkerClassMod implements ModInitializer {
 		}
 		 */
 		itemConfig.save();
-		registerItemGroup();
 		effectsConfig.save();
+	}
+	public static void registerSounds() {
+		BerserkerSounds.register();
+	}
+	public static void registerEffects() {
+		BerserkerEffects.register(effectsConfig.value);
+		effectsConfig.save();
+	}
+	public static void registerParticles() {
+		Particles.register();
 	}
 }

@@ -10,18 +10,18 @@
 	"contact": {
 		"sources": "https://github.com/ProfessorFichte"
 	},
-	"license": "MIT",
+	"license": "ARR",
 	"icon": "assets/berserker_rpg/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"client": [
-			"net.berserker_rpg.client.BerserkerClient"
+			"com.berserker.fabric.client.FabricClient"
 		],
 		"main": [
-			"net.berserker_rpg.BerserkerClassMod"
+			"com.berserker.fabric.FabricMod"
 		],
 		"modmenu": [
-			"net.spell_engine.client.compatibility.ModMenuCompatibility"
+			"net.spell_engine.fabric.client.compat.ModMenuCompatibility"
 		],
 		"fabric-datagen": [
 			"net.berserker_rpg.BerserkerDataGen"

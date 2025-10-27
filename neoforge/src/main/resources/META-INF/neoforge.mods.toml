@@ -1,0 +1,52 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+#issueTrackerURL = ""
+license = "ARR"
+
+[[mods]]
+modId = "berserker_rpg"
+version = "${version}"
+displayName = "Berserker"
+authors = "Fichte"
+description = '''
+Enter a wild, relentless battle trance as a Berserker! Spell Engine Add-On
+'''
+#logoFile = "icon.png"
+
+[[dependencies.berserker_rpg]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "azurelibarmor"
+type = "required"
+versionRange = "[${azure_lib_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[${spell_engine_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "more_rpg_classes"
+type = "required"
+versionRange = "[${more_rpg_library_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[mixins]]
+config = "berserker-class-mod.mixins.json"
