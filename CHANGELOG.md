@@ -1,3 +1,6 @@
+# 2.5.1 - 1.21.1
+- update azurelib
+
 # 2.5.0 - 1.21.1
 - Move to Architectury Enviroment for Multiloader
 - NeoForge Beta!

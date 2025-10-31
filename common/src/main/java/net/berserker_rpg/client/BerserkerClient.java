@@ -1,7 +1,7 @@
 package net.berserker_rpg.client;
 
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.berserker_rpg.client.armor.CustomArmorRenderer;
 import net.berserker_rpg.client.effect.RageParticles;
 import net.berserker_rpg.client.effect.RageRenderer;
@@ -17,7 +17,6 @@ import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.render.CustomModels;
 import net.spell_engine.client.gui.SpellTooltip;
-import net.spell_engine.client.particle.SpellFlameParticle;
 
 import java.util.List;
 import java.util.function.Supplier;

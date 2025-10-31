@@ -1,17 +1,12 @@
 package net.berserker_rpg.client.armor;
 
-import mod.azure.azurelibarmor.rewrite.render.AzRendererConfig;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererConfig;
-import net.minecraft.item.ItemStack;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererConfig;
 import net.minecraft.util.Identifier;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
 public class CustomArmorRenderer extends AzArmorRenderer {
-    public CustomArmorRenderer(AzRendererConfig<ItemStack> config) {
-        super(config);
-    }
 
     public static CustomArmorRenderer wildling_armor() {
         return new CustomArmorRenderer("wildling_armor", "wildling");
