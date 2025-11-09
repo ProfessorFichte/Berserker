@@ -28,7 +28,7 @@ public class BerserkerClassMod {
 	public static final Logger LOGGER = LoggerFactory.getLogger("berserker_rpg");
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
-			("equipment", Default.itemConfig)
+			("equipment_v1", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)

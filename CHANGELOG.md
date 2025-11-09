@@ -1,3 +1,6 @@
+# 2.5.2 - 1.21.1
+- add optional critical strike mod armor attributes
+
 # 2.5.1 - 1.21.1
 - update azurelib
 
