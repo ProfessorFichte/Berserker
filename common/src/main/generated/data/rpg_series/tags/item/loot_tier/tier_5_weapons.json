@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "berserker_rpg:unique_berserker_axe_1",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:unique_sword_1",
+      "required": false
+    }
+  ]
+}
