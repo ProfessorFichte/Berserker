@@ -11,16 +11,21 @@ import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.sounds.BerserkerSounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.berserker_rpg.config.TweaksConfig;
+import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static net.berserker_rpg.compat.CompatLoadingCheck.armoryLoadCheck;
 
 
 public class BerserkerClassMod {
@@ -66,8 +71,7 @@ public class BerserkerClassMod {
 		Registry.register(Registries.ITEM_GROUP, BerserkerGroup.BERSERKER_KEY, BerserkerGroup.BERSERKER);
 		WeaponsRegister.register(itemConfig.value.weapons);
 		Armors.register(itemConfig.value.armor_sets);
-				/*
-		if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
+		if (armoryLoadCheck()) {
 			FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
 				ResourceManagerHelper.registerBuiltinResourcePack(
 						Identifier.of(MOD_ID, "berserker_armory_compat"),
@@ -76,7 +80,6 @@ public class BerserkerClassMod {
 				);
 			});
 		}
-		 */
 		itemConfig.save();
 		effectsConfig.save();
 	}

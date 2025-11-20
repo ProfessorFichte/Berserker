@@ -1,20 +1,11 @@
 {
   "values": [
     {
-      "id": "berserker_rpg:wildling_feet",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:northling_feet",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:netherite_northling_feet",
-      "required": false
-    },
-    {
       "id": "berserker_rpg:warlord_feet",
       "required": false
-    }
+    },
+    "berserker_rpg:wildling_feet",
+    "berserker_rpg:northling_feet",
+    "berserker_rpg:netherite_northling_feet"
   ]
 }

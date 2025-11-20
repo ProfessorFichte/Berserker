@@ -1,3 +1,7 @@
+# 2.5.3 - 1.21.1
+- Enable the Armory Tier Set - "Warlord" for the Berserker Class
+- Add Black Cleaver and Skofnung to rpg_series weapon loot tier 5
+
 # 2.5.2 - 1.21.1
 - add optional critical strike mod armor attributes
 

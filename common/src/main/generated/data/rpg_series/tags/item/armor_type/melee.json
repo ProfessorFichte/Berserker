@@ -1,6 +1,22 @@
 {
   "values": [
     {
+      "id": "berserker_rpg:warlord_head",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_chest",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_legs",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:warlord_feet",
+      "required": false
+    },
+    {
       "id": "berserker_rpg:wildling_head",
       "required": false
     },
@@ -46,22 +62,6 @@
     },
     {
       "id": "berserker_rpg:netherite_northling_feet",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:warlord_head",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:warlord_chest",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:warlord_legs",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:warlord_feet",
       "required": false
     }
   ]

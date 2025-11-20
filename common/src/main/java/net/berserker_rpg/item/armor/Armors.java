@@ -30,6 +30,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
+import static net.berserker_rpg.compat.CompatLoadingCheck.armoryLoadCheck;
 
 public class Armors {
     private static final Supplier<Ingredient> WILDLING_INGREDIENTS = () -> Ingredient.ofItems(
@@ -255,8 +256,7 @@ public class Armors {
 
     public static Armor.Entry warlordArmorSet;
     public static void register(Map<String, ArmorSetConfig> configs) {
-        /*
-        if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
+        if (armoryLoadCheck()) {
             warlordArmorSet = create(
                     material_warlord,
                     Identifier.of(MOD_ID, "warlord"),
@@ -307,8 +307,6 @@ public class Armors {
                     commonSettings(warlord_passive)
             );
         }
-
-         */
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 }

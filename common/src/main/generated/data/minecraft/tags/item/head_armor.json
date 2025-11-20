@@ -1,20 +1,11 @@
 {
   "values": [
     {
-      "id": "berserker_rpg:wildling_head",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:northling_head",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:netherite_northling_head",
-      "required": false
-    },
-    {
       "id": "berserker_rpg:warlord_head",
       "required": false
-    }
+    },
+    "berserker_rpg:wildling_head",
+    "berserker_rpg:northling_head",
+    "berserker_rpg:netherite_northling_head"
   ]
 }

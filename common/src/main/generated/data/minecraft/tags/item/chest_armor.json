@@ -1,20 +1,11 @@
 {
   "values": [
     {
-      "id": "berserker_rpg:wildling_chest",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:northling_chest",
-      "required": false
-    },
-    {
-      "id": "berserker_rpg:netherite_northling_chest",
-      "required": false
-    },
-    {
       "id": "berserker_rpg:warlord_chest",
       "required": false
-    }
+    },
+    "berserker_rpg:wildling_chest",
+    "berserker_rpg:northling_chest",
+    "berserker_rpg:netherite_northling_chest"
   ]
 }
