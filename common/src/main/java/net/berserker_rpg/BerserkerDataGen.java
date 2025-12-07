@@ -1,6 +1,7 @@
 package net.berserker_rpg;
 
 import net.berserker_rpg.item.armor.Armors;
+import net.berserker_rpg.item.tag.ModItemTags;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.sounds.BerserkerSounds;
 import net.berserker_rpg.spell.BerserkerSpells;
@@ -25,10 +26,13 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.item.weapon.Weapon;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
+import net.spell_engine.api.tags.SpellEngineItemTags;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
+import net.spell_power.api.SpellPowerTags;
 
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -130,10 +134,52 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
             }
 
         }
+        public void generateBerserkerAxeTags(List<Weapon.Entry> weapons) {
+            Iterator var2 = weapons.iterator();
+
+            while(var2.hasNext()) {
+                Weapon.Entry weapon = (Weapon.Entry)var2.next();
+                FabricTagProvider<Item>.FabricTagBuilder tag = this.getOrCreateTagBuilder(ModItemTags.BERSERKER_AXES);
+                tag.addOptional(weapon.id());
+                int tier = weapon.lootProperties().tier();
+                if (tier >= 0) {
+                    FabricTagProvider<Item>.FabricTagBuilder tierTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.LootTiers.get(tier, RPGSeriesItemTags.LootCategory.WEAPONS));
+                    tierTag.addOptional(weapon.id());
+                }
+                String lootTheme = weapon.lootProperties().theme();
+                if (lootTheme != null && !lootTheme.isEmpty()) {
+                    FabricTagProvider<Item>.FabricTagBuilder themeTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.LootThemes.get(lootTheme));
+                    themeTag.addOptional(weapon.id());
+                }
+            }
+        }
+        public void generateGeneralWeaponTags(List<Weapon.Entry> weapons) {
+            Iterator var2 = weapons.iterator();
+
+            while(var2.hasNext()) {
+                Weapon.Entry weapon = (Weapon.Entry)var2.next();
+                TagKey<Item> weaponType = RPGSeriesItemTags.WeaponType.get(weapon.category());
+                FabricTagProvider<Item>.FabricTagBuilder weaponTag = this.getOrCreateTagBuilder(weaponType);
+                weaponTag.addOptional(weapon.id());
+                int tier = weapon.lootProperties().tier();
+                if (tier >= 0) {
+                    FabricTagProvider<Item>.FabricTagBuilder tierTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.LootTiers.get(tier, RPGSeriesItemTags.LootCategory.WEAPONS));
+                    tierTag.addOptional(weapon.id());
+                }
+
+                String lootTheme = weapon.lootProperties().theme();
+                if (lootTheme != null && !lootTheme.isEmpty()) {
+                    FabricTagProvider<Item>.FabricTagBuilder themeTag = this.getOrCreateTagBuilder(RPGSeriesItemTags.LootThemes.get(lootTheme));
+                    themeTag.addOptional(weapon.id());
+                }
+            }
+
+        }
         List<String> armoryKeywords = List.of("warlord");
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-            generateWeaponTags(WeaponsRegister.entries);
+            generateBerserkerAxeTags(WeaponsRegister.entries.stream().filter(entry -> entry.name().contains("berserker_axe")).toList());
+            generateGeneralWeaponTags(WeaponsRegister.entries.stream().filter(entry -> !entry.name().contains("berserker_axe")).toList());
             var armorTagOptions1 = new ArmorOptions(false, true);
             var armorTagOptions2 = new ArmorOptions(true, true);
             armoryTags(
@@ -145,6 +191,17 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
                     RPGSeriesItemTags.ArmorMetaType.MELEE,
                     armorTagOptions2
             );
+
+            var spellInfinityTag = getOrCreateTagBuilder(SpellEngineItemTags.ENCHANTABLE_SPELL_INFINITY);
+            spellInfinityTag.addTag(ModItemTags.BERSERKER_AXES);
+            var spellPowerTag  = getOrCreateTagBuilder(SpellPowerTags.Items.Enchantable.SPELL_POWER_GENERIC);
+            spellPowerTag .addTag(ModItemTags.BERSERKER_AXES);
+            var unbreakingTag = getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE);
+            unbreakingTag.addTag(ModItemTags.BERSERKER_AXES);
+            var sharpnessTag = getOrCreateTagBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE);
+            sharpnessTag.addTag(ModItemTags.BERSERKER_AXES);
+            var meleeTag = getOrCreateTagBuilder(ItemTags.SWORDS);
+            meleeTag.addTag(ModItemTags.BERSERKER_AXES);
         }
     }
 
