@@ -126,7 +126,7 @@ public class BerserkerSpells {
         var title = "Carve";
         var description = "On melee hit: {trigger_chance} chance to stack armor reduction by {bonus2} and increasing incoming damage by {bonus} for {effect_amplifier_cap} times.";
         var spell = passiveSpellBase();
-        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
         var debuffEffect = BerserkerEffects.CARVE;
         SpellTooltip.DescriptionMutator mutator = (args) -> {
             var modifier = debuffEffect.config().attributes().get(1);
@@ -168,6 +168,35 @@ public class BerserkerSpells {
         spell.cost.batching = true;
 
         return new Entry(id, spell, title, description, mutator);
+    }
+    public static Entry lightning_strike = add(lightning_strike());
+    private static Entry lightning_strike() {
+        var id = Identifier.of(MOD_ID, "lightning_strike");
+        var title = "Toranos's Lightning Strike";
+        var description = "On melee hit: {trigger_chance} chance to spawn a lightning strike.";
+        var spell = passiveSpellBase();
+        spell.school = MoreSpellSchools.RAGE_MELEE;
+
+        var trigger = new Spell.Trigger();
+        trigger.type = Spell.Trigger.Type.MELEE_IMPACT;
+        trigger.equipment_condition = EquipmentSlot.MAINHAND;
+        trigger.chance = 0.2F;
+        spell.passive.triggers = List.of(trigger);
+
+        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
+
+        var custom = new Spell.Impact();
+        custom.action = new Spell.Impact.Action();
+        custom.action.custom = new Spell.Impact.Action.Custom();
+        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
+        custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
+        custom.action.custom.handler = "more_rpg_classes:lightning";
+        spell.impacts = List.of(custom);
+
+        configureCooldown(spell, 3);
+        spell.cost.batching = true;
+
+        return new Entry(id, spell, title, description, null);
     }
     ///ACTIVE SPELLS
     public static final Entry wild_rage = add(wild_rage());
