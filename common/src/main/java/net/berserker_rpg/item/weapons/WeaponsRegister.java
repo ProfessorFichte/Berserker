@@ -55,7 +55,7 @@ public class WeaponsRegister {
 
     //BERSERKER-AXE
     private static Weapon.Entry berserker_axes(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, berserker_axe_attackSpeed), Equipment.WeaponType.DOUBLE_AXE);
+        return entry(name, material, BerserkerAxeItem::new, new WeaponConfig(damage, berserker_axe_attackSpeed), Equipment.WeaponType.DOUBLE_AXE);
     }
     private static Weapon.Entry sword(String name, Weapon.CustomMaterial material, float damage) {
         return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2.4f), Equipment.WeaponType.SWORD);
@@ -167,6 +167,12 @@ public class WeaponsRegister {
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .spell(BerserkerSpells.carve_melee.id())
+                    .loot(Equipment.LootProperties.of(5))
+                    .rarity = Rarity.RARE;
+            berserker_axes( "unique_berserker_axe_2",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
+                    .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
+                    .spell(BerserkerSpells.lightning_strike.id())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             sword( "unique_sword_1",
