@@ -93,4 +93,7 @@ public class BerserkerClassMod {
 	public static void registerParticles() {
 		Particles.register();
 	}
+	public static Identifier id(String path) {
+		return Identifier.of(MOD_ID, path);
+	}
 }

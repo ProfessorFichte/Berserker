@@ -16,6 +16,7 @@
   "item.berserker_rpg.aether_berserker_axe": "Holy Raid Axe",
   "item.berserker_rpg.unique_berserker_axe_1": "Black Cleaver",
   "item.berserker_rpg.unique_sword_1": "Skofnung",
+  "item.berserker_rpg.unique_berserker_axe_2": "Toranos's Axe",
 
   "item.berserker_rpg.glacial_berserker_axe": "Norse Raid Axe",
   "item.berserker_rpg.wither_berserker_axe": "Soul Ripper",
@@ -70,6 +71,9 @@
   "spell.berserker_rpg.improved_bloody_strike.description": "Increases power multiplier of Bloody Strike by {power_multiplier}",
   "spell.berserker_rpg.carve.name": "Carve",
   "spell.berserker_rpg.carve.description": "On melee hit: {trigger_chance} chance to stack armor reduction by {bonus2} and increasing incoming damage by {bonus} for {effect_amplifier_cap} times.",
+  "spell.berserker_rpg.lightning_strike.name": "Toranos's Lightning Strike",
+  "spell.berserker_rpg.lightning_strike.description": "On melee hit: {trigger_chance} chance to spawn a lightning strike.",
+
 
   "equipment_set.berserker_rpg.warlord": "Raging Warlord",
 

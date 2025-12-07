@@ -5,6 +5,10 @@
       "required": false
     },
     {
+      "id": "berserker_rpg:unique_berserker_axe_2",
+      "required": false
+    },
+    {
       "id": "berserker_rpg:unique_sword_1",
       "required": false
     }

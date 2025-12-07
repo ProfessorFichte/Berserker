@@ -141,7 +141,7 @@ if (System.getenv("CURSEFORGE_API_KEY")) {
             relations {
                 // Required dependencies
                 requiredDependency 'spell-engine'
-                requiredDependency 'spell-power'
+                requiredDependency 'azurelib-armor'
                 requiredDependency 'more-rpg-library'
             }
 
@@ -167,7 +167,8 @@ if (System.getenv("MODRINTH_API_KEY")) {
         dependencies {
             // Required dependencies
             required.project 'spell-engine'
-            required.project 'spell-power'
+            required.project 'more-rpg-library'
+            required.project 'azurelib-armor'
         }
     }
 }

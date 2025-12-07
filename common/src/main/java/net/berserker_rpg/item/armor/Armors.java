@@ -1,8 +1,6 @@
 package net.berserker_rpg.item.armor;
 
-import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -21,7 +19,6 @@ import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.spell.SpellDataComponents;
-import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
