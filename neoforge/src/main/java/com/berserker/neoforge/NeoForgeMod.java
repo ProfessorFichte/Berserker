@@ -1,7 +1,6 @@
 package com.berserker.neoforge;
 
 import net.berserker_rpg.BerserkerClassMod;
-import net.berserker_rpg.client.particle.Particles;
 import net.minecraft.registry.RegistryKeys;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;

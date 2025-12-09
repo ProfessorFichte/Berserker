@@ -1,6 +1,5 @@
 package net.berserker_rpg;
 
-import net.berserker_rpg.client.particle.Particles;
 import net.berserker_rpg.config.Default;
 import net.berserker_rpg.spell.CustomSpellImpacts;
 import net.berserker_rpg.effect.BerserkerEffects;
@@ -9,7 +8,6 @@ import net.berserker_rpg.item.BerserkerItems;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.berserker_rpg.sounds.BerserkerSounds;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
@@ -89,9 +87,6 @@ public class BerserkerClassMod {
 	public static void registerEffects() {
 		BerserkerEffects.register(effectsConfig.value);
 		effectsConfig.save();
-	}
-	public static void registerParticles() {
-		Particles.register();
 	}
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);

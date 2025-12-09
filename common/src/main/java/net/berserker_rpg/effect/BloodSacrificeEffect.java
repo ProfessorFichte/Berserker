@@ -6,6 +6,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 
 import static net.berserker_rpg.BerserkerClassMod.tweaksConfig;
 
@@ -27,22 +28,23 @@ public class BloodSacrificeEffect extends StatusEffect {
 
     public void onApplied(LivingEntity entity, int amplifier) {
         float modifier = 1.0F;
-        var attack_damage = entity.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        float actual_health_player = entity.getHealth();
-        double amount = modifier * attack_damage;
-        float self_damage_calc = (float) (amount * tweaksConfig.value.bloody_strike_self_damage);
-        if(actual_health_player <= 0.5F){
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 300,2,false,false,true));
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 300,2,false,false,true));
-        }else{
-            if(self_damage_calc > actual_health_player){
-                entity.setHealth(0.5F);
+        if(entity instanceof PlayerEntity playerEntity && !playerEntity.isCreative()){
+            var attack_damage = entity.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+            float actual_health_player = entity.getHealth();
+            double amount = modifier * attack_damage;
+            float self_damage_calc = (float) (amount * tweaksConfig.value.bloody_strike_self_damage);
+            if(actual_health_player <= 0.5F){
+                entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 300,2,false,false,true));
+                entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 300,2,false,false,true));
             }else{
-                entity.setHealth(actual_health_player- self_damage_calc);
+                if(self_damage_calc > actual_health_player){
+                    entity.setHealth(0.5F);
+                }else{
+                    entity.setHealth(actual_health_player- self_damage_calc);
+                }
+                entity.setAbsorptionAmount(Math.max(entity.getAbsorptionAmount(), healthPerStack  * (1 + amplifier )));
             }
-            entity.setAbsorptionAmount(Math.max(entity.getAbsorptionAmount(), healthPerStack  * (1 + amplifier )));
         }
-
         super.onApplied(entity, amplifier);
     }
 

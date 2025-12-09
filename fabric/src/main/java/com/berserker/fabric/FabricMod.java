@@ -10,6 +10,5 @@ public final class FabricMod implements ModInitializer {
         BerserkerClassMod.registerItems();
         BerserkerClassMod.registerSounds();
         BerserkerClassMod.registerEffects();
-        BerserkerClassMod.registerParticles();
     }
 }

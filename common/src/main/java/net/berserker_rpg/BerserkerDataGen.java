@@ -27,8 +27,6 @@ import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.item.weapon.Weapon;
-import net.spell_engine.api.spell.Spell;
-import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.api.tags.SpellEngineItemTags;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
@@ -48,7 +46,6 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(SpellGen::new);
-        pack.addProvider(SpellTagGenerator::new);
         pack.addProvider(SoundGen::new);
         pack.addProvider(ModelProvider::new);
     }
@@ -66,18 +63,6 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
         }
     }
 
-    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
-        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(output, SpellRegistry.KEY, registriesFuture);
-        }
-
-        @Override
-        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-            getOrCreateTagBuilder(TagKey.of(SpellRegistry.KEY, Identifier.of("arsenal", "melee")))
-                    .addOptional(BerserkerSpells.carve_melee.id())
-            ;
-        }
-    }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
         public ItemTagGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {

@@ -2,17 +2,13 @@ package net.berserker_rpg.client;
 
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
-import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.client.armor.CustomArmorRenderer;
 import net.berserker_rpg.client.effect.RageParticles;
 import net.berserker_rpg.client.effect.RageRenderer;
-import net.berserker_rpg.client.particle.Particles;
-import net.berserker_rpg.client.particle.SmallThunderParticle;
 import net.berserker_rpg.effect.BerserkerEffects;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.spell.BerserkerSpells;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.particle.*;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
@@ -35,8 +31,6 @@ public class BerserkerClient {
         CustomModels.registerModelIds(List.of(
                 RageRenderer.modelIdRage
         ));
-        ParticleFactoryRegistry.getInstance().register(Particles.RAGE_PAR, DamageParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(Particles.SMALL_THUNDER, SmallThunderParticle.Factory::new);
 
         registerArmorRenderer(Armors.wildlingArmorSet, CustomArmorRenderer::wildling_armor);
         registerArmorRenderer(Armors.northlingArmorSet, CustomArmorRenderer::northling_armor);
@@ -46,13 +40,6 @@ public class BerserkerClient {
         }
         CustomParticleStatusEffect.register(BerserkerEffects.RAGE.effect, new RageParticles(1));
         CustomModelStatusEffect.register(BerserkerEffects.RAGE.effect, new RageRenderer());
-    }
-
-    public static void registerParticleAppearances() {
-        ParticleFactoryRegistry registry = ParticleFactoryRegistry.getInstance();
-
-        registry.register(Particles.RAGE_PAR, DamageParticle.Factory::new);
-        registry.register(Particles.SMALL_THUNDER, SmallThunderParticle.Factory::new);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

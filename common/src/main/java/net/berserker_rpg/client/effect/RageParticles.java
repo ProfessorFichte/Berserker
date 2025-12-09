@@ -10,7 +10,7 @@ public class RageParticles implements CustomParticleStatusEffect.Spawner{
 
     public RageParticles(int particleCount) {
         this.particles = new ParticleBatch(
-                "berserker_rpg:rage_particle",
+                "more_rpg_classes:rage_particle",
                 ParticleBatch.Shape.PIPE, ParticleBatch.Origin.LAUNCH_POINT,
                 null, particleCount, 0.1F, 0.3F, 0);
     }

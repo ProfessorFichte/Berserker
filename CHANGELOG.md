@@ -2,6 +2,7 @@
 - fix Aeternium Beserker Axe Recipe
 - Add New Tier 5 Berserker Axe - Toranos's Axe
 - Berserker Raid Axe's now disable Shields
+- migrate Particles and Sounds from this Mod to More RPG Library
 
 # 2.5.3 - 1.21.1
 - Enable the Armory Tier Set - "Warlord" for the Berserker Class

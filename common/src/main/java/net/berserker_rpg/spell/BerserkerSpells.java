@@ -8,7 +8,6 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.spell_engine.api.datagen.SpellBuilder;
-import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.Sound;
@@ -120,84 +119,6 @@ public class BerserkerSpells {
         return new Entry(id, spell, title, description, null);
     }
     ///PASSIVES
-    public static Entry carve_melee = add(carve_melee());
-    private static Entry carve_melee() {
-        var id = Identifier.of(MOD_ID, "carve");
-        var title = "Carve";
-        var description = "On melee hit: {trigger_chance} chance to stack armor reduction by {bonus2} and increasing incoming damage by {bonus} for {effect_amplifier_cap} times.";
-        var spell = passiveSpellBase();
-        spell.school = MoreSpellSchools.RAGE_MELEE;
-        var debuffEffect = BerserkerEffects.CARVE;
-        SpellTooltip.DescriptionMutator mutator = (args) -> {
-            var modifier = debuffEffect.config().attributes().get(1);
-            var modifier2 = debuffEffect.config().attributes().get(0);
-            var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
-            var bonus2 = SpellTooltip.bonus(modifier2.value, modifier2.operation);
-            return args.description()
-                    .replace("{bonus}", bonus)
-                    .replace("{bonus2}", bonus2);
-        };
-
-        var trigger = new Spell.Trigger();
-        trigger.type = Spell.Trigger.Type.MELEE_IMPACT;
-        trigger.equipment_condition = EquipmentSlot.MAINHAND;
-        trigger.chance = 0.2F;
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        var debuff = createEffectImpact(debuffEffect.id, 5);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-        debuff.action.status_effect.show_particles = false;
-        debuff.action.status_effect.amplifier = 1;
-        debuff.action.status_effect.amplifier_cap = 5;
-        debuff.action.status_effect.duration = 8;
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SKULL,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.25F)
-                        .color(Color.RAGE.toRGBA())
-        };
-        debuff.sound = new Sound(BerserkerSounds.CARVE.id().toString());
-        spell.impacts = List.of(debuff);
-
-        configureCooldown(spell, 3);
-        spell.cost.batching = true;
-
-        return new Entry(id, spell, title, description, mutator);
-    }
-    public static Entry lightning_strike = add(lightning_strike());
-    private static Entry lightning_strike() {
-        var id = Identifier.of(MOD_ID, "lightning_strike");
-        var title = "Toranos's Lightning Strike";
-        var description = "On melee hit: {trigger_chance} chance to spawn a lightning strike.";
-        var spell = passiveSpellBase();
-        spell.school = MoreSpellSchools.RAGE_MELEE;
-
-        var trigger = new Spell.Trigger();
-        trigger.type = Spell.Trigger.Type.MELEE_IMPACT;
-        trigger.equipment_condition = EquipmentSlot.MAINHAND;
-        trigger.chance = 0.2F;
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        var custom = new Spell.Impact();
-        custom.action = new Spell.Impact.Action();
-        custom.action.custom = new Spell.Impact.Action.Custom();
-        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
-        custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
-        custom.action.custom.handler = "more_rpg_classes:lightning";
-        spell.impacts = List.of(custom);
-
-        configureCooldown(spell, 3);
-        spell.cost.batching = true;
-
-        return new Entry(id, spell, title, description, null);
-    }
     ///ACTIVE SPELLS
     public static final Entry wild_rage = add(wild_rage());
     private static Entry wild_rage() {
@@ -226,7 +147,7 @@ public class BerserkerSpells {
                         ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
                         2, 0.01F, 0.1F)
                         .preSpawnTravel(7),
-                new ParticleBatch("berserker_rpg:rage_particle",
+                new ParticleBatch("more_rpg_classes:rage_particle",
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         4, 0.01F, 0.2F)
                         .preSpawnTravel(7),
@@ -274,7 +195,7 @@ public class BerserkerSpells {
         spell.release.animation = "more_rpg_classes:two_handed_roar";
         spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
         spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("berserker_rpg:rage_particle",
+                new ParticleBatch("more_rpg_classes:rage_particle",
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         4, 0.01F, 0.2F)
                         .preSpawnTravel(7),

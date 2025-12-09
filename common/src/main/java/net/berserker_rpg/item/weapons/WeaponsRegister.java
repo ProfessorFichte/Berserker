@@ -13,6 +13,7 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.more_rpg_classes.custom.MoreSpellSchools;
+import net.more_rpg_classes.custom.MrpgLibSpells;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.Equipment;
@@ -166,19 +167,19 @@ public class WeaponsRegister {
             berserker_axes( "unique_berserker_axe_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
-                    .spell(BerserkerSpells.carve_melee.id())
+                    .spell(MrpgLibSpells.carve_melee.id())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             berserker_axes( "unique_berserker_axe_2",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
-                    .spell(BerserkerSpells.lightning_strike.id())
+                    .spell(MrpgLibSpells.lightning_strike_melee.id())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             sword( "unique_sword_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),8.0F)
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.05F))
-                    .spell(BerserkerSpells.carve_melee.id())
+                    .spell(MrpgLibSpells.carve_melee.id())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
         }

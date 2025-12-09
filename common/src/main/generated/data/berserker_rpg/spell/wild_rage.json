@@ -17,7 +17,7 @@
         "pre_spawn_travel": 7.0
       },
       {
-        "particle_id": "berserker_rpg:rage_particle",
+        "particle_id": "more_rpg_classes:rage_particle",
         "origin": "CENTER",
         "shape": "SPHERE",
         "count": 4.0,

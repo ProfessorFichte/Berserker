@@ -7,6 +7,5 @@ public final class FabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BerserkerClient.init();
-        BerserkerClient.registerParticleAppearances();
     }
 }

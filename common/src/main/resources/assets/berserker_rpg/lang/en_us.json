@@ -56,7 +56,7 @@
   "spell.berserker_rpg.wild_rage.name": "Wild Rage",
   "spell.berserker_rpg.wild_rage.description": "Enter a wild rage, increases attack speed by {bonus} and rage by {bonus2}, stacking up to {effect_amplifier_cap} times.",
   "spell.berserker_rpg.bloody_strike.name": "Bloody Strike",
-  "spell.berserker_rpg.bloody_strike.description": "Deals {damage} physical-damage in trade of self damage, gives absorption for dealt damage.",
+  "spell.berserker_rpg.bloody_strike.description": "Deals {damage} physical-damage in trade of self damage, gives absorption for dealt damage. Weakens the player if health is too low.",
   "spell.berserker_rpg.nordic_storm.name": "Nordic Storm",
   "spell.berserker_rpg.nordic_storm.description": "Spinning attack, that deals {damage_0} physical- and {damage_1} frost-damage on targets per second.",
   "spell.berserker_rpg.rumbling_swing.name": "Rumbling Swing",
@@ -69,10 +69,6 @@
   "spell.berserker_rpg.blood_reckoning.description": "The caster heals himself and converts absorption to health.",
   "spell.berserker_rpg.improved_bloody_strike.name": "Improved Bloody Strike",
   "spell.berserker_rpg.improved_bloody_strike.description": "Increases power multiplier of Bloody Strike by {power_multiplier}",
-  "spell.berserker_rpg.carve.name": "Carve",
-  "spell.berserker_rpg.carve.description": "On melee hit: {trigger_chance} chance to stack armor reduction by {bonus2} and increasing incoming damage by {bonus} for {effect_amplifier_cap} times.",
-  "spell.berserker_rpg.lightning_strike.name": "Toranos's Lightning Strike",
-  "spell.berserker_rpg.lightning_strike.description": "On melee hit: {trigger_chance} chance to spawn a lightning strike.",
 
 
   "equipment_set.berserker_rpg.warlord": "Raging Warlord",
