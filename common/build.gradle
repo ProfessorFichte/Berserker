@@ -48,8 +48,8 @@ dependencies {
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-    modImplementation(files("run/mods/dev/more_rpg_library-fabric-2.5.8+1.21.1.jar"))
-    //modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}")
+    //modImplementation(files("run/mods/dev/more_rpg_library-fabric-2.5.9+1.21.1.jar"))
+    modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}")
 
     // Compatibility
     // Fabric specific
