@@ -22,8 +22,5 @@ public final class NeoForgeMod {
         event.register(RegistryKeys.STATUS_EFFECT, reg -> {
             BerserkerClassMod.registerEffects();
         });
-        event.register(RegistryKeys.PARTICLE_TYPE, reg -> {
-            Particles.register();
-        });
     }
 }
