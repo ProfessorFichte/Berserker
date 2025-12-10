@@ -7,6 +7,12 @@
       ]
     }
   ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "loot_n_explore"
+    }
+  ],
   "type": "minecraft:smithing_transform",
   "addition": {
     "item": "loot_n_explore:ender_dragon_scales"
