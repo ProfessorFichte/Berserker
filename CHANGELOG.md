@@ -1,7 +1,7 @@
 # 2.5.5 - 1.21.1
-- Add many Datagen methods, so most stuff gets generated
-- Improve Advancements
-- Fix WIld Rage Effect Spamming Particles
+- Datagen methods got added to the project, so most data-related files gets generated
+- Improve the Berserker-Class Advancements
+- Fixed Wild Rage's Effect Particle Renderer Spamming too many Particles
 
 # 2.5.4 - 1.21.1
 - fix Aeternium Beserker Axe Recipe

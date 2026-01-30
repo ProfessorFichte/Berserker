@@ -11,7 +11,7 @@ public class RageParticles implements CustomParticleStatusEffect.Spawner{
     public RageParticles(int particleCount) {
         this.particles = new ParticleBatch(
                 "more_rpg_classes:rage_particle",
-                ParticleBatch.Shape.PIPE, ParticleBatch.Origin.LAUNCH_POINT,
+                ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.CENTER,
                 null, particleCount, 0.1F, 0.3F, 0);
     }
 
@@ -19,9 +19,9 @@ public class RageParticles implements CustomParticleStatusEffect.Spawner{
     public void spawnParticles(LivingEntity livingEntity, int amplifier) {
         var world = livingEntity.getWorld();
         if (world.isClient) {
-            var scaledParticles = new ParticleBatch(particles);
-            scaledParticles.count *= (1);
-            ParticleHelper.play(livingEntity.getWorld(), livingEntity, scaledParticles);
+            if (world.random.nextFloat() < 0.15F) {
+                ParticleHelper.play(livingEntity.getWorld(), livingEntity, particles);
+            }
         }
     }
 }
