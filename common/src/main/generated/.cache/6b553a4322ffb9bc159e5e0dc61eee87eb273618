@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-09T21:46:12.243769	Berserker Class Mod/Tags for minecraft:item
+// 1.21.1	2026-01-30T22:40:08.0616939	Berserker Class Mod/Tags for minecraft:item
 c5fb7bcb96d5b2d14aa36698cf8b41e5eb170f81 data\rpg_series\tags\item\loot_tier\tier_0_weapons.json
 64cf39a80439c7a8120ca7fe16c499bbfdbe114a data\rpg_series\tags\item\loot_tier\tier_1_weapons.json
 522dc9b4e3fe1e5c58ce9437aa845e6fc9cb92b3 data\spell_power\tags\item\enchantable\spell_power_generic.json
@@ -9,8 +9,8 @@ ac1742fe52819a1ee57a5a8e91da07fba052359a data\rpg_series\tags\item\loot_tier\tie
 cc21251b5b23a7c546472c6f6ec4ce88877a6142 data\minecraft\tags\item\head_armor.json
 522dc9b4e3fe1e5c58ce9437aa845e6fc9cb92b3 data\minecraft\tags\item\enchantable\durability.json
 941626a51eae9ebd2a2fe44142c42bfb16d91f96 data\rpg_series\tags\item\loot_tier\tier_2_armors.json
-5a6c4a062a3dc6c8dc1604d2742be380f8ab3876 data\berserker_rpg\tags\item\berserker_axes.json
 00f7a33b7991b7fb31eb9915ab157d55bd43077b data\rpg_series\tags\item\loot_tier\tier_1_armors.json
+5a6c4a062a3dc6c8dc1604d2742be380f8ab3876 data\berserker_rpg\tags\item\berserker_axes.json
 14eafe28e1ad90bdeabd0c4fb2167c6885ca710e data\minecraft\tags\item\foot_armor.json
 522dc9b4e3fe1e5c58ce9437aa845e6fc9cb92b3 data\spell_engine\tags\item\enchantable\spell_infinity.json
 14ed85a01e30d74f97ffe32d9d1ec249316b9d5c data\rpg_series\tags\item\loot_theme\aether.json

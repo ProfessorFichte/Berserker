@@ -1,0 +1,43 @@
+{
+  "parent": "more_rpg_content:root",
+  "criteria": {
+    "has_all_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": "berserker_rpg:northling_head"
+          },
+          {
+            "items": "berserker_rpg:northling_chest"
+          },
+          {
+            "items": "berserker_rpg:northling_legs"
+          },
+          {
+            "items": "berserker_rpg:northling_feet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.berserker_rpg.equipment.phasleb_armor_set.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "berserker_rpg:northling_chest"
+    },
+    "title": {
+      "translate": "advancements.berserker_rpg.equipment.phasleb_armor_set.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_all_items"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

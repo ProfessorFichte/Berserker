@@ -1,5 +1,7 @@
-// 1.21.1	2025-12-09T21:46:12.2452743	Berserker Class Mod/Spell Generator
+// 1.21.1	2026-01-30T22:40:08.0636958	Berserker Class Mod/Spell Generator
+b16f24c7ea610f59d9bacc41da85db71c4fab9f0 data\berserker_rpg\spell\rumbling_swing.json
 ed1d186b0357d38c1a951bb0385d00fe9cf1d212 data\berserker_rpg\spell\improved_bloody_strike.json
+b673adc18ac6bdf5eed6cd85b549534cb9032a64 data\berserker_rpg\spell\nordic_storm.json
 a958ff48460d0c22952b194a79b58d4eb6b7abe3 data\berserker_rpg\spell\blood_reckoning.json
 7763ba1c0d47aacde34c90741ef292f3ac717adf data\berserker_rpg\spell\outrage.json
 b38707edfdc93893c61c3472568ed4491a1ff715 data\berserker_rpg\spell\wild_rage.json

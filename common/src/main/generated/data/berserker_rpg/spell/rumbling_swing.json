@@ -1,0 +1,101 @@
+{
+  "school": "spell_power:lightning",
+  "range": 10.0,
+  "tier": 5,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": "berserker_rpg:rumbling_swing",
+    "particles": [
+      {
+        "particle_id": "electric_spark",
+        "origin": "CENTER",
+        "shape": "CIRCLE",
+        "count": 15.0,
+        "min_speed": 0.5,
+        "max_speed": 3.0
+      }
+    ],
+    "sound": {
+      "id": "entity.player.attack.sweep"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {
+      "required": true
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "TELEPORT",
+        "teleport": {
+          "mode": "BEHIND_TARGET",
+          "intent": "HARMFUL",
+          "behind_target": {},
+          "depart_particles": [
+            {
+              "particle_id": "cloud",
+              "origin": "FEET",
+              "shape": "SPHERE",
+              "count": 20.0,
+              "min_speed": 0.05,
+              "max_speed": 0.1,
+              "pre_spawn_travel": 15.0,
+              "invert": true
+            }
+          ],
+          "arrive_particles": [
+            {
+              "particle_id": "poof",
+              "origin": "FEET",
+              "shape": "SPHERE",
+              "count": 10.0,
+              "min_speed": 0.05,
+              "max_speed": 0.1,
+              "pre_spawn_travel": 2.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.8
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "berserker_rpg:small_thunder",
+          "origin": "CENTER",
+          "shape": "PIPE",
+          "count": 1.0,
+          "min_speed": 0.1,
+          "max_speed": 0.15
+        }
+      ],
+      "sound": {
+        "id": "entity.lightning_bolt.impact"
+      }
+    },
+    {
+      "school": "spell_power:lightning",
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.5
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 1.0,
+    "cooldown": {
+      "duration": 25.0
+    }
+  }
+}

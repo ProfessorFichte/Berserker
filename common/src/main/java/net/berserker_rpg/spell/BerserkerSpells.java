@@ -7,6 +7,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
+import net.spell_power.api.SpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
@@ -185,8 +186,8 @@ public class BerserkerSpells {
     public static final Entry blood_reckoning = add(blood_reckoning());
     private static Entry blood_reckoning() {
         var id = Identifier.of(MOD_ID, "blood_reckoning");
-        var title = "";
-        var description = "";
+        var title = "Blood Reckoning";
+        var description = "The caster heals himself and converts absorption to health.";
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0;
         spell.tier = 2;
@@ -227,8 +228,8 @@ public class BerserkerSpells {
     public static final Entry bloody_strike = add(bloody_strike());
     private static Entry bloody_strike() {
         var id = Identifier.of(MOD_ID, "bloody_strike");
-        var title = "";
-        var description = "";
+        var title = "Bloody Strike";
+        var description = "Deals {damage} physical-damage in trade of self damage, gives absorption for dealt damage. Weakens the player if health is too low.";
         var effect = BerserkerEffects.BLOOD_SACRIFICE;
         var debuffEffect = MRPGCEffects.BLEEDING;
         var spell = SpellBuilder.createSpellActive();
@@ -337,5 +338,150 @@ public class BerserkerSpells {
         configureCooldown(spell, 35);
         spell.cost.exhaust = 0.3F;
         return new Entry(id, spell, title, description, mutator);
+    }
+
+    public static final Entry nordic_storm = add(nordic_storm());
+    private static Entry nordic_storm() {
+        var id = Identifier.of(MOD_ID, "nordic_storm");
+        var title = "Nordic Storm";
+        var description = "Spinning attack, that deals {damage_0} physical- and {damage_1} frost-damage on targets per second.";
+        var spell = SpellBuilder.createSpellActive();
+        spell.school = SpellSchools.FROST;
+        spell.range = 0;
+        spell.range_mechanic = Spell.RangeMechanic.MELEE;
+        spell.tier = 5;
+
+        spell.active.cast = new Spell.Active.Cast();
+        spell.active.cast.duration = 0.5F;
+        spell.active.cast.movement_speed = 1.2F;
+        spell.active.cast.animation = "berserker_rpg:nordic_storm";
+        spell.active.cast.sound = new Sound(Identifier.of("spell_engine:generic_frost_impact"), 0);
+        spell.active.cast.start_sound = new Sound("entity.player.breath");
+        spell.active.cast.channel_ticks = 5;
+        spell.active.cast.particles = new ParticleBatch[]{
+                new ParticleBatch("sweep_attack",
+                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
+                        1, 0.3F, 3.0F),
+                new ParticleBatch("spell_engine:frost_shard",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        1, 0.3F, 3.0F)
+        };
+
+        spell.target.type = Spell.Target.Type.AREA;
+        spell.target.area = new Spell.Target.Area();
+        spell.target.area.distance_dropoff = Spell.Target.Area.DropoffCurve.SQUARED;
+        spell.target.area.angle_degrees = 360;
+        spell.target.area.vertical_range_multiplier = 0.5F;
+
+        var damage = damageImpact(0.8F, 0F);
+        damage.attribute = "minecraft:generic.attack_damage";
+        var freezeHurts = new Spell.Impact.TargetModifier();
+        var freezeHurtsCond = new Spell.TargetCondition();
+        freezeHurtsCond.entity_type = "#minecraft:freeze_hurts_extra_types";
+        freezeHurts.conditions = List.of(freezeHurtsCond);
+        freezeHurts.modifier = new Spell.Impact.Modifier();
+        freezeHurts.modifier.power_multiplier = 0.3F;
+        var freezeImmune = new Spell.Impact.TargetModifier();
+        var freezeImmuneCond = new Spell.TargetCondition();
+        freezeImmuneCond.entity_type = "#minecraft:freeze_immune_entity_types";
+        freezeImmune.conditions = List.of(freezeImmuneCond);
+        freezeImmune.modifier = new Spell.Impact.Modifier();
+        freezeImmune.modifier.power_multiplier = -0.3F;
+        damage.target_modifiers = List.of(freezeHurts, freezeImmune);
+        damage.particles = new ParticleBatch[]{
+                new ParticleBatch("spell_engine:frost_hit",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
+                        1, 0.5F, 3.0F)
+        };
+        damage.sound = new Sound(Identifier.of("item.axe.strip"), 2);
+
+        var frosted = createEffectImpact(Identifier.of("more_rpg_classes", "frosted"), 8);
+        frosted.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+        frosted.action.status_effect.amplifier = 1;
+        frosted.action.status_effect.amplifier_cap = 4;
+        frosted.action.status_effect.show_particles = false;
+        var frostedDeny = new Spell.Impact.TargetModifier();
+        var frostedDenyCond = new Spell.TargetCondition();
+        frostedDenyCond.entity_type = "#minecraft:freeze_immune_entity_types";
+        frostedDeny.conditions = List.of(frostedDenyCond);
+        frostedDeny.execute = TriState.DENY;
+        frosted.target_modifiers = List.of(frostedDeny);
+
+        spell.impacts = List.of(damage, frosted);
+
+        configureCooldown(spell, 10);
+        spell.cost.cooldown.proportional = true;
+        spell.cost.exhaust = 1.0F;
+        spell.cost.durability = 5;
+        return new Entry(id, spell, title, description, null);
+    }
+
+    public static final Entry rumbling_swing = add(rumbling_swing());
+    private static Entry rumbling_swing() {
+        var id = Identifier.of(MOD_ID, "rumbling_swing");
+        var title = "Rumbling Swing";
+        var description = "Jumps lightning fast, dealing {damage_0} physical- and {damage_1} lightning-damage";
+        var spell = SpellBuilder.createSpellActive();
+        spell.school = SpellSchools.LIGHTNING;
+        spell.range = 10;
+        spell.tier = 5;
+
+        spell.target.type = Spell.Target.Type.AIM;
+        spell.target.aim = new Spell.Target.Aim();
+        spell.target.aim.sticky = false;
+        spell.target.aim.required = true;
+
+        spell.release.animation = "berserker_rpg:rumbling_swing";
+        spell.release.sound = new Sound("entity.player.attack.sweep");
+        spell.release.particles = new ParticleBatch[]{
+                new ParticleBatch("electric_spark",
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                        15, 0.5F, 3.0F)
+        };
+
+        var teleport = new Spell.Impact();
+        teleport.action = new Spell.Impact.Action();
+        teleport.action.type = Spell.Impact.Action.Type.TELEPORT;
+        teleport.action.teleport = new Spell.Impact.Action.Teleport();
+        teleport.action.teleport.mode = Spell.Impact.Action.Teleport.Mode.BEHIND_TARGET;
+        teleport.action.teleport.intent = SpellTarget.Intent.HARMFUL;
+        teleport.action.teleport.behind_target = new Spell.Impact.Action.Teleport.BehindTarget();
+        teleport.action.teleport.behind_target.distance = 1.5F;
+        teleport.action.teleport.depart_particles = new ParticleBatch[]{
+                new ParticleBatch("cloud",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        20, 0.05F, 0.1F)
+                        .invert()
+                        .preSpawnTravel(15)
+        };
+        teleport.action.teleport.arrive_particles = new ParticleBatch[]{
+                new ParticleBatch("poof",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        10, 0.05F, 0.1F)
+                        .preSpawnTravel(2)
+        };
+
+        var damage = damageImpact(0.8F, 1.0F);
+        damage.attribute = "minecraft:generic.attack_damage";
+        damage.particles = new ParticleBatch[]{
+                new ParticleBatch("berserker_rpg:small_thunder",
+                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
+                        1, 0.1F, 0.15F)
+        };
+        damage.sound = new Sound("entity.lightning_bolt.impact");
+
+        var lightningDamage = new Spell.Impact();
+        lightningDamage.school = SpellSchools.LIGHTNING;
+        lightningDamage.action = new Spell.Impact.Action();
+        lightningDamage.action.type = Spell.Impact.Action.Type.DAMAGE;
+        lightningDamage.action.damage = new Spell.Impact.Action.Damage();
+        lightningDamage.action.damage.spell_power_coefficient = 0.5F;
+
+        spell.impacts = List.of(teleport, damage, lightningDamage);
+
+        configureCooldown(spell, 25);
+        spell.cost.exhaust = 1.0F;
+        spell.cost.durability = 1;
+        return new Entry(id, spell, title, description, null);
     }
 }

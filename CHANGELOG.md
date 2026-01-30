@@ -1,3 +1,8 @@
+# 2.5.5 - 1.21.1
+- Add many Datagen methods, so most stuff gets generated
+- Improve Advancements
+- Fix WIld Rage Effect Spamming Particles
+
 # 2.5.4 - 1.21.1
 - fix Aeternium Beserker Axe Recipe
 - Add New Tier 5 Berserker Axe - Toranos's Axe

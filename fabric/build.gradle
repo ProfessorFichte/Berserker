@@ -92,7 +92,10 @@ dependencies {
     //modImplementation(files("run/mods/dev/more_rpg_library-fabric-2.5.9+1.21.1.jar"))
 
     // Trinkets
-    modImplementation("dev.emi:trinkets:${project.trinkets_version}")
+    modImplementation("maven.modrinth:trinkets:${project.trinkets_version}")
+    // Cardinal Components API (required by Trinkets)
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.3"
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.3"
 
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")

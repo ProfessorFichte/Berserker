@@ -1,0 +1,27 @@
+{
+  "parent": "berserker_rpg:spell_novice_berserker",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": true,
+        "spell_pool": "berserker_rpg:berserker"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.berserker_rpg.spell_master_berserker.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "id": "berserker_rpg:berserker_spell_book"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.berserker_rpg.spell_master_berserker.title"
+    }
+  }
+}

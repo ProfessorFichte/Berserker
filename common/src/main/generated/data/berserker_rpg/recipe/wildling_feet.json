@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "more_rpg_classes:wolf_fur"
+    },
+    "Z": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "R R",
+    "Z Z"
+  ],
+  "result": {
+    "count": 1,
+    "id": "berserker_rpg:wildling_feet"
+  }
+}

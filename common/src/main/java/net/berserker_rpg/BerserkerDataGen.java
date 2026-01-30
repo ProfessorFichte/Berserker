@@ -1,5 +1,6 @@
 package net.berserker_rpg;
 
+import net.berserker_rpg.datagen.*;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.item.tag.ModItemTags;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
@@ -13,7 +14,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -35,6 +38,7 @@ import net.spell_power.api.SpellPowerTags;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
@@ -42,12 +46,20 @@ import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 public class BerserkerDataGen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+        BerserkerVanillaAdvancementProvider.init();
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(SpellGen::new);
         pack.addProvider(SoundGen::new);
         pack.addProvider(ModelProvider::new);
+        pack.addProvider(LangGenerator::new);
+        pack.addProvider(WeaponAttributesGenerator::new);
+        pack.addProvider(BerserkerRecipeProvider::new);
+        pack.addProvider(BerserkerSmithingRecipeProvider::new);
+        pack.addProvider(BerserkerConditionalRecipeProvider::new);
+        pack.addProvider(BerserkerVanillaAdvancementProvider::new);
+        pack.addProvider(BerserkerAdvancementDataGen::new);
     }
 
     public static class SpellGen extends SpellGenerator {
@@ -199,9 +211,9 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generate(RecipeExporter exporter) {
-            disassembleArmor(exporter, Armors.wildlingArmorSet, Items.LEATHER);
-            disassembleArmor(exporter, Armors.northlingArmorSet, Items.IRON_NUGGET);
-            disassembleArmor(exporter, Armors.netheriteNorthlingArmorSet, Items.NETHERITE_SCRAP);
+            disassembleArmor(exporter, Armors.wildlingArmorSet.armorSet(), Items.LEATHER);
+            disassembleArmor(exporter, Armors.northlingArmorSet.armorSet(), Items.IRON_NUGGET);
+            disassembleArmor(exporter, Armors.netheriteNorthlingArmorSet.armorSet(), Items.NETHERITE_SCRAP);
 
             disassemble(exporter,
                     WeaponsRegister.entries.stream()
@@ -284,16 +296,41 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
             super(output);
         }
 
+        // Custom model with parent for raid axes
+        private static final Model RAID_AXE_MODEL = new Model(
+                Optional.of(Identifier.of(MOD_ID, "item/raid_axe_model")),
+                Optional.empty(),
+                TextureKey.LAYER0
+        );
+
+        // Handheld model for swords
+        private static final Model HANDHELD_MODEL = new Model(
+                Optional.of(Identifier.ofVanilla("item/handheld")),
+                Optional.empty(),
+                TextureKey.LAYER0
+        );
+
         @Override
         public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-
         }
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+            // Armors
             Armors.entries.forEach(entry -> {
                 for (var piece: entry.armorSet().pieces()) {
                     itemModelGenerator.register((Item) piece, Models.GENERATED);
+                }
+            });
+
+            // Weapons with custom parent
+            WeaponsRegister.entries.forEach(entry -> {
+                if (entry.item() != null) {
+                    if (entry.name().contains("berserker_axe")) {
+                        itemModelGenerator.register(entry.item(), RAID_AXE_MODEL);
+                    } else if (entry.name().contains("sword")) {
+                        itemModelGenerator.register(entry.item(), HANDHELD_MODEL);
+                    }
                 }
             });
         }

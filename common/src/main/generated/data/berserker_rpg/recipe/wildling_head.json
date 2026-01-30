@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "more_rpg_classes:wolf_fur"
+    },
+    "W": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "R R",
+    "WRW",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "berserker_rpg:wildling_head"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "more_rpg_classes:polar_bear_fur"
+    },
+    "W": {
+      "item": "minecraft:leather"
+    },
+    "Z": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "R R",
+    "WRW",
+    "ZZZ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "berserker_rpg:northling_chest"
+  }
+}

@@ -32,9 +32,9 @@ public class BerserkerClient {
                 RageRenderer.modelIdRage
         ));
 
-        registerArmorRenderer(Armors.wildlingArmorSet, CustomArmorRenderer::wildling_armor);
-        registerArmorRenderer(Armors.northlingArmorSet, CustomArmorRenderer::northling_armor);
-        registerArmorRenderer(Armors.netheriteNorthlingArmorSet, CustomArmorRenderer::netherite_northling_armor);
+        registerArmorRenderer(Armors.wildlingArmorSet.armorSet(), CustomArmorRenderer::wildling_armor);
+        registerArmorRenderer(Armors.northlingArmorSet.armorSet(), CustomArmorRenderer::northling_armor);
+        registerArmorRenderer(Armors.netheriteNorthlingArmorSet.armorSet(), CustomArmorRenderer::netherite_northling_armor);
         if (armoryLoadCheck()) {
             registerArmorRenderer(Armors.warlordArmorSet.armorSet(), CustomArmorRenderer::warlord_armor);
         }

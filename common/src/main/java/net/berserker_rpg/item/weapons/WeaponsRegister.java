@@ -64,25 +64,31 @@ public class WeaponsRegister {
 
     public static final Weapon.Entry flint_berserker_axe = berserker_axes("flint_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.WOOD, () -> Ingredient.ofItems(Items.FLINT)), 7.0F)
+            .translatedName("Flint Raid Axe")
             .loot(Equipment.LootProperties.of(0));
     public static final Weapon.Entry stone_berserker_axe = berserker_axes("stone_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.STONE, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)), 9.0F)
+            .translatedName("Stone Raid Axe")
             .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.01F))
             .loot(Equipment.LootProperties.of(0));
     public static final Weapon.Entry iron_berserker_axe = berserker_axes("iron_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.IRON_INGOT)), 9.0F)
+            .translatedName("Iron Raid Axe")
             .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.02F))
             .loot(Equipment.LootProperties.of(1));
     public static final Weapon.Entry golden_berserker_axe = berserker_axes("golden_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT)), 7.0F)
+            .translatedName("Gold Raid Axe")
             .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.02F))
             .loot(Equipment.LootProperties.of("golden_weapon"));
     public static final Weapon.Entry diamond_berserker_axe = berserker_axes("diamond_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 10.5F)
+            .translatedName("Diamond Raid Axe")
             .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.035F))
             .loot(Equipment.LootProperties.of(2));
     public static final Weapon.Entry netherite_berserker_axe = berserker_axes("netherite_berserker_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 12.0F)
+            .translatedName("Netherite Raid Axe")
             .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.05F))
             .loot(Equipment.LootProperties.of(3));
 
@@ -104,6 +110,7 @@ public class WeaponsRegister {
             var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             berserker_axes("ruby_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
+                    .translatedName("Ruby Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of(4));
         }
@@ -111,6 +118,7 @@ public class WeaponsRegister {
             var repair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             berserker_axes("aeternium_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
+                    .translatedName("Aeternium Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of(4));
         }
@@ -118,30 +126,35 @@ public class WeaponsRegister {
             var repair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
             berserker_axes("aether_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
+                    .translatedName("Holy Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of("aether"));
         }
         if(FabricLoader.getInstance().isModLoaded(LNE)|| BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
             berserker_axes( "ender_dragon_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)),lneAxeAttackDamage)
+                    .translatedName("Dragons Conquest")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, lneWeaponSpellPower))
                     .spell(dragonclaw)
                     .rarity = Rarity.RARE;
             berserker_axes( "elder_guardian_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)),lneAxeAttackDamage)
+                    .translatedName("Sunken Captain")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.WATER.id, lneWeaponSpellPower))
                     .spell(waterbomb)
                     .rarity = Rarity.RARE;
             berserker_axes( "wither_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)),lneAxeAttackDamage)
+                    .translatedName("Soul Ripper")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(SpellSchools.SOUL.id, lneWeaponSpellPower))
                     .spell(wither_pulse)
                     .rarity = Rarity.RARE;
             berserker_axes( "glacial_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.ICE)),lneAxeAttackDamage)
+                    .translatedName("Norse Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(SpellSchools.FROST.id, lneWeaponSpellPower))
                     .spell(avalanche)
@@ -166,18 +179,21 @@ public class WeaponsRegister {
         if (FabricLoader.getInstance().isModLoaded(ARSENAL) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
             berserker_axes( "unique_berserker_axe_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
+                    .translatedName("Black Cleaver")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .spell(MrpgLibSpells.carve_melee.id())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             berserker_axes( "unique_berserker_axe_2",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
+                    .translatedName("Toranos's Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .spell(MrpgLibSpells.lightning_strike_melee.id())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             sword( "unique_sword_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),8.0F)
+                    .translatedName("Skofnung")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.05F))
                     .spell(MrpgLibSpells.carve_melee.id())
                     .loot(Equipment.LootProperties.of(5))

@@ -9,7 +9,6 @@ import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.spell_engine.api.config.EffectConfig;
 import net.spell_engine.api.effect.*;
-import net.spell_engine.api.entity.SpellEngineAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,8 @@ public class BerserkerEffects {
 
     public static final Effects.Entry RAGE = add(new Effects.Entry(
             Identifier.of(MOD_ID, "rage"),
-            "",
-            "",
+            "Rage",
+            "You deal more damage, the less health you have. Can increase the effect on hit.",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
                     new AttributeModifier(
@@ -43,8 +42,8 @@ public class BerserkerEffects {
     ));
     public static final Effects.Entry BLOOD_SACRIFICE = add(new Effects.Entry(
             Identifier.of(MOD_ID, "blood_sacrifice"),
-            "",
-            "",
+            "Blood Sacrifice",
+            "Converts your health to absorption hearts.",
             new BloodSacrificeEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
                     new AttributeModifier(
@@ -56,8 +55,8 @@ public class BerserkerEffects {
     ));
     public static final Effects.Entry OUTRAGE = add(new Effects.Entry(
             Identifier.of(MOD_ID, "outrage"),
-            "",
-            "",
+            "Outrage",
+            "Clears harmful status effects when applied, increases attack speed & damage.",
             new OutrageEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
                     new AttributeModifier(
@@ -72,29 +71,11 @@ public class BerserkerEffects {
                     )
             ))
     ));
-    public static final Effects.Entry CARVE = add(new Effects.Entry(
-            Identifier.of(MOD_ID, "carve"),
-            "",
-            "",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xf70000),
-            new EffectConfig(List.of(
-                    new AttributeModifier(
-                            EntityAttributes.GENERIC_ARMOR.getIdAsString(),
-                            -0.1F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    ),
-                    new AttributeModifier(
-                            SpellEngineAttributes.DAMAGE_TAKEN.id.toString(),
-                            -0.05F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    )
-            ))
-    ));
 
     public static void register(ConfigFile.Effects config) {
-        Synchronized.configure(RAGE.effect,true);
-        Synchronized.configure(BLOOD_SACRIFICE.effect,true);
-        Synchronized.configure(OUTRAGE.effect,true);
+        for (var entry: entries) {
+            Synchronized.configure(entry.effect, true);
+        }
 
         Effects.register(entries, config.effects);
     }

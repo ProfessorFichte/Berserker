@@ -121,7 +121,7 @@ public class Armors {
         return entry;
     }
 
-    public static final Armor.Set wildlingArmorSet =
+    public static final Armor.Entry wildlingArmorSet =
             create(
                     material_wildling,
                     Identifier.of(MOD_ID, "wildling"),
@@ -149,9 +149,9 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
                                     ))
                     ),1,null)
-                    .armorSet();
+                    .translatedName("Wildling Head", "Wildling Suit", "Wildling Legs", "Wildling Boots");
 
-    public static final Armor.Set northlingArmorSet =
+    public static final Armor.Entry northlingArmorSet =
             create(
                     material_northling,
                     Identifier.of(MOD_ID, "northling"),
@@ -199,9 +199,9 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     ))
                     ),2,null)
-                    .armorSet();
+                    .translatedName("Northling Head", "Northling Suit", "Northling Pants", "Northling Boots");
 
-    public static final Armor.Set netheriteNorthlingArmorSet =
+    public static final Armor.Entry netheriteNorthlingArmorSet =
             create(
                     material_netherite_northling,
                     Identifier.of(MOD_ID, "netherite_northling"),
@@ -249,7 +249,7 @@ public class Armors {
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     ))
                     ),3,null)
-                    .armorSet();
+                    .translatedName("Netherite Northling Head", "Netherite Northling Suit", "Netherite Northling Pants", "Netherite Northling Boots");
 
     public static Armor.Entry warlordArmorSet;
     public static void register(Map<String, ArmorSetConfig> configs) {
@@ -302,7 +302,7 @@ public class Armors {
                                     ))
                     ),5,
                     commonSettings(warlord_passive)
-            );
+            ).translatedName("Norse Warlord Head", "Norse Warlord Suit", "Norse Warlord Pants", "Norse Warlord Boots");
         }
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }

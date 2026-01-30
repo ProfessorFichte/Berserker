@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "minecraft:bone"
+    },
+    "W": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "WW ",
+    "WR ",
+    "WR "
+  ],
+  "result": {
+    "count": 1,
+    "id": "berserker_rpg:golden_berserker_axe"
+  }
+}

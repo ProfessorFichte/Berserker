@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "minecraft:bone"
+    },
+    "W": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "WW ",
+    "WR ",
+    "WR "
+  ],
+  "result": {
+    "count": 1,
+    "id": "berserker_rpg:diamond_berserker_axe"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "berserker_rpg:diamond_berserker_axe"
+  },
+  "result": {
+    "count": 1,
+    "id": "berserker_rpg:netherite_berserker_axe"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

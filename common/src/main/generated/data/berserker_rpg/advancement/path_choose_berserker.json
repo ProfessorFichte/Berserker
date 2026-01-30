@@ -1,0 +1,26 @@
+{
+  "parent": "more_rpg_content:root",
+  "criteria": {
+    "book": {
+      "conditions": {
+        "spell_pool": "berserker_rpg:berserker"
+      },
+      "trigger": "spell_engine:spell_book_creation"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.berserker_rpg.path_choose_berserker.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "berserker_rpg:berserker_spell_book"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.berserker_rpg.path_choose_berserker.title"
+    }
+  }
+}
