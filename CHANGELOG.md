@@ -1,3 +1,13 @@
+# 2.6.0 - 1.21.1
+**Update to use Spell Engine 1.9.0**
+- DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes.
+- The Berserker Spell Book now offers 3 spells only, to match other classes
+- Outrage & Blood Reckoning are now T4-Spell Choices
+- Added a new Weapon Skill **Decapitate**, for Berserker Axes.
+
+# 2.5.6 - 1.21.1
+- Add spellbook description
+
 # 2.5.5 - 1.21.1
 - Datagen methods got added to the project, so most data-related files gets generated
 - Improve the Berserker-Class Advancements

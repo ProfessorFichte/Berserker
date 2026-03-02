@@ -24,8 +24,10 @@ public class LangGenerator extends FabricLanguageProvider {
         builder.add("itemGroup." + MOD_ID + ".general", "Berserker");
 
         // Spell Book and Scroll
-        builder.add("item." + MOD_ID + ".berserker_spell_book", "Ancient Rune Tome");
-        builder.add("item." + MOD_ID + ".berserker.spell_scroll", "Berserker Rune Scroll");
+        builder.add("item." + MOD_ID + ".spell_book/berserker", "Ancient Rune Tome");
+        builder.add("item.berserker_rpg.spell_book/berserker.spell_binding.description",
+                "Spell Book of Berserkers, using raid axe's and other high damage weapons. The Berserker is all about high physical melee damage.\n- Strengths: High damage output.\n- Weaknesses: Ranged Enemies\n- Equipment: Light Armor");
+        builder.add("item." + MOD_ID + ".spell_scroll/berserker", "Berserker Rune Scroll");
 
         // Weapons
         WeaponsRegister.entries.forEach(entry -> {

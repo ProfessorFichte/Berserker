@@ -6,7 +6,9 @@
   "learn": {},
   "active": {},
   "release": {
-    "animation": "berserker_rpg:berserker_axe_both"
+    "animation": {
+      "id": "berserker_rpg:berserker_axe_both"
+    }
   },
   "target": {
     "type": "AREA",

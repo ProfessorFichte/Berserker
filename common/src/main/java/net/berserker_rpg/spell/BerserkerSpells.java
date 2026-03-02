@@ -2,15 +2,17 @@ package net.berserker_rpg.spell;
 
 import net.berserker_rpg.effect.BerserkerEffects;
 import net.berserker_rpg.sounds.BerserkerSounds;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
+import net.spell_engine.api.spell.ExternalSpellSchools;
+import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_power.api.SpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.api.util.TriState;
 import net.spell_engine.client.gui.SpellTooltip;
@@ -25,8 +27,19 @@ import java.util.List;
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
 public class BerserkerSpells {
+    public enum Book { BERSERKER}
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator) {
+                        @Nullable SpellTooltip.DescriptionMutator mutator,
+                        @Nullable Book book) {
+        public Entry(Identifier id, Spell spell, String title, String description) {
+            this(id, spell, title, description, null, null);
+        }
+        public Entry mutator(SpellTooltip.DescriptionMutator mutator) {
+            return new Entry(id, spell, title, description, mutator, book);
+        }
+        public Entry book(Book book) {
+            return new Entry(id, spell, title, description, mutator, book);
+        }
     }
 
     public static final List<Entry> entries = new ArrayList<>();
@@ -117,7 +130,7 @@ public class BerserkerSpells {
         modifier.power_modifier.power_multiplier = 0.1F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description, null, null);
     }
     ///PASSIVES
     ///ACTIVE SPELLS
@@ -129,7 +142,7 @@ public class BerserkerSpells {
         var effect = BerserkerEffects.RAGE;
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0;
-        spell.tier = 1;
+        spell.tier = 2;
         spell.school = MoreSpellSchools.RAGE_MELEE;
         SpellTooltip.DescriptionMutator mutator = (args) -> {
             var modifier = effect.config().attributes().get(1);
@@ -141,7 +154,7 @@ public class BerserkerSpells {
                     .replace("{bonus2}", bonus2);
         };
 
-        spell.release.animation = "more_rpg_classes:two_handed_roar";
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.WILD_RAGE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch("minecraft:angry_villager",
@@ -181,49 +194,7 @@ public class BerserkerSpells {
         configureCooldown(spell, 15);
         spell.cost.exhaust = 0.2F;
 
-        return new Entry(id, spell, title, description, mutator);
-    }
-    public static final Entry blood_reckoning = add(blood_reckoning());
-    private static Entry blood_reckoning() {
-        var id = Identifier.of(MOD_ID, "blood_reckoning");
-        var title = "Blood Reckoning";
-        var description = "The caster heals himself and converts absorption to health.";
-        var spell = SpellBuilder.createSpellActive();
-        spell.range = 0;
-        spell.tier = 2;
-        spell.school = MoreSpellSchools.RAGE_MELEE;
-
-        spell.release.animation = "more_rpg_classes:two_handed_roar";
-        spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("more_rpg_classes:rage_particle",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        4, 0.01F, 0.2F)
-                        .preSpawnTravel(7),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.4F)
-                        .color(Color.RAGE.toRGBA())
-                        .extent(3),
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        15, 0.1F, 0.5F)
-        };
-
-        spell.target.type = Spell.Target.Type.CASTER;
-
-        var custom = new Spell.Impact();
-        custom.action = new Spell.Impact.Action();
-        custom.action.custom = new Spell.Impact.Action.Custom();
-        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
-        custom.action.custom.intent = SpellTarget.Intent.HELPFUL;
-        custom.action.custom.handler = "berserker_rpg:blood_reckoning";
-
-        spell.impacts = List.of(custom);
-        spell.cost.exhaust = 0.3F;
-
-        configureCooldown(spell, 20);
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
     public static final Entry bloody_strike = add(bloody_strike());
     private static Entry bloody_strike() {
@@ -238,7 +209,7 @@ public class BerserkerSpells {
         spell.tier = 3;
         spell.school = MoreSpellSchools.RAGE_MELEE;
 
-        spell.release.animation = "berserker_rpg:berserker_axe_both";
+        spell.release.animation = PlayerAnimation.of("berserker_rpg:berserker_axe_both");
 
         var buff = createEffectImpact(effect.id, 15);
         buff.action.apply_to_caster = true;
@@ -284,7 +255,49 @@ public class BerserkerSpells {
         
         configureCooldown(spell, 13);
         spell.cost.exhaust = 0.3F;
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description, null,Book.BERSERKER);
+    }
+    public static final Entry blood_reckoning = add(blood_reckoning());
+    private static Entry blood_reckoning() {
+        var id = Identifier.of(MOD_ID, "blood_reckoning");
+        var title = "Blood Reckoning";
+        var description = "The caster heals himself and converts absorption to health.";
+        var spell = SpellBuilder.createSpellActive();
+        spell.range = 0;
+        spell.tier = 4;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
+
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
+        spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
+        spell.release.particles = new ParticleBatch[]{
+                new ParticleBatch("more_rpg_classes:rage_particle",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        4, 0.01F, 0.2F)
+                        .preSpawnTravel(7),
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        25, 0.2F, 0.4F)
+                        .color(Color.RAGE.toRGBA())
+                        .extent(3),
+                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
+                        15, 0.1F, 0.5F)
+        };
+
+        spell.target.type = Spell.Target.Type.CASTER;
+
+        var custom = new Spell.Impact();
+        custom.action = new Spell.Impact.Action();
+        custom.action.custom = new Spell.Impact.Action.Custom();
+        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
+        custom.action.custom.intent = SpellTarget.Intent.HELPFUL;
+        custom.action.custom.handler = "berserker_rpg:blood_reckoning";
+
+        spell.impacts = List.of(custom);
+        spell.cost.exhaust = 0.3F;
+
+        configureCooldown(spell, 20);
+        return new Entry(id, spell, title, description, null,Book.BERSERKER);
     }
     public static final Entry outrage = add(outrage());
     private static Entry outrage() {
@@ -304,7 +317,7 @@ public class BerserkerSpells {
                     .replace("{bonus}", bonus);
         };
 
-        spell.release.animation = "more_rpg_classes:two_handed_roar";
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch("crimson_spore",
@@ -337,9 +350,77 @@ public class BerserkerSpells {
 
         configureCooldown(spell, 35);
         spell.cost.exhaust = 0.3F;
-        return new Entry(id, spell, title, description, mutator);
+        return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
 
+    public static final Entry rumbling_swing = add(rumbling_swing());
+    private static Entry rumbling_swing() {
+        var id = Identifier.of(MOD_ID, "rumbling_swing");
+        var title = "Rumbling Swing";
+        var description = "Jumps lightning fast, dealing {damage_0} physical- and {damage_1} lightning-damage";
+        var spell = SpellBuilder.createSpellActive();
+        spell.school = SpellSchools.LIGHTNING;
+        spell.range = 10;
+        spell.tier = 5;
+
+        spell.target.type = Spell.Target.Type.AIM;
+        spell.target.aim = new Spell.Target.Aim();
+        spell.target.aim.sticky = false;
+        spell.target.aim.required = true;
+
+        spell.release.animation = PlayerAnimation.of("berserker_rpg:rumbling_swing");
+        spell.release.sound = new Sound("entity.player.attack.sweep");
+        spell.release.particles = new ParticleBatch[]{
+                new ParticleBatch("electric_spark",
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                        15, 0.5F, 3.0F)
+        };
+
+        var teleport = new Spell.Impact();
+        teleport.action = new Spell.Impact.Action();
+        teleport.action.type = Spell.Impact.Action.Type.TELEPORT;
+        teleport.action.teleport = new Spell.Impact.Action.Teleport();
+        teleport.action.teleport.mode = Spell.Impact.Action.Teleport.Mode.BEHIND_TARGET;
+        teleport.action.teleport.intent = SpellTarget.Intent.HARMFUL;
+        teleport.action.teleport.behind_target = new Spell.Impact.Action.Teleport.BehindTarget();
+        teleport.action.teleport.behind_target.distance = 1.5F;
+        teleport.action.teleport.depart_particles = new ParticleBatch[]{
+                new ParticleBatch("cloud",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        20, 0.05F, 0.1F)
+                        .invert()
+                        .preSpawnTravel(15)
+        };
+        teleport.action.teleport.arrive_particles = new ParticleBatch[]{
+                new ParticleBatch("poof",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        10, 0.05F, 0.1F)
+                        .preSpawnTravel(2)
+        };
+
+        var damage = damageImpact(0.8F, 1.0F);
+        damage.attribute = "minecraft:generic.attack_damage";
+        damage.particles = new ParticleBatch[]{
+                new ParticleBatch("berserker_rpg:small_thunder",
+                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
+                        1, 0.1F, 0.15F)
+        };
+        damage.sound = new Sound("entity.lightning_bolt.impact");
+
+        var lightningDamage = new Spell.Impact();
+        lightningDamage.school = SpellSchools.LIGHTNING;
+        lightningDamage.action = new Spell.Impact.Action();
+        lightningDamage.action.type = Spell.Impact.Action.Type.DAMAGE;
+        lightningDamage.action.damage = new Spell.Impact.Action.Damage();
+        lightningDamage.action.damage.spell_power_coefficient = 0.5F;
+
+        spell.impacts = List.of(teleport, damage, lightningDamage);
+
+        configureCooldown(spell, 25);
+        spell.cost.exhaust = 1.0F;
+        spell.cost.durability = 1;
+        return new Entry(id, spell, title, description, null,null);
+    }
     public static final Entry nordic_storm = add(nordic_storm());
     private static Entry nordic_storm() {
         var id = Identifier.of(MOD_ID, "nordic_storm");
@@ -354,7 +435,7 @@ public class BerserkerSpells {
         spell.active.cast = new Spell.Active.Cast();
         spell.active.cast.duration = 0.5F;
         spell.active.cast.movement_speed = 1.2F;
-        spell.active.cast.animation = "berserker_rpg:nordic_storm";
+        spell.active.cast.animation = PlayerAnimation.of("berserker_rpg:nordic_storm");
         spell.active.cast.sound = new Sound(Identifier.of("spell_engine:generic_frost_impact"), 0);
         spell.active.cast.start_sound = new Sound("entity.player.breath");
         spell.active.cast.channel_ticks = 5;
@@ -413,75 +494,26 @@ public class BerserkerSpells {
         spell.cost.cooldown.proportional = true;
         spell.cost.exhaust = 1.0F;
         spell.cost.durability = 5;
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description, null, null);
     }
-
-    public static final Entry rumbling_swing = add(rumbling_swing());
-    private static Entry rumbling_swing() {
-        var id = Identifier.of(MOD_ID, "rumbling_swing");
-        var title = "Rumbling Swing";
-        var description = "Jumps lightning fast, dealing {damage_0} physical- and {damage_1} lightning-damage";
+    /// WEAPON SKILLS
+    public static Entry decapitate = add(decapitate());
+    private static Entry decapitate() {
+        var id = Identifier.of(MOD_ID, "decapitate");
+        var title = "Decapitate";
+        var description = "";
         var spell = SpellBuilder.createSpellActive();
-        spell.school = SpellSchools.LIGHTNING;
-        spell.range = 10;
-        spell.tier = 5;
+        spell.tier = 1;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
+        spell.range = 0.0F;
+        spell.range_mechanic = Spell.RangeMechanic.MELEE;
 
-        spell.target.type = Spell.Target.Type.AIM;
-        spell.target.aim = new Spell.Target.Aim();
-        spell.target.aim.sticky = false;
-        spell.target.aim.required = true;
+        SpellBuilder.Target.none(spell);
 
-        spell.release.animation = "berserker_rpg:rumbling_swing";
-        spell.release.sound = new Sound("entity.player.attack.sweep");
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("electric_spark",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        15, 0.5F, 3.0F)
-        };
+        spell.cost.exhaust = 0.1F;
+        SpellBuilder.Cost.cooldownGroupWeapon(spell);
+        SpellBuilder.Cost.cooldown(spell, 15);
 
-        var teleport = new Spell.Impact();
-        teleport.action = new Spell.Impact.Action();
-        teleport.action.type = Spell.Impact.Action.Type.TELEPORT;
-        teleport.action.teleport = new Spell.Impact.Action.Teleport();
-        teleport.action.teleport.mode = Spell.Impact.Action.Teleport.Mode.BEHIND_TARGET;
-        teleport.action.teleport.intent = SpellTarget.Intent.HARMFUL;
-        teleport.action.teleport.behind_target = new Spell.Impact.Action.Teleport.BehindTarget();
-        teleport.action.teleport.behind_target.distance = 1.5F;
-        teleport.action.teleport.depart_particles = new ParticleBatch[]{
-                new ParticleBatch("cloud",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        20, 0.05F, 0.1F)
-                        .invert()
-                        .preSpawnTravel(15)
-        };
-        teleport.action.teleport.arrive_particles = new ParticleBatch[]{
-                new ParticleBatch("poof",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        10, 0.05F, 0.1F)
-                        .preSpawnTravel(2)
-        };
-
-        var damage = damageImpact(0.8F, 1.0F);
-        damage.attribute = "minecraft:generic.attack_damage";
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch("berserker_rpg:small_thunder",
-                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
-                        1, 0.1F, 0.15F)
-        };
-        damage.sound = new Sound("entity.lightning_bolt.impact");
-
-        var lightningDamage = new Spell.Impact();
-        lightningDamage.school = SpellSchools.LIGHTNING;
-        lightningDamage.action = new Spell.Impact.Action();
-        lightningDamage.action.type = Spell.Impact.Action.Type.DAMAGE;
-        lightningDamage.action.damage = new Spell.Impact.Action.Damage();
-        lightningDamage.action.damage.spell_power_coefficient = 0.5F;
-
-        spell.impacts = List.of(teleport, damage, lightningDamage);
-
-        configureCooldown(spell, 25);
-        spell.cost.exhaust = 1.0F;
-        spell.cost.durability = 1;
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description, null, null);
     }
 }

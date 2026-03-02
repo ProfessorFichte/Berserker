@@ -6,7 +6,9 @@
   "learn": {},
   "active": {},
   "release": {
-    "animation": "more_rpg_classes:two_handed_roar",
+    "animation": {
+      "id": "more_rpg_classes:two_handed_roar"
+    },
     "particles": [
       {
         "particle_id": "crimson_spore",

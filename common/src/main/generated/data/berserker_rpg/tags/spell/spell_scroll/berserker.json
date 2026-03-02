@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "berserker_rpg:wild_rage",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:bloody_strike",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:blood_reckoning",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:outrage",
+      "required": false
+    }
+  ]
+}

@@ -6,9 +6,6 @@ import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.spell_engine.api.item.SpellBooks;
-
 import java.util.HashMap;
 
 public class BerserkerItems {
@@ -29,8 +26,6 @@ public class BerserkerItems {
 
 
     public static void registerModItems(){
-        SpellBooks.createAndRegister(Identifier.of(BerserkerClassMod.MOD_ID,"berserker"), BerserkerGroup.BERSERKER_KEY);
-
         ItemGroupEvents.modifyEntriesEvent(BerserkerGroup.BERSERKER_KEY).register((content) -> {
         });
 

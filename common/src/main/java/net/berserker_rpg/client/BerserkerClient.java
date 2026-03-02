@@ -8,15 +8,11 @@ import net.berserker_rpg.client.effect.RageRenderer;
 import net.berserker_rpg.effect.BerserkerEffects;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.spell.BerserkerSpells;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.minecraft.client.particle.*;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
-import net.spell_engine.api.item.armor.Armor;
-import net.spell_engine.api.render.CustomModels;
+import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.client.gui.SpellTooltip;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 import static net.berserker_rpg.compat.CompatLoadingCheck.armoryLoadCheck;
@@ -28,9 +24,6 @@ public class BerserkerClient {
                 SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());
             }
         }
-        CustomModels.registerModelIds(List.of(
-                RageRenderer.modelIdRage
-        ));
 
         registerArmorRenderer(Armors.wildlingArmorSet.armorSet(), CustomArmorRenderer::wildling_armor);
         registerArmorRenderer(Armors.northlingArmorSet.armorSet(), CustomArmorRenderer::northling_armor);

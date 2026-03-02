@@ -68,47 +68,44 @@ public class BerserkerAdvancementDataGen implements DataProvider {
                 "Path of the Berserker",
                 "Create the Ancient Rune Tome",
                 Identifier.of("more_rpg_content", "root"),
-                MOD_ID + ":berserker_spell_book",
+                MOD_ID + ":item/spell_scroll/berserker",
                 AdvancementFrame.TASK,
                 true, true, false, null,
                 SpellEngineCriteriaType.SPELL_BOOK_CREATION,
-                MOD_ID + ":berserker"
+                MOD_ID + ":spell_book/berserker"
         ));
-
-        addEntry(new Entry(
-                id("spell_novice_berserker"),
-                "Berserking",
-                "Obtain your first berserker skill",
-                id("path_choose_berserker"),
-                MOD_ID + ":berserker_spell_book",
-                AdvancementFrame.TASK,
-                true, true, false, null,
-                SpellEngineCriteriaType.ONE_SPELL_BOUND,
-                MOD_ID + ":berserker"
-        ));
-
-        addEntry(new Entry(
-                id("spell_master_berserker"),
-                "Relentless Raider",
-                "Complete the Ancient Rune Tome",
-                id("spell_novice_berserker"),
-                MOD_ID + ":berserker_spell_book",
-                AdvancementFrame.GOAL,
-                true, true, false, null,
-                SpellEngineCriteriaType.ALL_SPELLS_BOUND,
-                MOD_ID + ":berserker"
-        ));
-
         addEntry(new Entry(
                 id("spell_cast_berserker_book"),
                 "To the Ships!",
                 "Use a skill from the Ancient Rune Tome",
                 id("spell_novice_berserker"),
-                MOD_ID + ":berserker_spell_book",
+                MOD_ID + ":item/spell_book/berserker",
                 AdvancementFrame.TASK,
                 true, true, false, null,
                 SpellEngineCriteriaType.SPELL_CAST,
-                "#" + MOD_ID + ":berserker"
+                "#" + MOD_ID + ":spell_book/berserker"
+        ));
+        addEntry(new Entry(
+                id("spell_novice_berserker"),
+                "Berserking",
+                "Obtain your first berserker skill",
+                id("path_choose_berserker"),
+                MOD_ID + ":iron_berserker_axe",
+                AdvancementFrame.TASK,
+                true, true, false, null,
+                SpellEngineCriteriaType.ONE_SPELL_BOUND,
+                MOD_ID + ":spell_book/berserker"
+        ));
+        addEntry(new Entry(
+                id("spell_master_berserker"),
+                "Relentless Raider",
+                "Complete the Ancient Rune Tome",
+                id("spell_novice_berserker"),
+                MOD_ID + ":netherite_northling_head",
+                AdvancementFrame.GOAL,
+                true, true, false, null,
+                SpellEngineCriteriaType.ALL_SPELLS_BOUND,
+                MOD_ID + ":spell_book/berserker"
         ));
     }
 
@@ -135,7 +132,22 @@ public class BerserkerAdvancementDataGen implements DataProvider {
         // Display
         JsonObject display = new JsonObject();
         JsonObject icon = new JsonObject();
-        icon.addProperty("id", entry.iconItemName().contains(":") ? entry.iconItemName() : MOD_ID + ":" + entry.iconItemName());
+        String iconName = entry.iconItemName().contains(":") ? entry.iconItemName() : MOD_ID + ":" + entry.iconItemName();
+        if (iconName.contains("item/spell_book/")) {
+            icon.addProperty("id", "spell_engine:spell_book");
+            JsonObject components = new JsonObject();
+            components.addProperty("spell_engine:item_model", iconName);
+            icon.add("components", components);
+        }
+        else if (iconName.contains("item/spell_scroll/")) {
+            icon.addProperty("id", "spell_engine:spell_scroll");
+            JsonObject components = new JsonObject();
+            components.addProperty("spell_engine:item_model", iconName);
+            icon.add("components", components);
+        }
+        else {
+            icon.addProperty("id", iconName);
+        }
         display.add("icon", icon);
         display.add("title", createTranslatable(entry.titleKey()));
         display.add("description", createTranslatable(entry.descriptionKey()));

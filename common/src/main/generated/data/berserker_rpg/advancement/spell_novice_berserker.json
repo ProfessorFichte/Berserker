@@ -4,7 +4,7 @@
     "bind": {
       "conditions": {
         "complete": false,
-        "spell_pool": "berserker_rpg:berserker"
+        "spell_pool": "berserker_rpg:spell_book/berserker"
       },
       "trigger": "spell_engine:spell_binding"
     }
@@ -17,7 +17,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "id": "berserker_rpg:berserker_spell_book"
+      "id": "berserker_rpg:iron_berserker_axe"
     },
     "show_toast": true,
     "title": {

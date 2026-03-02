@@ -15,7 +15,7 @@ import net.spell_engine.api.render.LightEmission;
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 public class RageRenderer implements CustomModelStatusEffect.Renderer{
     private static final RenderLayer RENDER_LAYER = CustomLayers.spellEffect(LightEmission.RADIATE, false);
-    public static final Identifier modelIdRage = Identifier.of(MOD_ID, "effect/rage_model");
+    public static final Identifier modelIdRage = Identifier.of(MOD_ID, "spell_effect/rage_model");
 
     @Override
     public void renderEffect(int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {

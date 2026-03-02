@@ -16,9 +16,11 @@ import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.custom.MrpgLibSpells;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
-import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.weapon.SpellSwordItem;
-import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_engine.api.spell.container.SpellContainers;
+import net.spell_engine.rpg_series.datagen.WeaponSkills;
+import net.spell_engine.rpg_series.item.Equipment;
+import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class WeaponsRegister {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
     private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType weaponType) {
         var entry = new Weapon.Entry(MOD_ID, name, material, factory, defaults, weaponType);
-        entry.castSpell();
+        entry.spellContainer(SpellContainers.forMagicWeapon());
         entries.add(entry);
         return entry;
     }
@@ -56,10 +58,12 @@ public class WeaponsRegister {
 
     //BERSERKER-AXE
     private static Weapon.Entry berserker_axes(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, BerserkerAxeItem::new, new WeaponConfig(damage, berserker_axe_attackSpeed), Equipment.WeaponType.DOUBLE_AXE);
+        return entry(name, material, BerserkerAxeItem::new, new WeaponConfig(damage, berserker_axe_attackSpeed), Equipment.WeaponType.DOUBLE_AXE)
+                .spellContainer(SpellContainers.forMeleeWeapon().withSpellId(BerserkerSpells.decapitate.id()));
     }
     private static Weapon.Entry sword(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2.4f), Equipment.WeaponType.SWORD);
+        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2.4f), Equipment.WeaponType.SWORD)
+                .spellContainer(SpellContainers.forMeleeWeapon().withSpellId(WeaponSkills.SWIFT_STRIKES.id()));
     }
 
     public static final Weapon.Entry flint_berserker_axe = berserker_axes("flint_berserker_axe",
@@ -136,28 +140,28 @@ public class WeaponsRegister {
                     .translatedName("Dragons Conquest")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, lneWeaponSpellPower))
-                    .spell(dragonclaw)
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(dragonclaw))
                     .rarity = Rarity.RARE;
             berserker_axes( "elder_guardian_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)),lneAxeAttackDamage)
                     .translatedName("Sunken Captain")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.WATER.id, lneWeaponSpellPower))
-                    .spell(waterbomb)
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(waterbomb))
                     .rarity = Rarity.RARE;
             berserker_axes( "wither_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)),lneAxeAttackDamage)
                     .translatedName("Soul Ripper")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(SpellSchools.SOUL.id, lneWeaponSpellPower))
-                    .spell(wither_pulse)
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(wither_pulse))
                     .rarity = Rarity.RARE;
             berserker_axes( "glacial_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.ICE)),lneAxeAttackDamage)
                     .translatedName("Norse Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .attribute(AttributeModifier.bonus(SpellSchools.FROST.id, lneWeaponSpellPower))
-                    .spell(avalanche)
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(avalanche))
                     .rarity = Rarity.RARE;
 // ADD THIS IN LNE OR BERSERKER LNE MOD
             /*
@@ -181,21 +185,21 @@ public class WeaponsRegister {
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .translatedName("Black Cleaver")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
-                    .spell(MrpgLibSpells.carve_melee.id())
+                    .withAdditionalSpell(MrpgLibSpells.carve_melee.id().toString())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             berserker_axes( "unique_berserker_axe_2",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
-                    .translatedName("Toranos's Axe")
+                    .translatedName("Torans's Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
-                    .spell(MrpgLibSpells.lightning_strike_melee.id())
+                    .withAdditionalSpell(MrpgLibSpells.lightning_strike_melee.id().toString())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
             sword( "unique_sword_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),8.0F)
                     .translatedName("Skofnung")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.05F))
-                    .spell(MrpgLibSpells.carve_melee.id())
+                    .withAdditionalSpell(MrpgLibSpells.carve_melee.id().toString())
                     .loot(Equipment.LootProperties.of(5))
                     .rarity = Rarity.RARE;
         }

@@ -1,97 +1,53 @@
 {
-  "school": "spell_power:frost",
+  "school": "spell_power:rage_melee",
   "range": 0.0,
   "range_mechanic": "MELEE",
-  "tier": 5,
+  "tier": 1,
   "learn": {},
-  "active": {
-    "cast": {
-      "duration": 0.5,
-      "channel_ticks": 5,
-      "animation": "berserker_rpg:nordic_storm",
-      "movement_speed": 1.2,
-      "start_sound": {
-        "id": "entity.player.breath"
-      },
-      "sound": {
-        "id": "spell_engine:generic_frost_impact",
-        "randomness": 0.0
-      },
-      "particles": [
+  "active": {},
+  "target": {
+    "type": "NONE"
+  },
+  "deliver": {
+    "type": "MELEE",
+    "melee": {
+      "attacks": [
         {
-          "particle_id": "sweep_attack",
-          "origin": "CENTER",
-          "shape": "PIPE",
-          "count": 1.0,
-          "min_speed": 0.3,
-          "max_speed": 3.0
-        },
-        {
-          "particle_id": "spell_engine:frost_shard",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 1.0,
-          "min_speed": 0.3,
-          "max_speed": 3.0
+          "delay": 0.1,
+          "additional_strikes": 4,
+          "additional_strike_delay": 0.15,
+          "additional_hits_on_same_target": false,
+          "forward_momentum": 1.25,
+          "movement_slipperiness": 0.3,
+          "hitbox": {
+            "width": 0.5,
+            "height": 0.5,
+            "arc": 160.0
+          },
+          "animation": {
+            "id": "berserker_rpg:nordic_storm"
+          },
+          "swing_sound": {
+            "id": "minecraft:entity.player.breath"
+          },
+          "impact_sound": {
+            "id": "minecraft:item.axe.strip",
+            "randomness": 2.0
+          },
+          "particles": [
+            {
+              "particle_id": "spell_engine:frost_shard",
+              "origin": "CENTER",
+              "shape": "SPHERE",
+              "count": 5.0,
+              "min_speed": 0.3
+            }
+          ]
         }
       ]
     }
   },
-  "target": {
-    "type": "AREA",
-    "area": {
-      "distance_dropoff": "SQUARED",
-      "vertical_range_multiplier": 0.5,
-      "angle_degrees": 360.0
-    }
-  },
   "impacts": [
-    {
-      "attribute": "minecraft:generic.attack_damage",
-      "target_modifiers": [
-        {
-          "conditions": [
-            {
-              "entity_type": "#minecraft:freeze_hurts_extra_types"
-            }
-          ],
-          "modifier": {
-            "power_multiplier": 0.3
-          }
-        },
-        {
-          "conditions": [
-            {
-              "entity_type": "#minecraft:freeze_immune_entity_types"
-            }
-          ],
-          "modifier": {
-            "power_multiplier": -0.3
-          }
-        }
-      ],
-      "action": {
-        "type": "DAMAGE",
-        "damage": {
-          "spell_power_coefficient": 0.8,
-          "knockback": 0.0
-        }
-      },
-      "particles": [
-        {
-          "particle_id": "spell_engine:frost_hit",
-          "origin": "LAUNCH_POINT",
-          "shape": "SPHERE",
-          "count": 1.0,
-          "min_speed": 0.5,
-          "max_speed": 3.0
-        }
-      ],
-      "sound": {
-        "id": "minecraft:item.axe.strip",
-        "randomness": 2.0
-      }
-    },
     {
       "target_modifiers": [
         {
@@ -116,11 +72,9 @@
     }
   ],
   "cost": {
-    "exhaust": 1.0,
-    "durability": 5,
     "cooldown": {
-      "duration": 10.0,
-      "proportional": true
+      "group": "weapon",
+      "duration": 15.0
     }
   }
 }

@@ -1,11 +1,13 @@
 {
   "school": "spell_power:rage_melee",
   "range": 0.0,
-  "tier": 1,
+  "tier": 2,
   "learn": {},
   "active": {},
   "release": {
-    "animation": "more_rpg_classes:two_handed_roar",
+    "animation": {
+      "id": "more_rpg_classes:two_handed_roar"
+    },
     "particles": [
       {
         "particle_id": "minecraft:angry_villager",

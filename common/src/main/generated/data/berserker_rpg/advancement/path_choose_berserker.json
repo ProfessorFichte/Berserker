@@ -3,7 +3,7 @@
   "criteria": {
     "book": {
       "conditions": {
-        "spell_pool": "berserker_rpg:berserker"
+        "spell_pool": "berserker_rpg:spell_book/berserker"
       },
       "trigger": "spell_engine:spell_book_creation"
     }
@@ -16,7 +16,10 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "id": "berserker_rpg:berserker_spell_book"
+      "components": {
+        "spell_engine:item_model": "berserker_rpg:item/spell_scroll/berserker"
+      },
+      "id": "spell_engine:spell_scroll"
     },
     "show_toast": true,
     "title": {

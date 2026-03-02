@@ -5,7 +5,9 @@
   "learn": {},
   "active": {},
   "release": {
-    "animation": "berserker_rpg:rumbling_swing",
+    "animation": {
+      "id": "berserker_rpg:rumbling_swing"
+    },
     "particles": [
       {
         "particle_id": "electric_spark",

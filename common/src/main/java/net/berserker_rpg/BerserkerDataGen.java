@@ -28,17 +28,17 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
-import net.spell_engine.api.item.armor.Armor;
-import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.registry.SpellRegistry;
+import net.spell_engine.api.tags.SpellTags;
+import net.spell_engine.rpg_series.item.Armor;
+import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_engine.api.tags.SpellEngineItemTags;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 import net.spell_power.api.SpellPowerTags;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
@@ -51,6 +51,7 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(SpellGen::new);
+        pack.addProvider(SpellTagGenerator::new);
         pack.addProvider(SoundGen::new);
         pack.addProvider(ModelProvider::new);
         pack.addProvider(LangGenerator::new);
@@ -330,6 +331,31 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
                         itemModelGenerator.register(entry.item(), RAID_AXE_MODEL);
                     } else if (entry.name().contains("sword")) {
                         itemModelGenerator.register(entry.item(), HANDHELD_MODEL);
+                    }
+                }
+            });
+        }
+    }
+    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
+        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, SpellRegistry.KEY, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            var namespace = MOD_ID;
+            var treasureTagBuilder = getOrCreateTagBuilder(SpellTags.TREASURE);
+            var processedBooks = new HashSet<BerserkerSpells.Book>();
+            BerserkerSpells.entries.forEach(entry -> {
+                if (entry.book() != null) {
+                    var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
+                    var bookTag = getOrCreateTagBuilder(bookTagKey);
+                    bookTag.addOptional(entry.id());
+                    var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
+                    var scrollTag = getOrCreateTagBuilder(scrollTagKey);
+                    scrollTag.addOptional(entry.id());
+                    if (processedBooks.add(entry.book())) {
+                        treasureTagBuilder.addOptionalTag(scrollTagKey);
                     }
                 }
             });
