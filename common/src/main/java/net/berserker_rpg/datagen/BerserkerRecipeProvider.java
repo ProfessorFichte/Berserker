@@ -188,18 +188,5 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .input('Z', Items.CHAIN)
                 .criterion(hasItem(MRPGCItems.POLAR_BEAR_FUR), conditionsFromItem(MRPGCItems.POLAR_BEAR_FUR))
                 .offerTo(exporter, Identifier.of(MOD_ID, "northling_feet"));
-
-        // ==========================================
-        // BERSERKER SPELL BOOK
-        // ==========================================
-
-        var berserkerBook = getOrFallback(Identifier.of(MOD_ID, "berserker_spell_book"), Items.WRITTEN_BOOK);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, berserkerBook)
-                .input(MRPGCItems.HARDENED_LEATHER)
-                .input(MRPGCItems.WOLF_FUR)
-                .input(Items.BOOK)
-                .input(Items.LAPIS_LAZULI)
-                .criterion(hasItem(MRPGCItems.HARDENED_LEATHER), conditionsFromItem(MRPGCItems.HARDENED_LEATHER))
-                .offerTo(exporter);
     }
 }

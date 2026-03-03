@@ -501,18 +501,43 @@ public class BerserkerSpells {
     private static Entry decapitate() {
         var id = Identifier.of(MOD_ID, "decapitate");
         var title = "Decapitate";
-        var description = "";
+        var description = "Delivers a heavy blow with forward momentum that disables shield and item usage of target.";
         var spell = SpellBuilder.createSpellActive();
         spell.tier = 1;
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.range = 0.0F;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
 
+        SpellBuilder.Casting.cast(spell, 0.75F);
+        spell.active.cast.animation = PlayerAnimation.of("berserker_rpg:decapitate_charge");
+        spell.active.cast.animation.speed = 1.5F;
+        spell.active.cast.animation_pitch = false;
+        spell.release.sound = new Sound(BerserkerSounds.DECAPITATE_RELEASE.id());
+
         SpellBuilder.Target.none(spell);
 
-        spell.cost.exhaust = 0.1F;
+        var cut_1 = new Spell.Delivery.Melee.Attack();
+        cut_1.attack_speed_multiplier = 1.25F;
+        cut_1.delay = 0.1F;
+        cut_1.hitbox = new Spell.Delivery.Melee.HitBox();
+        cut_1.hitbox.arc = 180;
+        cut_1.hitbox.height = 0.7F;
+        cut_1.hitbox.roll = 15F;
+        cut_1.damage_bonus = 0.25F;
+        cut_1.forward_momentum = 1.5F;
+        cut_1.swing_sound = new Sound(BerserkerSounds.DECAPITATE_SWING.id());
+        cut_1.impact_sound = new Sound(BerserkerSounds.DECAPITATE_IMPACT.id());
+        cut_1.impact_sound_cap = 1;
+        cut_1.animation = PlayerAnimation.of("berserker_rpg:decapitate_release");
+
+        SpellBuilder.Deliver.melee(spell, List.of(cut_1));
+
+        var disrupt = SpellBuilder.Impacts.disrupt(true, 2F);
+        spell.impacts = List.of(disrupt);
+
         SpellBuilder.Cost.cooldownGroupWeapon(spell);
         SpellBuilder.Cost.cooldown(spell, 15);
+        spell.cost.cooldown.attempt_duration = 1F;
 
         return new Entry(id, spell, title, description, null, null);
     }

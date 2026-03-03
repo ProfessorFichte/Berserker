@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-02T23:47:57.3268895	Berserker Class Mod/Crafting Recipes (berserker_rpg)
+// 1.21.1	2026-03-03T23:59:20.9128628	Berserker Class Mod/Crafting Recipes (berserker_rpg)
 e0a9c2173de124445e15784a5f73fd4460c6d20e data\berserker_rpg\recipe\iron_berserker_axe.json
 30eebcb89f67013368ca63f14cd0d3e0cca1ffb2 data\berserker_rpg\advancement\recipes\combat\golden_berserker_axe.json
 fcbc87abfcdc579816fcd8b582a19d6c5188eb6c data\berserker_rpg\advancement\recipes\combat\stone_berserker_axe.json
@@ -21,9 +21,7 @@ f882c50c34fa8b038123252fe435ca26c8c02a84 data\berserker_rpg\advancement\recipes\
 5dd3351b603127ba30c0a20579f6c1eeb7a083cd data\berserker_rpg\recipe\northling_head.json
 d18c6da8b60d08df2e69bd43ed222aac7b48838a data\berserker_rpg\recipe\stone_berserker_axe.json
 34028488f58966777a870d05997482ab7ef995b3 data\berserker_rpg\advancement\recipes\combat\northling_legs.json
-179d9e3d76745ea6603a3ac0e32b74c3abaeb3da data\berserker_rpg\recipe\written_book.json
 2c510d8d41aeb353fb6e8900e1821b0805256db0 data\berserker_rpg\recipe\flint_berserker_axe.json
 9fbad7ee4e696706ed8cd9cad024aba4b5fda492 data\berserker_rpg\recipe\wildling_chest.json
 bf8c5e5cf52a9588fcd402b2923fe7ea74fb8740 data\berserker_rpg\recipe\diamond_berserker_axe.json
-0c3d335bdaea89629a65e47f86b4aeb77c757300 data\berserker_rpg\advancement\recipes\misc\written_book.json
 77a6a996f589edbcb9f92f84ed9153e19fe76c43 data\berserker_rpg\recipe\wildling_feet.json

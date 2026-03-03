@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-02T23:47:57.3238858	Berserker Class Mod/Model Definitions
+// 1.21.1	2026-03-03T23:59:20.9108612	Berserker Class Mod/Model Definitions
 99df633d87148eff0be79933ac5b35f4c03d028c assets\berserker_rpg\models\item\warlord_legs.json
 79d072ec61350f91f7b15f98d54fca62f6f835be assets\berserker_rpg\models\item\wildling_chest.json
 6518b897d6ea7a3152761c1963001ab3aa6dbf2f assets\berserker_rpg\models\item\unique_sword_1.json
@@ -11,8 +11,8 @@ caaaece8c6c732b9bc265d38c3713ee166398302 assets\berserker_rpg\models\item\northl
 54520bec38cb23a52d8285cba77a627bd73db987 assets\berserker_rpg\models\item\warlord_feet.json
 67c23696865473bc22416edcd388107dd91e5e7b assets\berserker_rpg\models\item\wildling_legs.json
 3169a8bed002a351f42aace731be8d1c08f01e1f assets\berserker_rpg\models\item\iron_berserker_axe.json
-fb574579fe6c9ddcd77d5d17d42487864b565bcb assets\berserker_rpg\models\item\netherite_northling_chest.json
 8ec19fbb3b6e98362293a81c97c032ef4c6ad602 assets\berserker_rpg\models\item\aeternium_berserker_axe.json
+fb574579fe6c9ddcd77d5d17d42487864b565bcb assets\berserker_rpg\models\item\netherite_northling_chest.json
 2cce8595cee5a7906570864cdb58e56a7a0ffa6c assets\berserker_rpg\models\item\elder_guardian_berserker_axe.json
 199d64fe537e72108dc06258cf8812046443c0bf assets\berserker_rpg\models\item\unique_berserker_axe_1.json
 7c66e63bec826ef02003de67771e03b4adf0897a assets\berserker_rpg\models\item\wither_berserker_axe.json
@@ -20,8 +20,8 @@ b7b3412ad012b96078cb6b628bde08050a328a4e assets\berserker_rpg\models\item\northl
 c88d8b03117c45e64ff06eaba11fc361e08a8064 assets\berserker_rpg\models\item\aether_berserker_axe.json
 4dbb26b6cd2ae1d3e4899632b34de3420f2bb4f3 assets\berserker_rpg\models\item\netherite_northling_feet.json
 6808802395b441cce63ce8ee817514e76bc450bf assets\berserker_rpg\models\item\northling_chest.json
-29436383520fdaae74abdf0fdb7aeb74ef595547 assets\berserker_rpg\models\item\ender_dragon_berserker_axe.json
 ae593bada7beab5719f55a04ee1bbd9ea0a83b6e assets\berserker_rpg\models\item\diamond_berserker_axe.json
+29436383520fdaae74abdf0fdb7aeb74ef595547 assets\berserker_rpg\models\item\ender_dragon_berserker_axe.json
 4472cd1bc3d0fca361d425e00f21ccf743f4be24 assets\berserker_rpg\models\item\glacial_berserker_axe.json
 6a9188540a104ae3029fc40a84fc7eec1972ba9f assets\berserker_rpg\models\item\golden_berserker_axe.json
 7de7a870c7ff235a27cea8dba237334ab9d1b3b4 assets\berserker_rpg\models\item\unique_berserker_axe_2.json

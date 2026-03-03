@@ -200,6 +200,8 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
             sharpnessTag.addTag(ModItemTags.BERSERKER_AXES);
             var meleeTag = getOrCreateTagBuilder(ItemTags.SWORDS);
             meleeTag.addTag(ModItemTags.BERSERKER_AXES);
+            var rpgSeriesMeleeWeaponTag = getOrCreateTagBuilder(RPGSeriesItemTags.Archetype.tag(RPGSeriesItemTags.RoleArchetype.MELEE_DAMAGE));
+            rpgSeriesMeleeWeaponTag.addTag(ModItemTags.BERSERKER_AXES);
         }
     }
 

@@ -23,7 +23,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.berserker_rpg.equipment.phasleb_armor_set.description"
+      "translate": "advancements.berserker_rpg.equipment.northling_armor_set.description"
     },
     "frame": "goal",
     "icon": {
@@ -31,7 +31,7 @@
       "id": "berserker_rpg:northling_chest"
     },
     "title": {
-      "translate": "advancements.berserker_rpg.equipment.phasleb_armor_set.title"
+      "translate": "advancements.berserker_rpg.equipment.northling_armor_set.title"
     }
   },
   "requirements": [

@@ -9,9 +9,19 @@
       "berserker_rpg:bloody_strike"
     ]
   },
-  "carve": {
+  "decapitate_impact": {
     "sounds": [
-      "berserker_rpg:carve"
+      "berserker_rpg:decapitate_impact"
+    ]
+  },
+  "decapitate_release": {
+    "sounds": [
+      "berserker_rpg:decapitate_release"
+    ]
+  },
+  "decapitate_swing": {
+    "sounds": [
+      "berserker_rpg:decapitate_swing"
     ]
   },
   "outrage": {

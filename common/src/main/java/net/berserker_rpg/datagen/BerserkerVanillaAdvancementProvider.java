@@ -59,20 +59,20 @@ public class BerserkerVanillaAdvancementProvider extends FabricAdvancementProvid
     }
 
     public static void init() {
-        var phasleb = Armors.northlingArmorSet.armorSet();
+        var northling = Armors.northlingArmorSet.armorSet();
         addEntry(new Entry(
-                id("equipment/phasleb_armor_set"),
+                id("equipment/northling_armor_set"),
                 "For the North!",
                 "Obtain the full Northling Armor Set",
                 Identifier.of("more_rpg_content", "root"),
-                (Item) phasleb.chest,
+                (Item) northling.chest,
                 AdvancementFrame.GOAL,
                 true, true, false, null,
                 new Item[]{
-                        (Item) phasleb.head,
-                        (Item) phasleb.chest,
-                        (Item) phasleb.legs,
-                        (Item) phasleb.feet
+                        (Item) northling.head,
+                        (Item) northling.chest,
+                        (Item) northling.legs,
+                        (Item) northling.feet
                 },
                 null
         ));
