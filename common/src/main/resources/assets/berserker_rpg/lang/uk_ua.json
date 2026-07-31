@@ -1,0 +1,84 @@
+{
+  "itemGroup.berserker_rpg.general": "Берсерк",
+
+  "item.berserker_rpg.berserker_spell_book": "Стародавній том рун"
+  "item.berserker_rpg.berserker.spell_scroll": "Сувій руни берсерка",
+
+  "item.berserker_rpg.flint_berserker_axe": "Крем'яна рейдерська сокира"
+  "item.berserker_rpg.stone_berserker_axe": "Кам'яна рейдерська сокира"
+  "item.berserker_rpg.iron_berserker_axe": "Залізна рейдерська сокира"
+  "item.berserker_rpg.golden_berserker_axe": "Золота рейдерська сокира"
+  "item.berserker_rpg.diamond_berserker_axe": "Діамантова рейдерська сокира"
+  "item.berserker_rpg.netherite_berserker_axe": "Незеритова рейдерська сокира"
+  "item.berserker_rpg.thunder_berserker_axe": "Сокира Торанна"
+  "item.berserker_rpg.ruby_berserker_axe": "Рубінова рейдерська сокира"
+  "item.berserker_rpg.aeternium_berserker_axe": "Етернієва рейдерська сокира"
+  "item.berserker_rpg.aether_berserker_axe": "Священна рейдерська сокира"
+  "item.berserker_rpg.unique_berserker_axe_1": "Чорний тесак"
+  "item.berserker_rpg.unique_sword_1": "Скофнунг"
+  "item.berserker_rpg.unique_berserker_axe_2": "Сокира Тораноса",
+
+  "item.berserker_rpg.glacial_berserker_axe": "Скандинавська рейдерська сокира"
+  "item.berserker_rpg.wither_berserker_axe": "Викрадач душ"
+  "item.berserker_rpg.ender_dragon_berserker_axe": "Завоювання дракона"
+  "item.berserker_rpg.elder_guardian_berserker_axe": "Потоплений капітан",
+
+  "item.berserker_rpg.wildling_head": "Шолом здичавілого"
+  "item.berserker_rpg.wildling_chest": "Броня здичавілого"
+  "item.berserker_rpg.wildling_legs": "Штани здичавілого"
+  "item.berserker_rpg.wildling_feet": "Черевики здичавілого"
+  "item.berserker_rpg.northling_head": "Шолом сіверянина"
+  "item.berserker_rpg.northling_chest": "Броня сіверянина"
+  "item.berserker_rpg.northling_legs": "Штани сіверянина"
+  "item.berserker_rpg.northling_feet": "Черевики сіверянина"
+  "item.berserker_rpg.netherite_northling_head": "Незеритовий шолом сіверянина"
+  "item.berserker_rpg.netherite_northling_chest": "Незеритова броня сіверянина"
+  "item.berserker_rpg.netherite_northling_legs": "Незеритові штани сіверянина"
+  "item.berserker_rpg.netherite_northling_feet": "Незеритові черевики сіверянина"
+  "item.berserker_rpg.warlord_head": "Шолом скандинавського полководця"
+  "item.berserker_rpg.warlord_chest": "Броня скандинавського полководця"
+  "item.berserker_rpg.warlord_legs": "Штани скандинавського полководця"
+  "item.berserker_rpg.warlord_feet": "Черевики скандинавського полководця",
+
+  "effect.berserker_rpg.rage": "Лють"
+  "effect.berserker_rpg.rage.description": "Ви завдаєте більше шкоди, чим менше у вас здоров'я. Може посилювати ефект при влучанні."
+  "effect.berserker_rpg.blood_reckoning": "Кривава розплата"
+  "effect.berserker_rpg.blood_reckoning.description": "Зцілює вас і перетворює серця поглинання на здоров'я."
+  "effect.berserker_rpg.blood_sacrifice": "Кривава жертва"
+  "effect.berserker_rpg.blood_sacrifice.description": "Перетворює ваше здоров'я на серця поглинання."
+  "effect.berserker_rpg.outrage": "Несамовитість"
+  "effect.berserker_rpg.outrage.description": "Очищає від шкідливих ефектів при застосуванні, збільшує швидкість атаки та шкоду."
+  "effect.berserker_rpg.carve": "Розрізання"
+  "effect.berserker_rpg.carve.description": "Зменшує броню та збільшує отримувану шкоду.",
+
+  "death.attack.berserker_cost": "%1$s падає від виснаження.",
+
+  "spell.berserker_rpg.wild_rage.name": "Дика лють"
+  "spell.berserker_rpg.wild_rage.description": "Ввійдіть у стан дикої люті, що збільшує швидкість атаки на {bonus} та лють на {bonus2}, сумується до {effect_amplifier_cap} разів."
+  "spell.berserker_rpg.bloody_strike.name": "Кривавий удар"
+  "spell.berserker_rpg.bloody_strike.description": "Завдає {damage} фізичної шкоди ціною власного здоров'я, дає поглинання за завдану шкоду. Послаблює гравця, якщо здоров'я занадто низьке."
+  "spell.berserker_rpg.nordic_storm.name": "Північний шторм"
+  "spell.berserker_rpg.nordic_storm.description": "Атака з обертанням, яка завдає {damage_0} фізичної та {damage_1} шкоди від холоду цілям щосекунди."
+  "spell.berserker_rpg.rumbling_swing.name": "Гуркотливий змах"
+  "spell.berserker_rpg.rumbling_swing.description": "Стрибає з блискавичною швидкістю, завдаючи {damage_0} фізичної та {damage_1} шкоди від блискавки."
+  "spell.berserker_rpg.soulaxe_drain.name": "Жертовне поглинання"
+  "spell.berserker_rpg.soulaxe_drain.description": "Завдає шкоди вам, витягує душі цілей, завдаючи {damage} шкоди душам щосекунди."
+  "spell.berserker_rpg.outrage.name": "Несамовитість"
+  "spell.berserker_rpg.outrage.description": "Очищає від шкідливих ефектів, збільшує швидкість атаки та шкоду на {bonus}."
+  "spell.berserker_rpg.blood_reckoning.name": "Кривава розплата"
+  "spell.berserker_rpg.blood_reckoning.description": "Заклинач зцілює себе та перетворює поглинання на здоров'я."
+  "spell.berserker_rpg.improved_bloody_strike.name": "Покращений кривавий удар"
+  "spell.berserker_rpg.improved_bloody_strike.description": "Збільшує множник сили Кривавого удару на {power_multiplier}",
+
+  
+  "equipment_set.berserker_rpg.warlord": "Розлючений полководець",
+
+  "advancements.more_rpg_content.path_choose_berserker.title": "Шлях Берсерка"
+  "advancements.more_rpg_content.path_choose_berserker.description": "Створіть Стародавній том рун"
+  "advancements.more_rpg_content.spell_novice_berserker.title": "До кораблів!"
+  "advancements.more_rpg_content.spell_novice_berserker.description": "Отримайте свою першу навичку Берсерка"
+  "advancements.more_rpg_content.spell_master_berserker.title": "Невблаганний рейдер"
+  "advancements.more_rpg_content.spell_master_berserker.description": "Заповніть Стародавній том рун"
+  "advancements.more_rpg_content.spell_cast_berserker_book.title": "Берсеркінг"
+  "advancements.more_rpg_content.spell_cast_berserker_book.description": "Використайте навичку зі Стародавнього тому рун"
+}
