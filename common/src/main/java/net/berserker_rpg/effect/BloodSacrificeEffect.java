@@ -4,8 +4,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 
 import static net.berserker_rpg.BerserkerClassMod.tweaksConfig;
@@ -33,10 +31,7 @@ public class BloodSacrificeEffect extends StatusEffect {
             float actual_health_player = entity.getHealth();
             double amount = modifier * attack_damage;
             float self_damage_calc = (float) (amount * tweaksConfig.value.bloody_strike_self_damage);
-            if(actual_health_player <= 0.5F){
-                entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 300,2,false,false,true));
-                entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 300,2,false,false,true));
-            }else{
+            if(actual_health_player > 1.0F){
                 if(self_damage_calc > actual_health_player){
                     entity.setHealth(0.5F);
                 }else{

@@ -5,9 +5,7 @@ import net.berserker_rpg.sounds.BerserkerSounds;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
-import net.more_rpg_classes.effect.MRPGCEffects;
-import net.spell_engine.api.spell.ExternalSpellSchools;
-import net.spell_engine.fx.SpellEngineSounds;
+import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_power.api.SpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.Spell;
@@ -200,9 +198,9 @@ public class BerserkerSpells {
     private static Entry bloody_strike() {
         var id = Identifier.of(MOD_ID, "bloody_strike");
         var title = "Bloody Strike";
-        var description = "Deals {damage} physical-damage in trade of self damage, gives absorption for dealt damage. Weakens the player if health is too low.";
+        var description = "Deals {damage} physical-damage in trade of self damage, gives absorption for dealt damage. Below half a heart, the trade is skipped entirely.";
         var effect = BerserkerEffects.BLOOD_SACRIFICE;
-        var debuffEffect = MRPGCEffects.BLEEDING;
+        var debuffEffect = SpellEngineEffects.BLEED;
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0.5F;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
@@ -232,7 +230,7 @@ public class BerserkerSpells {
         debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
         debuff.action.status_effect.show_particles = false;
         debuff.action.status_effect.amplifier = 1;
-        debuff.action.status_effect.amplifier_cap = 5;
+        debuff.action.status_effect.amplifier_cap = 3;
         debuff.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
         debuff.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
@@ -257,11 +255,51 @@ public class BerserkerSpells {
         spell.cost.exhaust = 0.3F;
         return new Entry(id, spell, title, description, null,Book.BERSERKER);
     }
+    public static final Entry apprehend = add(apprehend());
+    private static Entry apprehend() {
+        var id = Identifier.of(MOD_ID, "apprehend");
+        var title = "Apprehend";
+        var description = "Strikes a wide area in front of you, pulling hit enemies towards you and lowering their armor.";
+        var effect = BerserkerEffects.APPREHEND;
+        var spell = SpellBuilder.createSpellActive();
+        spell.range = 0.5F;
+        spell.range_mechanic = Spell.RangeMechanic.MELEE;
+        spell.tier = 2;
+        spell.school = MoreSpellSchools.RAGE_MELEE;
+
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
+        spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
+        spell.release.particles = new ParticleBatch[]{
+                new ParticleBatch("crimson_spore",
+                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.CENTER,
+                        20, 0.2F, 0.4F)
+        };
+
+        spell.target.type = Spell.Target.Type.AREA;
+        spell.target.area = new Spell.Target.Area();
+        spell.target.area.vertical_range_multiplier = 0.5F;
+        spell.target.area.angle_degrees = 120;
+
+        var damage = damageImpact(0.5F, 0F);
+        damage.sound = new Sound(BerserkerSounds.BLOODY_STRIKE.id());
+
+        var pull = SpellBuilder.Impacts.pull(0.8F);
+
+        var debuff = createEffectImpact(effect.id, 6);
+        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
+
+        spell.impacts = List.of(damage, pull, debuff);
+
+        configureCooldown(spell, 16);
+        spell.cost.exhaust = 0.3F;
+        return new Entry(id, spell, title, description, null, Book.BERSERKER);
+    }
     public static final Entry blood_reckoning = add(blood_reckoning());
     private static Entry blood_reckoning() {
         var id = Identifier.of(MOD_ID, "blood_reckoning");
         var title = "Blood Reckoning";
-        var description = "The caster heals himself and converts absorption to health.";
+        var description = "Grants absorption for missing health. Heals for a portion of the remaining absorption when the effect runs out.";
+        var effect = BerserkerEffects.BLOOD_RECKONING;
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0;
         spell.tier = 4;
@@ -286,14 +324,10 @@ public class BerserkerSpells {
 
         spell.target.type = Spell.Target.Type.CASTER;
 
-        var custom = new Spell.Impact();
-        custom.action = new Spell.Impact.Action();
-        custom.action.custom = new Spell.Impact.Action.Custom();
-        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
-        custom.action.custom.intent = SpellTarget.Intent.HELPFUL;
-        custom.action.custom.handler = "berserker_rpg:blood_reckoning";
+        var buff = createEffectImpact(effect.id, 20);
+        buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
 
-        spell.impacts = List.of(custom);
+        spell.impacts = List.of(buff);
         spell.cost.exhaust = 0.3F;
 
         configureCooldown(spell, 20);
@@ -303,13 +337,13 @@ public class BerserkerSpells {
     private static Entry outrage() {
         var id = Identifier.of(MOD_ID, "outrage");
         var title = "Outrage";
-        var description = "Clears harmful effects, increases active rage effect duration and increases attack speed and damage by {bonus} for {effect_duration}.";
+        var description = "Clears harmful effects and increases attack damage by {bonus} for {effect_duration}.";
         var spell = SpellBuilder.createSpellActive();
         var effect = BerserkerEffects.OUTRAGE;
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.range = 0;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
-        spell.tier = 4;
+        spell.tier = 3;
         SpellTooltip.DescriptionMutator mutator = (args) -> {
             var modifier = effect.config().firstModifier();
             var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
@@ -353,6 +387,40 @@ public class BerserkerSpells {
         return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
 
+    public static final Entry northerners_guillotine = add(northerners_guillotine());
+    private static Entry northerners_guillotine() {
+        var id = Identifier.of(MOD_ID, "northerners_guillotine");
+        var title = "Northerners Guillotine";
+        var description = "Leaps to the target, striking a lethal blow. Deals more damage for every negative status effect on the target.";
+        var spell = SpellBuilder.createSpellActive();
+        spell.school = MoreSpellSchools.RAGE_MELEE;
+        spell.range_mechanic = Spell.RangeMechanic.MELEE;
+        spell.range = 0.5F;
+        spell.tier = 4;
+
+        spell.target.type = Spell.Target.Type.AIM;
+        spell.target.aim = new Spell.Target.Aim();
+        spell.target.aim.sticky = false;
+        spell.target.aim.required = true;
+
+        spell.release.animation = PlayerAnimation.of("berserker_rpg:decapitate_charge");
+        spell.release.sound = new Sound(BerserkerSounds.DECAPITATE_RELEASE.id());
+
+        var custom = new Spell.Impact();
+        custom.action = new Spell.Impact.Action();
+        custom.action.custom = new Spell.Impact.Action.Custom();
+        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
+        custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
+        custom.action.custom.handler = "berserker_rpg:northerners_guillotine";
+        custom.sound = new Sound(BerserkerSounds.DECAPITATE_IMPACT.id());
+
+        spell.impacts = List.of(custom);
+
+        configureCooldown(spell, 30);
+        spell.cost.exhaust = 1.0F;
+        spell.cost.durability = 1;
+        return new Entry(id, spell, title, description, null, Book.BERSERKER);
+    }
     public static final Entry rumbling_swing = add(rumbling_swing());
     private static Entry rumbling_swing() {
         var id = Identifier.of(MOD_ID, "rumbling_swing");
@@ -438,7 +506,9 @@ public class BerserkerSpells {
         spell.active.cast.animation = PlayerAnimation.of("berserker_rpg:nordic_storm");
         spell.active.cast.sound = new Sound(Identifier.of("spell_engine:generic_frost_impact"), 0);
         spell.active.cast.start_sound = new Sound("entity.player.breath");
-        spell.active.cast.channel_ticks = 5;
+        spell.active.cast.type = Spell.Active.Cast.Type.CHANNEL;
+        spell.active.cast.channel = new Spell.Active.Cast.Channel();
+        spell.active.cast.channel.ticks = 5;
         spell.active.cast.particles = new ParticleBatch[]{
                 new ParticleBatch("sweep_attack",
                         ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,

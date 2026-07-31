@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-03T23:59:20.9098469	Berserker Class Mod/Tags for minecraft:item
+// 1.21.1	2026-07-31T00:25:33.6838013	Berserker Class Mod/Tags for minecraft:item
 c5fb7bcb96d5b2d14aa36698cf8b41e5eb170f81 data\rpg_series\tags\item\loot_tier\tier_0_weapons.json
 64cf39a80439c7a8120ca7fe16c499bbfdbe114a data\rpg_series\tags\item\loot_tier\tier_1_weapons.json
 d4a29c4a18d46d7992699e9e7d72549e850321ea data\rpg_series\tags\item\loot_tier\tier_2_weapons.json
@@ -6,8 +6,8 @@ ac1742fe52819a1ee57a5a8e91da07fba052359a data\rpg_series\tags\item\loot_tier\tie
 941626a51eae9ebd2a2fe44142c42bfb16d91f96 data\rpg_series\tags\item\loot_tier\tier_2_armors.json
 5a6c4a062a3dc6c8dc1604d2742be380f8ab3876 data\berserker_rpg\tags\item\berserker_axes.json
 00f7a33b7991b7fb31eb9915ab157d55bd43077b data\rpg_series\tags\item\loot_tier\tier_1_armors.json
-fcc65298045957397127f611e970c1ad32b6e0be data\minecraft\tags\item\leg_armor.json
 522dc9b4e3fe1e5c58ce9437aa845e6fc9cb92b3 data\minecraft\tags\item\swords.json
+fcc65298045957397127f611e970c1ad32b6e0be data\minecraft\tags\item\leg_armor.json
 522dc9b4e3fe1e5c58ce9437aa845e6fc9cb92b3 data\spell_power\tags\item\enchantable\spell_power_generic.json
 522dc9b4e3fe1e5c58ce9437aa845e6fc9cb92b3 data\rpg_series\tags\item\archetype\melee_damage_weapon.json
 67007414a213268e56801c80aa81b1514a272972 data\rpg_series\tags\item\armor_type\melee.json

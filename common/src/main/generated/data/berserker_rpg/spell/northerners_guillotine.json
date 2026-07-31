@@ -1,0 +1,42 @@
+{
+  "school": "spell_power:rage_melee",
+  "range": 0.5,
+  "range_mechanic": "MELEE",
+  "tier": 4,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": {
+      "id": "berserker_rpg:decapitate_charge"
+    },
+    "sound": {
+      "id": "berserker_rpg:decapitate_release"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {
+      "required": true
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "CUSTOM",
+        "custom": {
+          "intent": "HARMFUL",
+          "handler": "berserker_rpg:northerners_guillotine"
+        }
+      },
+      "sound": {
+        "id": "berserker_rpg:decapitate_impact"
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 1.0,
+    "cooldown": {
+      "duration": 30.0
+    }
+  }
+}

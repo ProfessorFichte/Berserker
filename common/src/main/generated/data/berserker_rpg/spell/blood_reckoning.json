@@ -44,9 +44,10 @@
   "impacts": [
     {
       "action": {
-        "type": "CUSTOM",
-        "custom": {
-          "handler": "berserker_rpg:blood_reckoning"
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "berserker_rpg:blood_reckoning",
+          "duration": 20.0
         }
       }
     }

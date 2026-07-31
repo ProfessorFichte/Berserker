@@ -9,11 +9,19 @@
       "required": false
     },
     {
+      "id": "berserker_rpg:apprehend",
+      "required": false
+    },
+    {
       "id": "berserker_rpg:blood_reckoning",
       "required": false
     },
     {
       "id": "berserker_rpg:outrage",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:northerners_guillotine",
       "required": false
     }
   ]

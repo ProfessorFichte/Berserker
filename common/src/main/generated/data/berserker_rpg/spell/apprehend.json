@@ -1,0 +1,74 @@
+{
+  "school": "spell_power:rage_melee",
+  "range": 0.5,
+  "range_mechanic": "MELEE",
+  "tier": 2,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": {
+      "id": "more_rpg_classes:two_handed_roar"
+    },
+    "particles": [
+      {
+        "particle_id": "crimson_spore",
+        "origin": "CENTER",
+        "shape": "WIDE_PIPE",
+        "count": 20.0,
+        "min_speed": 0.2,
+        "max_speed": 0.4
+      }
+    ],
+    "sound": {
+      "id": "berserker_rpg:outrage"
+    }
+  },
+  "target": {
+    "type": "AREA",
+    "area": {
+      "vertical_range_multiplier": 0.5,
+      "angle_degrees": 120.0
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.5,
+          "knockback": 0.0
+        }
+      },
+      "sound": {
+        "id": "berserker_rpg:bloody_strike"
+      }
+    },
+    {
+      "action": {
+        "type": "VELOCITY",
+        "velocity": {
+          "push": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.8
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "berserker_rpg:apprehend",
+          "duration": 6.0
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.3,
+    "cooldown": {
+      "duration": 16.0
+    }
+  }
+}

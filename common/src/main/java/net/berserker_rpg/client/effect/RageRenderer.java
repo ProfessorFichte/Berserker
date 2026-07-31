@@ -18,7 +18,7 @@ public class RageRenderer implements CustomModelStatusEffect.Renderer{
     public static final Identifier modelIdRage = Identifier.of(MOD_ID, "spell_effect/rage_model");
 
     @Override
-    public void renderEffect(int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
+    public void renderEffect(long appliedAtWorldTime, int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
         var itemRenderer = MinecraftClient.getInstance().getItemRenderer();
         var camera =  MinecraftClient.getInstance().gameRenderer.getCamera();
         var direction = camera.getPos().subtract(livingEntity.getPos()).normalize().multiply(livingEntity.getWidth() * 0.5F);

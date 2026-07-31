@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "berserker_rpg:item/berserker_spell_book"
-  }
-}
