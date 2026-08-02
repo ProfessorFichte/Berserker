@@ -59,7 +59,7 @@ public class WeaponsRegister {
     //BERSERKER-AXE
     private static Weapon.Entry berserker_axes(String name, Weapon.CustomMaterial material, float damage) {
         return entry(name, material, BerserkerAxeItem::new, new WeaponConfig(damage, berserker_axe_attackSpeed), Equipment.WeaponType.DOUBLE_AXE)
-                .spellContainer(SpellContainers.forMeleeWeapon().withSpellId(BerserkerSpells.decapitate.id()));
+                .spellContainer(SpellContainers.forMeleeWeapon().withSpellId(MrpgLibSpells.decapitate.id()));
     }
     private static Weapon.Entry sword(String name, Weapon.CustomMaterial material, float damage) {
         return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2.4f), Equipment.WeaponType.SWORD)

@@ -3,6 +3,7 @@
   "range": 0.5,
   "range_mechanic": "MELEE",
   "tier": 3,
+  "group": "fanatic",
   "learn": {},
   "active": {},
   "release": {
@@ -19,24 +20,13 @@
   },
   "impacts": [
     {
-      "target_modifiers": [
-        {
-          "conditions": [
-            {
-              "entity_type": "#more_rpg_classes:bleeding_immune"
-            }
-          ],
-          "execute": "DENY"
-        }
-      ],
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "spell_engine:bleed",
           "duration": 5.0,
           "amplifier": 1,
-          "amplifier_cap": 3,
-          "amplifier_cap_power_multiplier": 0.2,
+          "amplifier_power_multiplier": 0.2,
           "apply_mode": "ADD"
         }
       },
@@ -77,6 +67,7 @@
         "status_effect": {
           "effect_id": "berserker_rpg:blood_sacrifice",
           "duration": 15.0,
+          "amplifier": 1,
           "amplifier_power_multiplier": 0.5
         }
       },

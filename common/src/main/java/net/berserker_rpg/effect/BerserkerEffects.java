@@ -26,7 +26,7 @@ public class BerserkerEffects {
     public static final Effects.Entry RAGE = add(new Effects.Entry(
             Identifier.of(MOD_ID, "rage"),
             "Rage",
-            "You deal more damage, the less health you have. Can increase the effect on hit.",
+            "Increases Rage & Attack Speed. You deal more damage, the less health you have.",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
                     new AttributeModifier(
@@ -36,7 +36,7 @@ public class BerserkerEffects {
                     ),
                     new AttributeModifier(
                             EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString(),
-                            0.025F,
+                            0.02F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
@@ -70,12 +70,17 @@ public class BerserkerEffects {
     public static final Effects.Entry OUTRAGE = add(new Effects.Entry(
             Identifier.of(MOD_ID, "outrage"),
             "Outrage",
-            "Clears harmful status effects when applied, increases attack damage.",
-            new OutrageEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
+            "Increases attack damage and speed.",
+            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
                     new AttributeModifier(
                             EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(),
-                            0.1F,
+                            0.2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString(),
+                            0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
@@ -98,6 +103,7 @@ public class BerserkerEffects {
         OnRemoval.configure(BLOOD_RECKONING.effect, (context) -> {
             var entity = context.entity();
             float heal = entity.getAbsorptionAmount() * tweaksConfig.value.blood_reckoning_absorption_to_heal_on_expire;
+            entity.setAbsorptionAmount(0F);
             entity.heal(heal);
         });
 

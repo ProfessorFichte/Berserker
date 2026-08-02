@@ -5,7 +5,7 @@
 - Models, Textures, Sound Effects & Animations are still missing
 - Added uk_ua localization- #9 - thx: Ch1sho
 - Fixed Outrage removing Absorption Hearts
-- Outrage now only buffs attack damage and removes harmful effect
+- Outrage is now a T3 Spell
 - Changed Blood Reckoning: When activated, gain a portion of absorption hearts depending on your missing health
 - When the effect runs heart a portion of your remaining absorption hearts heal you.
 

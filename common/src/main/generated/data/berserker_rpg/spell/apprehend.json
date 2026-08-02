@@ -3,6 +3,7 @@
   "range": 0.5,
   "range_mechanic": "MELEE",
   "tier": 2,
+  "group": "brute",
   "learn": {},
   "active": {},
   "release": {
@@ -60,7 +61,8 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "berserker_rpg:apprehend",
-          "duration": 6.0
+          "duration": 6.0,
+          "amplifier_power_multiplier": 0.15
         }
       }
     }

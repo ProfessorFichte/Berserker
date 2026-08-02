@@ -38,13 +38,13 @@ public class BerserkerClassMod {
 			.build();
 
 	public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
-			("effects_v4", new ConfigFile.Effects())
+			("effects_v5", new ConfigFile.Effects())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
 			.build();
 	public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
-			("tweaks_v1", new TweaksConfig())
+			("tweaks_v2", new TweaksConfig())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)

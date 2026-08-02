@@ -3,6 +3,7 @@
   "range": 0.0,
   "range_mechanic": "MELEE",
   "tier": 3,
+  "group": "brute",
   "learn": {},
   "active": {},
   "release": {
@@ -52,6 +53,20 @@
         "status_effect": {
           "effect_id": "berserker_rpg:outrage"
         }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "apply_mode": "REMOVE",
+          "remove": {
+            "id": "!minecraft:trial_omen"
+          }
+        }
+      },
+      "sound": {
+        "id": "spell_engine:generic_dispel_1"
       }
     }
   ],

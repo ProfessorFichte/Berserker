@@ -3,11 +3,12 @@
   "range": 0.5,
   "range_mechanic": "MELEE",
   "tier": 4,
+  "group": "brute",
   "learn": {},
   "active": {},
   "release": {
     "animation": {
-      "id": "berserker_rpg:decapitate_charge"
+      "id": "berserker_rpg:decapitate_release"
     },
     "sound": {
       "id": "berserker_rpg:decapitate_release"
