@@ -2,6 +2,7 @@ package net.berserker_rpg.spell;
 
 import net.berserker_rpg.effect.BerserkerEffects;
 import net.berserker_rpg.sounds.BerserkerSounds;
+import net.berserker_rpg.spell.custom_spell_impacts.NortherhersGuillotineImpact;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
+import static net.berserker_rpg.BerserkerClassMod.tweaksConfig;
 
 public class BerserkerSpells {
     public enum Book { BERSERKER}
@@ -149,7 +151,7 @@ public class BerserkerSpells {
     private static Entry bloody_strike() {
         var id = Identifier.of(MOD_ID, "bloody_strike");
         var title = "Bloody Strike";
-        var description = "Deals {damage} physical-damage in trade of self damage, gives absorption for dealt damage. Below half a heart, the trade is skipped entirely.";
+        var description = "Deals {damage} physical damage, costing {self_damage} of it back as self-damage in exchange for {absorption} absorption. Skipped entirely below half a heart.";
         var effect = BerserkerEffects.BLOOD_SACRIFICE;
         var debuffEffect = SpellEngineEffects.BLEED;
         var spell = SpellBuilder.createSpellActive();
@@ -158,6 +160,14 @@ public class BerserkerSpells {
         spell.tier = 3;
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.group = FANATIC;
+        SpellTooltip.DescriptionMutator mutator = (args) -> {
+            var modifier = effect.config().attributes().get(0);
+            var absorption = SpellTooltip.bonus(modifier.value, modifier.operation);
+            var self_damage = SpellTooltip.percent(tweaksConfig.value.bloody_strike_self_damage);
+            return args.description()
+                    .replace("{self_damage}", self_damage)
+                    .replace("{absorption}", absorption);
+        };
 
         spell.release.animation = PlayerAnimation.of("berserker_rpg:berserker_axe_both");
 
@@ -198,13 +208,13 @@ public class BerserkerSpells {
         
         SpellBuilder.Cost.cooldown(spell, 13);
         spell.cost.exhaust = 0.3F;
-        return new Entry(id, spell, title, description, null,Book.BERSERKER);
+        return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
     public static final Entry apprehend = add(apprehend());
     private static Entry apprehend() {
         var id = Identifier.of(MOD_ID, "apprehend");
         var title = "Apprehend";
-        var description = "Strikes a wide area in front of you, pulling hit enemies towards you and lowering their armor.";
+        var description = "Strikes a wide area in front of you, pulling hit enemies towards you and lowering their armor by {armor}.";
         var effect = BerserkerEffects.APPREHEND;
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0.5F;
@@ -212,6 +222,12 @@ public class BerserkerSpells {
         spell.tier = 2;
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.group = BRUTE;
+        SpellTooltip.DescriptionMutator mutator = (args) -> {
+            var modifier = effect.config().attributes().get(0);
+            var armor = SpellTooltip.bonus(Math.abs(modifier.value), modifier.operation);
+            return args.description()
+                    .replace("{armor}", armor);
+        };
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
@@ -238,19 +254,26 @@ public class BerserkerSpells {
 
         SpellBuilder.Cost.cooldown(spell, 16);
         spell.cost.exhaust = 0.3F;
-        return new Entry(id, spell, title, description, null, Book.BERSERKER);
+        return new Entry(id, spell, title, description, mutator, Book.BERSERKER);
     }
     public static final Entry blood_reckoning = add(blood_reckoning());
     private static Entry blood_reckoning() {
         var id = Identifier.of(MOD_ID, "blood_reckoning");
         var title = "Blood Reckoning";
-        var description = "Grants absorption for missing health. Heals for a portion of the remaining absorption when the effect runs out.";
+        var description = "Grants absorption equal to {absorption_ratio} of your missing health. When the effect ends, converts {heal_ratio} of your remaining absorption into a heal.";
         var effect = BerserkerEffects.BLOOD_RECKONING;
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0;
         spell.tier = 4;
         spell.group = FANATIC;
         spell.school = MoreSpellSchools.RAGE_MELEE;
+        SpellTooltip.DescriptionMutator mutator = (args) -> {
+            var absorptionRatio = SpellTooltip.percent(tweaksConfig.value.blood_reckoning_missing_health_to_absorption);
+            var healRatio = SpellTooltip.percent(tweaksConfig.value.blood_reckoning_absorption_to_heal_on_expire);
+            return args.description()
+                    .replace("{absorption_ratio}", absorptionRatio)
+                    .replace("{heal_ratio}", healRatio);
+        };
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
@@ -278,7 +301,7 @@ public class BerserkerSpells {
         spell.cost.exhaust = 0.3F;
 
         SpellBuilder.Cost.cooldown(spell, 20);
-        return new Entry(id, spell, title, description, null,Book.BERSERKER);
+        return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
     public static final Entry outrage = add(outrage());
     private static Entry outrage() {
@@ -339,13 +362,20 @@ public class BerserkerSpells {
     private static Entry northerners_guillotine() {
         var id = Identifier.of(MOD_ID, "northerners_guillotine");
         var title = "Northerners Guillotine";
-        var description = "Leaps to the target, striking a lethal blow. Deals more damage for every negative status effect on the target.";
+        var description = "Leaps to the target, striking a lethal blow. Deals {base_damage} bonus damage, increasing by {damage_per_amplifier} for every level of a harmful effect on the target.";
         var spell = SpellBuilder.createSpellActive();
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.range = 0.5F;
         spell.tier = 4;
         spell.group = BRUTE;
+        SpellTooltip.DescriptionMutator mutator = (args) -> {
+            var baseDamage = SpellTooltip.percent(NortherhersGuillotineImpact.BASE_DAMAGE_MULTIPLIER - 1F);
+            var perAmplifier = String.format("%.1f%%", tweaksConfig.value.northerners_guillotine_damage_per_amplifier * 100);
+            return args.description()
+                    .replace("{base_damage}", baseDamage)
+                    .replace("{damage_per_amplifier}", perAmplifier);
+        };
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -368,6 +398,6 @@ public class BerserkerSpells {
         SpellBuilder.Cost.cooldown(spell, 30);
         spell.cost.exhaust = 1.0F;
         spell.cost.durability = 1;
-        return new Entry(id, spell, title, description, null, Book.BERSERKER);
+        return new Entry(id, spell, title, description, mutator, Book.BERSERKER);
     }
 }

@@ -18,9 +18,10 @@ import net.spell_power.api.SpellPower;
 
 import java.util.List;
 
+import static net.berserker_rpg.BerserkerClassMod.tweaksConfig;
+
 public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
-    private static final float BASE_DAMAGE_MULTIPLIER = 1.2F;
-    private static final float DAMAGE_PER_HARMFUL_EFFECT = 0.2F;
+    public static final float BASE_DAMAGE_MULTIPLIER = 1.2F;
 
     @Override
     public SpellHandlers.ImpactResult onSpellImpact(
@@ -31,11 +32,12 @@ public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
             SpellHelper.ImpactContext context
     ) {
         if (target instanceof LivingEntity livingTarget && caster instanceof PlayerEntity playerCaster) {
-            long harmfulEffectCount = livingTarget.getStatusEffects().stream()
+            int harmfulAmplifierSum = livingTarget.getStatusEffects().stream()
                     .filter(instance -> instance.getEffectType().value().getCategory() == StatusEffectCategory.HARMFUL)
-                    .count();
+                    .mapToInt(instance -> instance.getAmplifier() + 1)
+                    .sum();
 
-            float damageMultiplier = BASE_DAMAGE_MULTIPLIER + (harmfulEffectCount * DAMAGE_PER_HARMFUL_EFFECT);
+            float damageMultiplier = BASE_DAMAGE_MULTIPLIER + (harmfulAmplifierSum * tweaksConfig.value.northerners_guillotine_damage_per_amplifier);
             CustomMethods.spellSchoolDamageCalculation(spell.value().school, damageMultiplier,livingTarget,playerCaster);
         }
         return new SpellHandlers.ImpactResult(true, false);
