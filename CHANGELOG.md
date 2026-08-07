@@ -10,6 +10,7 @@
 - Outrage is now a T3 Spell and slightly increases the duration of an ongoing Rage Effect 
 - Changed Blood Reckoning: When activated, gain a portion of absorption hearts depending on your missing health
 - When the effect runs heart a portion of your remaining absorption hearts heal you. (everything configurable in Tweaks Config)
+- Armory & Arsenal Compat Equipment is no added to a separate Item Group
 
 # 2.6.0 - 1.21.1
 **Update to use Spell Engine 1.9.0**
