@@ -1,4 +1,14 @@
 {
+  "apprehend_cast": {
+    "sounds": [
+      "berserker_rpg:apprehend_cast"
+    ]
+  },
+  "apprehend_impact": {
+    "sounds": [
+      "berserker_rpg:apprehend_impact"
+    ]
+  },
   "blood_reckoning": {
     "sounds": [
       "berserker_rpg:blood_reckoning"
@@ -22,6 +32,16 @@
   "decapitate_swing": {
     "sounds": [
       "berserker_rpg:decapitate_swing"
+    ]
+  },
+  "northerners_guillotine_cast": {
+    "sounds": [
+      "berserker_rpg:northerners_guillotine_cast"
+    ]
+  },
+  "northerners_guillotine_impact": {
+    "sounds": [
+      "berserker_rpg:northerners_guillotine_impact"
     ]
   },
   "outrage": {

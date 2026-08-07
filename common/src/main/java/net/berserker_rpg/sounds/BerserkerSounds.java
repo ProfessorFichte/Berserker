@@ -73,6 +73,10 @@ public class BerserkerSounds {
     public static final Entry DECAPITATE_IMPACT = add(new Entry("decapitate_impact"));
     public static final Entry DECAPITATE_RELEASE = add(new Entry("decapitate_release"));
     public static final Entry DECAPITATE_SWING = add(new Entry("decapitate_swing"));
+    public static final Entry APPREHEND_CAST = add(new Entry("apprehend_cast"));
+    public static final Entry APPREHEND_IMPACT = add(new Entry("apprehend_impact"));
+    public static final Entry NORTHERNERS_GUILLOTINE_CAST = add(new Entry("northerners_guillotine_cast"));
+    public static final Entry NORTHERNERS_GUILLOTINE_IMPACT = add(new Entry("northerners_guillotine_impact"));
 
     public static void register() {
         for (var entry: entries) {

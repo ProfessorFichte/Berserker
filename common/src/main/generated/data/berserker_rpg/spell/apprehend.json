@@ -8,20 +8,10 @@
   "active": {},
   "release": {
     "animation": {
-      "id": "more_rpg_classes:two_handed_roar"
+      "id": "berserker_rpg:apprehend_cast"
     },
-    "particles": [
-      {
-        "particle_id": "crimson_spore",
-        "origin": "CENTER",
-        "shape": "WIDE_PIPE",
-        "count": 20.0,
-        "min_speed": 0.2,
-        "max_speed": 0.4
-      }
-    ],
     "sound": {
-      "id": "berserker_rpg:outrage"
+      "id": "berserker_rpg:apprehend_cast"
     }
   },
   "target": {
@@ -41,7 +31,7 @@
         }
       },
       "sound": {
-        "id": "berserker_rpg:bloody_strike"
+        "id": "berserker_rpg:apprehend_impact"
       }
     },
     {
@@ -51,10 +41,21 @@
           "push": {
             "x": 0.0,
             "y": 0.0,
-            "z": -0.8
+            "z": -1.0
           }
         }
-      }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:smoke_medium",
+          "origin": "FEET",
+          "shape": "SPHERE",
+          "count": 25.0,
+          "min_speed": 0.3,
+          "max_speed": 0.3,
+          "pre_spawn_travel": 1.0
+        }
+      ]
     },
     {
       "action": {
@@ -62,7 +63,8 @@
         "status_effect": {
           "effect_id": "berserker_rpg:apprehend",
           "duration": 6.0,
-          "amplifier_power_multiplier": 0.15
+          "amplifier": 1,
+          "amplifier_power_multiplier": 0.1
         }
       }
     }

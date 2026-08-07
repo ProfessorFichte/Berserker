@@ -1,18 +1,22 @@
 package net.berserker_rpg.item.armor;
 
 import net.berserker_rpg.item.BerserkerGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.more_rpg_classes.item.MRPGCItemGroups;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
@@ -21,6 +25,7 @@ import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.api.spell.SpellDataComponents;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -118,6 +123,13 @@ public class Armors {
                 settings
         );
         entries.add(entry);
+        return entry;
+    }
+
+    private static final Map<Armor.Entry, RegistryKey<ItemGroup>> groupOverrides = new IdentityHashMap<>();
+
+    private static Armor.Entry groupKey(Armor.Entry entry, RegistryKey<ItemGroup> key) {
+        groupOverrides.put(entry, key);
         return entry;
     }
 
@@ -254,7 +266,7 @@ public class Armors {
     public static Armor.Entry warlordArmorSet;
     public static void register(Map<String, ArmorSetConfig> configs) {
         if (armoryLoadCheck()) {
-            warlordArmorSet = create(
+            warlordArmorSet = groupKey(create(
                     material_warlord,
                     Identifier.of(MOD_ID, "warlord"),
                     40,
@@ -302,8 +314,22 @@ public class Armors {
                                     ))
                     ),5,
                     commonSettings(warlord_passive)
-            ).translatedName("Norse Warlord Head", "Norse Warlord Suit", "Norse Warlord Pants", "Norse Warlord Boots");
+            ).translatedName("Norse Warlord Head", "Norse Warlord Suit", "Norse Warlord Pants", "Norse Warlord Boots"), MRPGCItemGroups.ARMORY_KEY);
         }
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
+        for (var override : groupOverrides.entrySet()) {
+            var entry = override.getKey();
+            var key = override.getValue();
+            var pieces = entry.armorSet().pieces();
+            ItemGroupEvents.modifyEntriesEvent(BerserkerGroup.BERSERKER_KEY).register(content -> {
+                content.getDisplayStacks().removeIf(stack -> pieces.stream().anyMatch(p -> stack.isOf((ArmorItem) p)));
+                content.getSearchTabStacks().removeIf(stack -> pieces.stream().anyMatch(p -> stack.isOf((ArmorItem) p)));
+            });
+            ItemGroupEvents.modifyEntriesEvent(key).register(content -> {
+                for (var piece : pieces) {
+                    content.add((ArmorItem) piece);
+                }
+            });
+        }
     }
 }

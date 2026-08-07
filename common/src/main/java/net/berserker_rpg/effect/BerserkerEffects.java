@@ -70,8 +70,8 @@ public class BerserkerEffects {
     public static final Effects.Entry OUTRAGE = add(new Effects.Entry(
             Identifier.of(MOD_ID, "outrage"),
             "Outrage",
-            "Increases attack damage and speed.",
-            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
+            "Increases attack damage and attack speed.",
+            new OutrageEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
             new EffectConfig(List.of(
                     new AttributeModifier(
                             EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(),

@@ -1,9 +1,8 @@
-// 1.21.1	2026-08-01T14:42:01.8284331	Berserker Class Mod/Spell Generator
-993b4c1977597261ec36ff2c498eb9b3f866db4f data\berserker_rpg\spell\bloody_strike.json
-1ee7207747e9331a5135a186f6c659a15f7a9d67 data\berserker_rpg\spell\rumbling_swing.json
-5e8f3bc4502da97a53b01a4010e94265469f5a29 data\berserker_rpg\spell\outrage.json
-6d6d8b72133398490d74ed42a9e45a251c8f29fd data\berserker_rpg\spell\blood_reckoning.json
-8a4bcedbd1784a458a51c88a4bbcf2ed62922073 data\berserker_rpg\spell\northerners_guillotine.json
-c5eb1fd4fb2e98a009946f96df76e8867637e6ed data\berserker_rpg\spell\apprehend.json
+// 1.21.1	2026-08-07T23:40:32.401008	Berserker Class Mod/Spell Generator
 ed1d186b0357d38c1a951bb0385d00fe9cf1d212 data\berserker_rpg\spell\improved_bloody_strike.json
+c6f3b51c36278f7aa31baad0a6da052024cddd72 data\berserker_rpg\spell\apprehend.json
+238485878acbb38908e770e75c29cf62e082dc0b data\berserker_rpg\spell\blood_reckoning.json
+ca38f87247d2afc358d9d55c957f78e9c3df5623 data\berserker_rpg\spell\outrage.json
 c5fe85c5f664f9dc6729ba1603e6084d3feb1236 data\berserker_rpg\spell\wild_rage.json
+5f00a0f8b8714b8b6b0ff38d1e39bc641b8ccdfb data\berserker_rpg\spell\northerners_guillotine.json
+993b4c1977597261ec36ff2c498eb9b3f866db4f data\berserker_rpg\spell\bloody_strike.json

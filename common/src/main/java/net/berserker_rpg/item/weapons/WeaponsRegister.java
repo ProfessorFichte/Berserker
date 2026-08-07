@@ -3,17 +3,21 @@ package net.berserker_rpg.item.weapons;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
 import net.berserker_rpg.spell.BerserkerSpells;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.custom.MrpgLibSpells;
+import net.more_rpg_classes.item.MRPGCItemGroups;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.weapon.SpellSwordItem;
@@ -24,6 +28,8 @@ import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -32,6 +38,14 @@ import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
 public class WeaponsRegister {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
+
+    private static final Map<Weapon.Entry, RegistryKey<ItemGroup>> groupOverrides = new IdentityHashMap<>();
+
+    private static Weapon.Entry groupKey(Weapon.Entry entry, RegistryKey<ItemGroup> key) {
+        groupOverrides.put(entry, key);
+        return entry;
+    }
+
     private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType weaponType) {
         var entry = new Weapon.Entry(MOD_ID, name, material, factory, defaults, weaponType);
         entry.spellContainer(SpellContainers.forMagicWeapon());
@@ -176,28 +190,37 @@ public class WeaponsRegister {
             */
         }
         if (FabricLoader.getInstance().isModLoaded(ARSENAL) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
-            berserker_axes( "unique_berserker_axe_1",
+            var uniqueBerserkerAxe1 = groupKey(berserker_axes( "unique_berserker_axe_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .translatedName("Black Cleaver")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .withAdditionalSpell(MrpgLibSpells.carve_melee.id().toString())
-                    .loot(Equipment.LootProperties.of(5))
-                    .rarity = Rarity.RARE;
-            berserker_axes( "unique_berserker_axe_2",
+                    .loot(Equipment.LootProperties.of(5)), MRPGCItemGroups.ARSENAL_KEY);
+            uniqueBerserkerAxe1.rarity = Rarity.RARE;
+            var uniqueBerserkerAxe2 = groupKey(berserker_axes( "unique_berserker_axe_2",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .translatedName("Torans's Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .withAdditionalSpell(MrpgLibSpells.lightning_strike_melee.id().toString())
-                    .loot(Equipment.LootProperties.of(5))
-                    .rarity = Rarity.RARE;
-            sword( "unique_sword_1",
+                    .loot(Equipment.LootProperties.of(5)), MRPGCItemGroups.ARSENAL_KEY);
+            uniqueBerserkerAxe2.rarity = Rarity.RARE;
+            var uniqueSword1 = groupKey(sword( "unique_sword_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),8.0F)
                     .translatedName("Skofnung")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.05F))
                     .withAdditionalSpell(MrpgLibSpells.carve_melee.id().toString())
-                    .loot(Equipment.LootProperties.of(5))
-                    .rarity = Rarity.RARE;
+                    .loot(Equipment.LootProperties.of(5)), MRPGCItemGroups.ARSENAL_KEY);
+            uniqueSword1.rarity = Rarity.RARE;
         }
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
+        for (var override : groupOverrides.entrySet()) {
+            var entry = override.getKey();
+            var key = override.getValue();
+            ItemGroupEvents.modifyEntriesEvent(BerserkerGroup.BERSERKER_KEY).register(content -> {
+                content.getDisplayStacks().removeIf(stack -> stack.isOf(entry.item()));
+                content.getSearchTabStacks().removeIf(stack -> stack.isOf(entry.item()));
+            });
+            ItemGroupEvents.modifyEntriesEvent(key).register(content -> content.add(entry.item()));
+        }
     }
 }

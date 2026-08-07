@@ -1,13 +1,15 @@
-# 2.6.1 - 1.21.1
+# 3.0.0 - 1.21.1
 - Adapt to Spell Engine 1.9.10+ API Changes
-  **Balancing & Internal Changes:**
-- Prepared the Spell Expansion Spells technically, they'll be available once they're fully ready
-- Models, Textures, Sound Effects & Animations are still missing
+**Spell Expansion**
+- T2 Apprehend: Strikes a wide area in front of you, pulling hit enemies towards you and lowering their armor.
+- T4 Northerners Guillotine: Leaps to the target, striking a lethal blow. Deals damage, increasing by every level of a harmful effect on the target.
+- Always critically strikes targets at or below 25% of their max health. (highly configurable)
+**Balancing & Internal Changes:**
 - Added uk_ua localization- #9 - thx: Ch1sho
 - Fixed Outrage removing Absorption Hearts
-- Outrage is now a T3 Spell
+- Outrage is now a T3 Spell and slightly increases the duration of an ongoing Rage Effect 
 - Changed Blood Reckoning: When activated, gain a portion of absorption hearts depending on your missing health
-- When the effect runs heart a portion of your remaining absorption hearts heal you.
+- When the effect runs heart a portion of your remaining absorption hearts heal you. (everything configurable in Tweaks Config)
 
 # 2.6.0 - 1.21.1
 **Update to use Spell Engine 1.9.0**

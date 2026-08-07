@@ -229,13 +229,8 @@ public class BerserkerSpells {
                     .replace("{armor}", armor);
         };
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
-        spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("crimson_spore",
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.CENTER,
-                        20, 0.2F, 0.4F)
-        };
+        spell.release.animation = PlayerAnimation.of("berserker_rpg:apprehend_cast");
+        spell.release.sound = new Sound(BerserkerSounds.APPREHEND_CAST.id());
 
         spell.target.type = Spell.Target.Type.AREA;
         spell.target.area = new Spell.Target.Area();
@@ -243,11 +238,17 @@ public class BerserkerSpells {
         spell.target.area.angle_degrees = 120;
 
         var damage = SpellBuilder.Impacts.damage(0.5F, 0F);
-        damage.sound = new Sound(BerserkerSounds.BLOODY_STRIKE.id());
+        damage.sound = new Sound(BerserkerSounds.APPREHEND_IMPACT.id());
 
-        var pull = SpellBuilder.Impacts.pull(0.8F);
+        var pull = SpellBuilder.Impacts.pull(1.0F);
+        pull.particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        25, 0.3F, 0.3F)
+                        .preSpawnTravel(1)
+        };
 
-        var debuff = SpellBuilder.Impacts.effectAdd_ScaledAmplifier(effect.id.toString(), 6,0,0.15F);
+        var debuff = SpellBuilder.Impacts.effectAdd_ScaledAmplifier(effect.id.toString(), 6,1,0.1F);
         debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
 
         spell.impacts = List.of(damage, pull, debuff);
@@ -294,20 +295,20 @@ public class BerserkerSpells {
 
         spell.target.type = Spell.Target.Type.CASTER;
 
-        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 12,0);
+        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 8,0);
         buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
 
         spell.impacts = List.of(buff);
         spell.cost.exhaust = 0.3F;
 
-        SpellBuilder.Cost.cooldown(spell, 20);
+        SpellBuilder.Cost.cooldown(spell, 24);
         return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
     public static final Entry outrage = add(outrage());
     private static Entry outrage() {
         var id = Identifier.of(MOD_ID, "outrage");
         var title = "Outrage";
-        var description = "Clears harmful effects and increases attack damage by {bonus} for {effect_duration}.";
+        var description = "Clears harmful effects and increases attack damage by {bonus} for {effect_duration}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.";
         var spell = SpellBuilder.createSpellActive();
         var effect = BerserkerEffects.OUTRAGE;
         spell.school = MoreSpellSchools.RAGE_MELEE;
@@ -318,8 +319,10 @@ public class BerserkerSpells {
         SpellTooltip.DescriptionMutator mutator = (args) -> {
             var modifier = effect.config().firstModifier();
             var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
+            var rageBonusDuration = String.format("%.1fs", tweaksConfig.value.outrage_rage_bonus_duration);
             return args.description()
-                    .replace("{bonus}", bonus);
+                    .replace("{bonus}", bonus)
+                    .replace("{rage_bonus_duration}", rageBonusDuration);
         };
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
@@ -353,7 +356,7 @@ public class BerserkerSpells {
 
         spell.impacts = List.of(buff, cleanse);
 
-        SpellBuilder.Cost.cooldown(spell, 35);
+        SpellBuilder.Cost.cooldown(spell, 30);
         spell.cost.exhaust = 0.3F;
         return new Entry(id, spell, title, description, mutator,Book.BERSERKER);
     }
@@ -362,7 +365,8 @@ public class BerserkerSpells {
     private static Entry northerners_guillotine() {
         var id = Identifier.of(MOD_ID, "northerners_guillotine");
         var title = "Northerners Guillotine";
-        var description = "Leaps to the target, striking a lethal blow. Deals {base_damage} bonus damage, increasing by {damage_per_amplifier} for every level of a harmful effect on the target.";
+        var description = "Leaps to the target, striking a lethal blow. Deals {base_damage} bonus damage, increasing by {damage_per_amplifier} for every level of a harmful effect on the target. " +
+                "Always critically strikes targets at or below {execute_threshold} of their max health.";
         var spell = SpellBuilder.createSpellActive();
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
@@ -372,9 +376,11 @@ public class BerserkerSpells {
         SpellTooltip.DescriptionMutator mutator = (args) -> {
             var baseDamage = SpellTooltip.percent(NortherhersGuillotineImpact.BASE_DAMAGE_MULTIPLIER - 1F);
             var perAmplifier = String.format("%.1f%%", tweaksConfig.value.northerners_guillotine_damage_per_amplifier * 100);
+            var executeThreshold = SpellTooltip.percent(tweaksConfig.value.northerners_guillotine_execute_health_threshold);
             return args.description()
                     .replace("{base_damage}", baseDamage)
-                    .replace("{damage_per_amplifier}", perAmplifier);
+                    .replace("{damage_per_amplifier}", perAmplifier)
+                    .replace("{execute_threshold}", executeThreshold);
         };
 
         spell.target.type = Spell.Target.Type.AIM;
@@ -382,8 +388,8 @@ public class BerserkerSpells {
         spell.target.aim.sticky = false;
         spell.target.aim.required = true;
 
-        spell.release.animation = PlayerAnimation.of("berserker_rpg:decapitate_release");
-        spell.release.sound = new Sound(BerserkerSounds.DECAPITATE_RELEASE.id());
+        spell.release.animation = PlayerAnimation.of("berserker_rpg:northerners_guillotine");
+        spell.release.sound = new Sound(BerserkerSounds.NORTHERNERS_GUILLOTINE_CAST.id());
 
         var custom = new Spell.Impact();
         custom.action = new Spell.Impact.Action();
@@ -391,11 +397,27 @@ public class BerserkerSpells {
         custom.action.type = Spell.Impact.Action.Type.CUSTOM;
         custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
         custom.action.custom.handler = "berserker_rpg:northerners_guillotine";
-        custom.sound = new Sound(BerserkerSounds.DECAPITATE_IMPACT.id());
+        custom.sound = new Sound(BerserkerSounds.NORTHERNERS_GUILLOTINE_IMPACT.id());
+        custom.particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        20, 0.3F, 0.3F)
+                        .preSpawnTravel(1).color(Color.RAGE.toRGBA()),
+        new ParticleBatch(SpellEngineParticles.smoke_large.id().toString(),
+                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                20, 0.45F, 0.45F)
+                .preSpawnTravel(3).color(Color.RAGE.toRGBA()),
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        20, 0.6F, 0.6F)
+                        .preSpawnTravel(5).color(Color.RAGE.toRGBA())
+        };
+
+
 
         spell.impacts = List.of(custom);
 
-        SpellBuilder.Cost.cooldown(spell, 30);
+        SpellBuilder.Cost.cooldown(spell, 35);
         spell.cost.exhaust = 1.0F;
         spell.cost.durability = 1;
         return new Entry(id, spell, title, description, mutator, Book.BERSERKER);

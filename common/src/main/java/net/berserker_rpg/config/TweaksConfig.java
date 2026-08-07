@@ -6,4 +6,6 @@ public class TweaksConfig {
     public float blood_reckoning_missing_health_to_absorption = 0.6F;
     public float blood_reckoning_absorption_to_heal_on_expire = 0.4F;
     public float northerners_guillotine_damage_per_amplifier = 0.025F;
+    public float northerners_guillotine_execute_health_threshold = 0.25F;
+    public float outrage_rage_bonus_duration = 6.0F;
 }
