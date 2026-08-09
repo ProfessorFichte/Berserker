@@ -153,7 +153,7 @@ public class BerserkerSmithingRecipeProvider extends SmithingRecipeGenerator {
         if (Armors.warlordArmorSet != null) {
             // From Northling to Warlord
             createArmorSetUpgrade(
-                    "smithing_warlord",
+                    "smithing_northling",
                     Armors.northlingArmorSet.armorSet(),
                     Identifier.of("armory_rpgs", "epic_armor_upgrade"),
                     Identifier.of("more_rpg_classes", "ravager_upgrade_crystal"),
@@ -163,7 +163,7 @@ public class BerserkerSmithingRecipeProvider extends SmithingRecipeGenerator {
 
             // From Netherite Northling to Warlord
             createArmorSetUpgrade(
-                    "smithing_warlord",
+                    "smithing_netherite_northling",
                     Armors.netheriteNorthlingArmorSet.armorSet(),
                     Identifier.of("armory_rpgs", "epic_armor_upgrade"),
                     Identifier.of("more_rpg_classes", "ravager_upgrade_crystal"),

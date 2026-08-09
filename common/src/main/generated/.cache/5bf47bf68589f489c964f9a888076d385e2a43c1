@@ -1,7 +1,7 @@
-// 1.21.1	2026-08-07T23:40:32.401008	Berserker Class Mod/Spell Generator
+// 1.21.1	2026-08-08T00:05:39.9985274	Berserker Class Mod/Spell Generator
 ed1d186b0357d38c1a951bb0385d00fe9cf1d212 data\berserker_rpg\spell\improved_bloody_strike.json
 c6f3b51c36278f7aa31baad0a6da052024cddd72 data\berserker_rpg\spell\apprehend.json
-238485878acbb38908e770e75c29cf62e082dc0b data\berserker_rpg\spell\blood_reckoning.json
+343b7a27e9e176dc5b27f667d0b4dbb8b5881a4a data\berserker_rpg\spell\blood_reckoning.json
 ca38f87247d2afc358d9d55c957f78e9c3df5623 data\berserker_rpg\spell\outrage.json
 c5fe85c5f664f9dc6729ba1603e6084d3feb1236 data\berserker_rpg\spell\wild_rage.json
 5f00a0f8b8714b8b6b0ff38d1e39bc641b8ccdfb data\berserker_rpg\spell\northerners_guillotine.json
