@@ -16,7 +16,6 @@ import net.spell_engine.api.spell.CustomSpellHandler;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellHelper;
-import net.spell_engine.utils.SoundHelper;
 import net.spell_engine.utils.TargetHelper;
 
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.function.Predicate;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 import static net.berserker_rpg.BerserkerClassMod.effectsConfig;
-import static net.more_rpg_classes.util.CustomMethods.clearNegativeEffects;
+import static net.more_rpg_classes.util.CustomMethods.removeEffects;
 import static net.spell_engine.internals.SpellRegistry.getSpell;
 
 public class CustomSpells {
@@ -103,7 +102,7 @@ public class CustomSpells {
                         final int dura_rage = data1.caster().getStatusEffect(Effects.RAGE).getDuration();
                         int rage_amplifier_max = effectsConfig.value.rage_max_amplifier_stack - 1;
                         if(amp_rage == rage_amplifier_max){
-                            clearNegativeEffects(data1.caster(),true);
+                            removeEffects(data1.caster(),true,false);
                             data1.caster().addStatusEffect(new StatusEffectInstance(Effects.RAGE, dura_rage + 10,rage_amplifier_max,false,false,true));
                         }
                     }

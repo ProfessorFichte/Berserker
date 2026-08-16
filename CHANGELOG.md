@@ -1,3 +1,6 @@
+1.2.6 - 1.20.1
+- Attempt to Fix a crash with MRPG Lib
+
 1.2.5 - 1.20.1
 - Changed Spell Book Texture to be more in line with the RPG-Series Books (by SirGhaith, Thanks!)
 - Improve Armor Model Assets (by Slepykat, Thanks!)
