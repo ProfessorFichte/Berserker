@@ -10,7 +10,10 @@ import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_power.api.SpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.Spell;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.more_rpg_classes.client.particle.MoreParticles;
+import net.spell_engine.api.spell.fx.Fx;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.api.util.TriState;
@@ -110,24 +113,20 @@ public class BerserkerSpells {
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.WILD_RAGE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("minecraft:angry_villager",
-                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
-                        2, 0.01F, 0.1F)
-                        .preSpawnTravel(7),
-                new ParticleBatch("more_rpg_classes:rage_particle",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        4, 0.01F, 0.2F)
-                        .preSpawnTravel(7),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.STRIPE,
-                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        20, 0.2F, 0.25F)
-                        .extent(-0.2F)
-                        .color(Color.RAGE.toRGBA()),
-        };
+        spell.release.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of("minecraft:angry_villager")
+                        .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
+                                .count(2).speed(0.01F, 0.1F)
+                                .preTravel(7)),
+                ParticleGroupBuilder.of(MoreParticles.RAGE_PAR)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(4).speed(0.01F, 0.2F)
+                                .preTravel(7)),
+                ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, ParticleGroup.Motion.FLOAT, Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
+                                .verticalOrigin(0.1F)
+                                .count(20).speed(0.2F, 0.25F)
+                                .extent(-0.2F)));
 
         spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
         spell.deliver.stash_effect = new Spell.Delivery.StashEffect();
@@ -174,27 +173,22 @@ public class BerserkerSpells {
         var buff = SpellBuilder.Impacts.effectSet_ScaledAmplifier(
                 effect.id.toString(), 15,1,0.5F);
         buff.action.apply_to_caster = true;
-        buff.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.1F, 0.1F)
-                        .extent(0.2F)
-                        .color(Color.RAGE.toRGBA())
-        };
+        buff.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.magic(SpellEngineParticles.magic_spark, ParticleGroup.Motion.DECELERATE, Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(25).speed(0.1F, 0.1F)
+                                .extent(0.2F)));
 
         var debuff = SpellBuilder.Impacts.effectAdd_ScaledAmplifier(
                 debuffEffect.id.toString(), 5,1,0.2F);
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.05F, 0.3F),
-                new ParticleBatch("more_rpg_classes:blood_drop",
-                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.FEET,
-                        10, 0.2F, 0.4F),
-        };
+        debuff.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(10).speed(0.05F, 0.3F)),
+                ParticleGroupBuilder.of(MoreParticles.BLOOD_DROP)
+                        .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
+                                .verticalOrigin(0.1F)
+                                .count(10).speed(0.2F, 0.4F)));
 
         spell.target.type = Spell.Target.Type.AREA;
         spell.target.area = new Spell.Target.Area();
@@ -241,12 +235,12 @@ public class BerserkerSpells {
         damage.sound = new Sound(BerserkerSounds.APPREHEND_IMPACT.id());
 
         var pull = SpellBuilder.Impacts.pull(1.0F);
-        pull.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        25, 0.3F, 0.3F)
-                        .preSpawnTravel(1)
-        };
+        pull.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .verticalOrigin(0.1F)
+                                .count(25).speed(0.3F, 0.3F)
+                                .preTravel(1)));
 
         var debuff = SpellBuilder.Impacts.effectAdd_ScaledAmplifier(effect.id.toString(), 6,1,0.1F);
         debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
@@ -278,20 +272,20 @@ public class BerserkerSpells {
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("more_rpg_classes:rage_particle",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        4, 0.01F, 0.2F)
-                        .preSpawnTravel(7),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.4F)
-                        .color(Color.RAGE.toRGBA())
-                        .extent(3),
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        15, 0.1F, 0.5F)
-        };
+        spell.release.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of(MoreParticles.RAGE_PAR)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(4).speed(0.01F, 0.2F)
+                                .preTravel(7F)),
+                ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
+                        .color(Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(25).speed(0.2F, 0.4F)
+                                .extent(3F)),
+                ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
+                        .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
+                                .count(15).speed(0.1F, 0.5F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)));
 
         spell.target.type = Spell.Target.Type.CASTER;
 
@@ -327,26 +321,21 @@ public class BerserkerSpells {
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("crimson_spore",
-                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
-                        20, 0.01F, 0.1F),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.STRIPE,
-                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        30, 0.1F, 0.4F)
-                        .extent(-0.2F)
-                        .color(Color.RAGE.toRGBA()),
-        };
-        spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.area_swirl.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        1, 0.0F, 0.F)
-                        .scale(0.25F)
-                        .followEntity(true).color(Color.RAGE.toRGBA())
-        };
+        spell.release.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of("crimson_spore")
+                        .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
+                                .count(20).speed(0.01F, 0.1F)),
+                ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, ParticleGroup.Motion.FLOAT, Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
+                                .count(30).speed(0.1F, 0.4F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
+                                .extent(-0.2F)),
+                ParticleGroupBuilder.of(SpellEngineParticles.area_swirl)
+                        .color(Color.RAGE)
+                        .attached()
+                        .scaleWith(Fx.ScaleWith.RANGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(1).speed(0F, 0F)));
 
         spell.target.type = Spell.Target.Type.CASTER;
 
@@ -398,20 +387,25 @@ public class BerserkerSpells {
         custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
         custom.action.custom.handler = "berserker_rpg:northerners_guillotine";
         custom.sound = new Sound(BerserkerSounds.NORTHERNERS_GUILLOTINE_IMPACT.id());
-        custom.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        20, 0.3F, 0.3F)
-                        .preSpawnTravel(1).color(Color.RAGE.toRGBA()),
-        new ParticleBatch(SpellEngineParticles.smoke_large.id().toString(),
-                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                20, 0.45F, 0.45F)
-                .preSpawnTravel(3).color(Color.RAGE.toRGBA()),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        20, 0.6F, 0.6F)
-                        .preSpawnTravel(5).color(Color.RAGE.toRGBA())
-        };
+        custom.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
+                        .color(Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(20).speed(0.3F, 0.3F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
+                                .preTravel(1F)),
+                ParticleGroupBuilder.of(SpellEngineParticles.smoke_large)
+                        .color(Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(20).speed(0.45F, 0.45F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
+                                .preTravel(3F)),
+                ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
+                        .color(Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                                .count(20).speed(0.6F, 0.6F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
+                                .preTravel(5F)));
 
 
 

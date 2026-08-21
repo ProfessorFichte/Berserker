@@ -18,7 +18,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.berserker_rpg.config.TweaksConfig;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

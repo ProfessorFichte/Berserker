@@ -5,9 +5,9 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.entity.attribute.MRPGCEntityAttributes;
-import net.spell_engine.api.config.AttributeModifier;
-import net.spell_engine.api.config.ConfigFile;
-import net.spell_engine.api.config.EffectConfig;
+import net.spell_engine.rpg_series.config.AttributeModifier;
+import net.spell_engine.rpg_series.config.ConfigFile;
+import net.spell_engine.rpg_series.config.EffectConfig;
 import net.spell_engine.api.effect.*;
 
 import java.util.ArrayList;

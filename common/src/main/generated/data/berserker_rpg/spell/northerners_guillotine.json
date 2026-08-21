@@ -29,38 +29,55 @@
           "handler": "berserker_rpg:northerners_guillotine"
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "FEET",
-          "shape": "SPHERE",
-          "count": 20.0,
-          "min_speed": 0.3,
-          "max_speed": 0.3,
-          "pre_spawn_travel": 1.0,
-          "color_rgba": 3208659199
-        },
-        {
-          "particle_id": "spell_engine:smoke_large",
-          "origin": "FEET",
-          "shape": "SPHERE",
-          "count": 20.0,
-          "min_speed": 0.45,
-          "max_speed": 0.45,
-          "pre_spawn_travel": 3.0,
-          "color_rgba": 3208659199
-        },
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "FEET",
-          "shape": "SPHERE",
-          "count": 20.0,
-          "min_speed": 0.6,
-          "max_speed": 0.6,
-          "pre_spawn_travel": 5.0,
-          "color_rgba": 3208659199
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {
+              "color": 3208659199
+            },
+            "batch": {
+              "count": 20.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "min_speed": 0.3,
+              "max_speed": 0.3,
+              "pre_travel": 1.0
+            }
+          },
+          {
+            "id": "spell_engine:smoke_large",
+            "appearance": {
+              "color": 3208659199
+            },
+            "batch": {
+              "count": 20.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "min_speed": 0.45,
+              "max_speed": 0.45,
+              "pre_travel": 3.0
+            }
+          },
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {
+              "color": 3208659199
+            },
+            "batch": {
+              "count": 20.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "min_speed": 0.6,
+              "max_speed": 0.6,
+              "pre_travel": 5.0
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "berserker_rpg:northerners_guillotine_impact"
       }
