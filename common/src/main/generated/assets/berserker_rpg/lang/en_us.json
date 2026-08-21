@@ -67,7 +67,7 @@
   "spell.berserker_rpg.improved_bloody_strike.name": "Improved Bloody Strike",
   "spell.berserker_rpg.northerners_guillotine.description": "Leaps to the target, striking a lethal blow. Deals 20%% bonus damage, increasing by {damage_per_amplifier} for every level of a harmful effect on the target. Always critically strikes targets at or below {execute_threshold} of their max health.",
   "spell.berserker_rpg.northerners_guillotine.name": "Northerners Guillotine",
-  "spell.berserker_rpg.outrage.description": "Clears harmful effects and increases attack damage by {effect|berserker_rpg:outrage|0|minecraft:generic.attack_damage} for {effect_duration}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.",
+  "spell.berserker_rpg.outrage.description": "Clears harmful effects and increases attack damage by {effect|berserker_rpg:outrage|0|minecraft:generic.attack_damage} for {effect_duration_1}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.",
   "spell.berserker_rpg.outrage.name": "Outrage",
   "spell.berserker_rpg.wild_rage.description": "Enter a wild rage, increases rage by {effect|berserker_rpg:rage|0|more_rpg_classes:rage_modifier} and attack speed by {effect|berserker_rpg:rage|0|minecraft:generic.attack_speed}, stacking up to {effect_amplifier_cap} times.",
   "spell.berserker_rpg.wild_rage.name": "Wild Rage"

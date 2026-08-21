@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-21T16:40:14.701807	Berserker Class Mod/Model Definitions
+// 1.21.1	2026-08-21T16:44:54.603454	Berserker Class Mod/Model Definitions
 4dbb26b6cd2ae1d3e4899632b34de3420f2bb4f3 assets/berserker_rpg/models/item/netherite_northling_feet.json
 7c66e63bec826ef02003de67771e03b4adf0897a assets/berserker_rpg/models/item/wither_berserker_axe.json
 6518b897d6ea7a3152761c1963001ab3aa6dbf2f assets/berserker_rpg/models/item/unique_sword_1.json
@@ -23,8 +23,8 @@ b550536ffed7f4a618fa22bbb4b16dfd679ee034 assets/berserker_rpg/models/item/nether
 2cce8595cee5a7906570864cdb58e56a7a0ffa6c assets/berserker_rpg/models/item/elder_guardian_berserker_axe.json
 1da94fadae182a579e3992f818f50e1474c74854 assets/berserker_rpg/models/item/wildling_feet.json
 3169a8bed002a351f42aace731be8d1c08f01e1f assets/berserker_rpg/models/item/iron_berserker_axe.json
-f316747ba457548ed4f23596a45ae3d977c5278c assets/berserker_rpg/models/item/flint_berserker_axe.json
 caaaece8c6c732b9bc265d38c3713ee166398302 assets/berserker_rpg/models/item/northling_head.json
+f316747ba457548ed4f23596a45ae3d977c5278c assets/berserker_rpg/models/item/flint_berserker_axe.json
 fb574579fe6c9ddcd77d5d17d42487864b565bcb assets/berserker_rpg/models/item/netherite_northling_chest.json
 8ec19fbb3b6e98362293a81c97c032ef4c6ad602 assets/berserker_rpg/models/item/aeternium_berserker_axe.json
 29436383520fdaae74abdf0fdb7aeb74ef595547 assets/berserker_rpg/models/item/ender_dragon_berserker_axe.json

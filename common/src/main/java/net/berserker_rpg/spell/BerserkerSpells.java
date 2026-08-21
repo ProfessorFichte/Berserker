@@ -291,7 +291,7 @@ public class BerserkerSpells {
         // explicitly rather than relying on the unordered "first modifier" fallback.
         var description = "Clears harmful effects and increases attack damage by "
                 + TooltipTokens.effect(effect.id, 0, Identifier.of(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString()))
-                + " for {effect_duration}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.";
+                + " for {effect_duration_1}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.";
         var spell = SpellBuilder.createSpellActive();
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.range = 0;
