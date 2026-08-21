@@ -12,7 +12,7 @@
     "item": "more_rpg_classes:ravager_upgrade_crystal"
   },
   "base": {
-    "item": "berserker_rpg:netherite_northling_legs"
+    "item": "berserker_rpg:northling_legs"
   },
   "neoforge:conditions": [
     {
