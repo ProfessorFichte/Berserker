@@ -30,24 +30,33 @@
           "apply_mode": "ADD"
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:dripping_blood",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.05,
-          "max_speed": 0.3
-        },
-        {
-          "particle_id": "more_rpg_classes:blood_drop",
-          "origin": "FEET",
-          "shape": "PIPE",
-          "count": 10.0,
-          "min_speed": 0.2,
-          "max_speed": 0.4
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:dripping_blood",
+            "appearance": {},
+            "batch": {
+              "count": 10.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.05,
+              "max_speed": 0.3
+            }
+          },
+          {
+            "id": "more_rpg_classes:blood_drop",
+            "appearance": {},
+            "batch": {
+              "count": 10.0,
+              "shape": "PIPE",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "min_speed": 0.2,
+              "max_speed": 0.4
+            }
+          }
+        ]
+      }
     },
     {
       "action": {
@@ -71,18 +80,25 @@
           "amplifier_power_multiplier": 0.5
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:magic_spark_decelerate",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 25.0,
-          "min_speed": 0.1,
-          "max_speed": 0.1,
-          "extent": 0.2,
-          "color_rgba": 3208659199
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:magic_spark",
+            "appearance": {
+              "color": 3208659199,
+              "motion": "DECELERATE"
+            },
+            "batch": {
+              "count": 25.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.1,
+              "extent": 0.2
+            }
+          }
+        ]
+      }
     }
   ],
   "cost": {

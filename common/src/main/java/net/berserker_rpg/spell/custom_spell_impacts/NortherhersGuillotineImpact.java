@@ -10,7 +10,7 @@ import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.event.SpellHandlers;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.compat.CriticalStrikeCompat;
-import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.internals.SpellExecution;
 import net.spell_engine.internals.SpellModifiers;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellPower;
@@ -26,7 +26,7 @@ public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
             SpellPower.Result powerResult,
             LivingEntity caster,
             Entity target,
-            SpellHelper.ImpactContext context
+            SpellExecution.ImpactContext context
     ) {
         if (target instanceof LivingEntity livingTarget && caster instanceof PlayerEntity playerCaster) {
             int harmfulAmplifierSum = livingTarget.getStatusEffects().stream()
