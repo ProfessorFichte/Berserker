@@ -45,17 +45,23 @@
           }
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "FEET",
-          "shape": "SPHERE",
-          "count": 25.0,
-          "min_speed": 0.3,
-          "max_speed": 0.3,
-          "pre_spawn_travel": 1.0
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {},
+            "batch": {
+              "count": 25.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "min_speed": 0.3,
+              "max_speed": 0.3,
+              "pre_travel": 1.0
+            }
+          }
+        ]
+      }
     },
     {
       "action": {
