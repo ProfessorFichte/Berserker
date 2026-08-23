@@ -28,6 +28,13 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.berserker_rpg]]
+modId = "forgified_fabric_api"
+type = "required"
+versionRange = "[${forgified_fabric_api_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
 modId = "azurelibarmor"
 type = "required"
 versionRange = "[${azure_lib_version},)"

@@ -93,9 +93,6 @@ public class BerserkerSpells {
         var id = Identifier.of(MOD_ID, "wild_rage");
         var title = "Wild Rage";
         var effect = BerserkerEffects.RAGE;
-        // `Rage` carries two modifiers with *different* values, so each token names its attribute
-        // explicitly — the effect's modifier map is unordered, the implicit "first modifier"
-        // fallback would be unreliable here. Amplifier 0 = the per-stack value.
         var description = "Enter a wild rage, increases rage by "
                 + TooltipTokens.effect(effect.id, 0, Identifier.of(MRPGCEntityAttributes.RAGE_MODIFIER.getIdAsString()))
                 + " and attack speed by "
@@ -159,7 +156,6 @@ public class BerserkerSpells {
         spell.tier = 3;
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.group = FANATIC;
-        // `{self_damage}` is config-derived — see `registerTooltipTokens()`.
 
         spell.release.animation = PlayerAnimation.of("berserker_rpg:berserker_axe_both");
 
@@ -252,7 +248,6 @@ public class BerserkerSpells {
         spell.tier = 4;
         spell.group = FANATIC;
         spell.school = MoreSpellSchools.RAGE_MELEE;
-        // `{absorption_ratio}` / `{heal_ratio}` are config-derived — see `registerTooltipTokens()`.
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
@@ -287,8 +282,6 @@ public class BerserkerSpells {
         var id = Identifier.of(MOD_ID, "outrage");
         var title = "Outrage";
         var effect = BerserkerEffects.OUTRAGE;
-        // `Outrage` carries two modifiers (attack damage + attack speed), so the attribute is named
-        // explicitly rather than relying on the unordered "first modifier" fallback.
         var description = "Clears harmful effects and increases attack damage by "
                 + TooltipTokens.effect(effect.id, 0, Identifier.of(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString()))
                 + " for {effect_duration_1}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.";
@@ -298,7 +291,6 @@ public class BerserkerSpells {
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.tier = 3;
         spell.group = BRUTE;
-        // `{rage_bonus_duration}` is config-derived — see `registerTooltipTokens()`.
 
         spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
@@ -348,7 +340,6 @@ public class BerserkerSpells {
         spell.range = 0.5F;
         spell.tier = 4;
         spell.group = BRUTE;
-        // `{damage_per_amplifier}` / `{execute_threshold}` are config-derived — see `registerTooltipTokens()`.
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -395,13 +386,6 @@ public class BerserkerSpells {
         return new Entry(id, spell, title, description, Book.BERSERKER);
     }
 
-    /// Registers the description values that no declarative `{token}` can express: numbers read from
-    /// the user-editable tweaks config. They can't be baked into the lang value (that would freeze the
-    /// datagen-time default) and they aren't status-effect modifiers, so they resolve at render time.
-    ///
-    /// `TooltipTokens.Custom` references only shared types, so this is safe to call from either side.
-    /// The lambdas read `tweaksConfig` lazily, so registration may run before the config is loaded.
-    ///
     /// Percentages injected here land *after* translation, so their `%` must NOT be doubled — unlike a
     /// percentage baked into a description literal, which uses `TooltipTokens.bakedPercent`.
     public static void registerTooltipTokens() {

@@ -18,9 +18,6 @@ import static net.berserker_rpg.compat.CompatLoadingCheck.armoryLoadCheck;
 
 public class BerserkerClient {
     public static void  init(){
-        // Description values that aren't expressible as declarative `{token}`s (config-derived numbers).
-        // `TooltipTokens` is server-safe; this is only called here because `BerserkerSpells` has no
-        // other runtime touch point (it is otherwise datagen-only), so its statics need forcing.
         BerserkerSpells.registerTooltipTokens();
 
         registerArmorRenderer(Armors.wildlingArmorSet.armorSet(), CustomArmorRenderer::wildling_armor);
