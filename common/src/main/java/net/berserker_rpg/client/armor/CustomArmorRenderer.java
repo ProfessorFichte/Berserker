@@ -1,31 +1,30 @@
 package net.berserker_rpg.client.armor;
 
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererConfig;
 import net.minecraft.util.Identifier;
+import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
-public class CustomArmorRenderer extends AzArmorRenderer {
+public final class CustomArmorRenderer {
 
-    public static CustomArmorRenderer wildling_armor() {
-        return new CustomArmorRenderer("wildling_armor", "wildling");
+    private CustomArmorRenderer() { }
+
+    public static GeoArmorRenderer wildling_armor() {
+        return make("wildling_armor", "wildling");
     }
-    public static CustomArmorRenderer northling_armor() {
-        return new CustomArmorRenderer("northling_armor", "northling");
+    public static GeoArmorRenderer northling_armor() {
+        return make("northling_armor", "northling");
     }
-    public static CustomArmorRenderer netherite_northling_armor() {
-        return new CustomArmorRenderer("northling_armor", "netherite_northling");
+    public static GeoArmorRenderer netherite_northling_armor() {
+        return make("northling_armor", "netherite_northling");
     }
-    public static CustomArmorRenderer warlord_armor() {
-        return new CustomArmorRenderer("warlord_armor", "warlord");
+    public static GeoArmorRenderer warlord_armor() {
+        return make("warlord_armor", "warlord");
     }
 
-
-    public CustomArmorRenderer(String modelName, String textureName) {
-        super(AzArmorRendererConfig.builder(
+    private static GeoArmorRenderer make(String modelName, String textureName) {
+        return GeoArmorRenderer.of(
                 Identifier.of(MOD_ID, "geo/" + modelName + ".geo.json"),
-                Identifier.of(MOD_ID, "textures/armor/" + textureName + ".png")
-        ).build());
+                Identifier.of(MOD_ID, "textures/armor/" + textureName + ".png"));
     }
 }

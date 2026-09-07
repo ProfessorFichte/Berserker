@@ -3,7 +3,6 @@ package net.berserker_rpg.item;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import java.util.HashMap;
@@ -26,9 +25,6 @@ public class BerserkerItems {
 
 
     public static void registerModItems(){
-        ItemGroupEvents.modifyEntriesEvent(BerserkerGroup.BERSERKER_KEY).register((content) -> {
-        });
-
         BerserkerClassMod.LOGGER.info("Registering Mod Items for " + BerserkerClassMod.MOD_ID);
     }
 }

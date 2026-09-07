@@ -1,10 +1,10 @@
 package net.berserker_rpg.compat;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 
 public class CompatLoadingCheck {
     public static boolean armoryLoadCheck(){
-        return FabricLoader.getInstance().isModLoaded("armory_rpgs") | FabricLoader.getInstance().isDevelopmentEnvironment();
+        return Platform.util().isModLoaded("armory_rpgs") | Platform.util().isDevelopmentEnvironment();
     }
 }
 

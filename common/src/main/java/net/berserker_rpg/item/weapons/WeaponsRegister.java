@@ -3,8 +3,7 @@ package net.berserker_rpg.item.weapons;
 import net.berserker_rpg.BerserkerClassMod;
 import net.berserker_rpg.item.BerserkerGroup;
 import net.berserker_rpg.spell.BerserkerSpells;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
@@ -119,31 +118,31 @@ public class WeaponsRegister {
     private static final float lneAxeAttackDamage = 15.0F;
     //Registration
     public static void register(Map<String, WeaponConfig> configs) {
-        if(FabricLoader.getInstance().isModLoaded(BETTER_NETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
-            var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
+        if(Platform.util().isModLoaded(BETTER_NETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
+            var repair = ingredient("betternether:nether_ruby", Platform.util().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             berserker_axes("ruby_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
                     .translatedName("Ruby Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of(4));
         }
-        if(FabricLoader.getInstance().isModLoaded(BETTER_END) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
-            var repair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
+        if(Platform.util().isModLoaded(BETTER_END) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
+            var repair = ingredient("betterend:aeternium_ingot", Platform.util().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             berserker_axes("aeternium_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
                     .translatedName("Aeternium Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of(4));
         }
-        if (FabricLoader.getInstance().isModLoaded(AETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
-            var repair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
+        if (Platform.util().isModLoaded(AETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
+            var repair = ingredient("aether:ambrosium_shard", Platform.util().isModLoaded(AETHER), Items.NETHERITE_INGOT);
             berserker_axes("aether_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair),15.0F)
                     .translatedName("Holy Raid Axe")
                     .attribute(AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),0.10F))
                     .loot(Equipment.LootProperties.of("aether"));
         }
-        if(FabricLoader.getInstance().isModLoaded(LNE)|| BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
+        if(Platform.util().isModLoaded(LNE)|| BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
             berserker_axes( "ender_dragon_berserker_axe",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)),lneAxeAttackDamage)
                     .translatedName("Dragons Conquest")
@@ -189,7 +188,7 @@ public class WeaponsRegister {
             });
             */
         }
-        if (FabricLoader.getInstance().isModLoaded(ARSENAL) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
+        if (Platform.util().isModLoaded(ARSENAL) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods) {
             var uniqueBerserkerAxe1 = groupKey(berserker_axes( "unique_berserker_axe_1",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.IRON_BLOCK)),lneAxeAttackDamage)
                     .translatedName("Black Cleaver")
@@ -213,14 +212,19 @@ public class WeaponsRegister {
             uniqueSword1.rarity = Rarity.RARE;
         }
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
+    }
+
+    /// Same deal as {@link net.berserker_rpg.item.armor.Armors#forEachGroupOverride}: a weapon pushed
+    /// into a different creative tab still lands in {@link BerserkerGroup#BERSERKER_KEY} first via
+    /// {@link Weapon#register}, so each platform has to move it over using its own item-group API.
+    public static void forEachGroupOverride(GroupOverrideConsumer consumer) {
         for (var override : groupOverrides.entrySet()) {
-            var entry = override.getKey();
-            var key = override.getValue();
-            ItemGroupEvents.modifyEntriesEvent(BerserkerGroup.BERSERKER_KEY).register(content -> {
-                content.getDisplayStacks().removeIf(stack -> stack.isOf(entry.item()));
-                content.getSearchTabStacks().removeIf(stack -> stack.isOf(entry.item()));
-            });
-            ItemGroupEvents.modifyEntriesEvent(key).register(content -> content.add(entry.item()));
+            consumer.accept(override.getKey().item(), override.getValue());
         }
+    }
+
+    @FunctionalInterface
+    public interface GroupOverrideConsumer {
+        void accept(Item item, RegistryKey<ItemGroup> targetGroup);
     }
 }
