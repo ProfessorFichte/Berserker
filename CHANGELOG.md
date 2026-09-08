@@ -1,3 +1,8 @@
+# 3.1.1.001 - 1.20.1
+- Backport to Minecraft 1.20.1, targeting Fabric + Forge 47 (no Forgified Fabric API)
+- Blood Sacrifice / Blood Reckoning lose their max-absorption modifiers (no such attribute before 1.20.5); absorption is uncapped instead and the granted amount is unchanged
+- Blood Sacrifice now runs its full duration instead of ending when absorption is depleted
+
 # 3.1.1 - 1.21.1
 - Drop Forgified Fabric API (FFAPI) as a required dependency
 - Replace AzurelibArmor with ArmorModelAPI

@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class BerserkerClassMod {
 	public static final String MOD_ID = "berserker_rpg";
 	public static final Logger LOGGER = LoggerFactory.getLogger("berserker_rpg");
-	public static final Identifier ARMORY_COMPAT_PACK_ID = Identifier.of(MOD_ID, "berserker_armory_compat");
+	public static final Identifier ARMORY_COMPAT_PACK_ID = new Identifier(MOD_ID, "berserker_armory_compat");
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
 			("equipment_v1", Default.itemConfig)
@@ -66,6 +66,6 @@ public class BerserkerClassMod {
 		effectsConfig.save();
 	}
 	public static Identifier id(String path) {
-		return Identifier.of(MOD_ID, path);
+		return new Identifier(MOD_ID, path);
 	}
 }

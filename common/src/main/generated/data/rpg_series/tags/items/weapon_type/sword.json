@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "berserker_rpg:unique_sword_1",
+      "required": false
+    }
+  ]
+}

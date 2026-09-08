@@ -10,7 +10,7 @@ public class CustomSpellImpacts {
 
     public static void registerCustomImpacts(){
         SpellHandlers.registerCustomImpact(
-                Identifier.of(MOD_ID, "northerners_guillotine"),
+                new Identifier(MOD_ID, "northerners_guillotine"),
                 new NortherhersGuillotineImpact()
         );
     }

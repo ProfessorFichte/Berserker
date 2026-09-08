@@ -1,0 +1,33 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "betterend"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "betterend"
+    }
+  ],
+  "key": {
+    "B": {
+      "item": "betterend:aeternium_ingot"
+    },
+    "R": {
+      "item": "minecraft:bone"
+    }
+  },
+  "pattern": [
+    "BB ",
+    "BR ",
+    "BR "
+  ],
+  "result": {
+    "item": "berserker_rpg:aeternium_berserker_axe"
+  }
+}

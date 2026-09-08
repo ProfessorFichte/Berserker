@@ -28,7 +28,7 @@ public class BerserkerSounds {
         }
 
         public Entry(String name) {
-            this(Identifier.of(MOD_ID, name));
+            this(new Identifier(MOD_ID, name));
         }
 
         public Entry(Identifier id) {

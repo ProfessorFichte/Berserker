@@ -1,5 +1,5 @@
-// 1.21.1	2026-08-23T00:57:59.7591783	Berserker Class Mod/berserker Advancements
-384253572702e4e5cf6d82e56dae68b2d7612db2 data\berserker_rpg\advancement\spell_master_berserker.json
-5fe50f042fc89f5fac35dae1f3e50ae9856fd6d2 data\berserker_rpg\advancement\spell_cast_berserker_book.json
-7fe55f11825ea45b6bc7d2087dd34ce6e01f285d data\berserker_rpg\advancement\spell_novice_berserker.json
-4a5eda0ac66711fe775f61042bcd733d4e66456c data\berserker_rpg\advancement\path_choose_berserker.json
+// 1.20.1	2026-09-08T11:14:54.756446	Berserker Class Mod/berserker Advancements
+ee76c4bd26a52c54b7127549e502f6827990b285 data/berserker_rpg/advancements/path_choose_berserker.json
+860d116ed412caa46c27cd45fcb4d824f63539f7 data/berserker_rpg/advancements/spell_cast_berserker_book.json
+08b75a2cf12c17e9bd77a6f05711a7e3f7dd08f8 data/berserker_rpg/advancements/spell_master_berserker.json
+66db6d5aecd02e53d0eb43d61b97e8bbf79db82f data/berserker_rpg/advancements/spell_novice_berserker.json

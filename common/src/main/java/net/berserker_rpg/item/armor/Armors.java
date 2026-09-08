@@ -1,16 +1,12 @@
 package net.berserker_rpg.item.armor;
 
 import net.berserker_rpg.item.BerserkerGroup;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -21,7 +17,7 @@ import net.spell_engine.rpg_series.config.ArmorSetConfig;
 import net.spell_engine.rpg_series.config.AttributeModifier;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.item.Armor;
-import net.spell_engine.api.spell.SpellDataComponents;
+import net.spell_engine.api.item.SpellItemData;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -41,19 +37,20 @@ public class Armors {
             Items.IRON_INGOT, Items.CHAIN, MRPGCItems.POLAR_BEAR_FUR
     );
 
-    public static Identifier warlord_passive = Identifier.of(MOD_ID, "warlord");
+    public static Identifier warlord_passive = new Identifier(MOD_ID, "warlord");
 
+    /// 1.20.1 has no data components: the equipment set is an item-level default served by SpellEngine's
+    /// `SpellItemData` NBT facade (the `Item.Settings#component` stand-in), and rarity is a plain settings call.
     private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
         return Armor.ItemSettingsTweaker.standard(itemSettings -> {
-            itemSettings
-                    .component(SpellDataComponents.EQUIPMENT_SET, equipmentSetId)
-                    .component(DataComponentTypes.RARITY, Rarity.RARE);
+            itemSettings.rarity(Rarity.RARE);
+            SpellItemData.defaults(itemSettings).equipmentSet(equipmentSetId);
         });
     }
 
     private static final String CRIT_MOD_ID = "critical_strike";
-    private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
-    private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");
+    private static final Identifier CRIT_CHANCE_ID = new Identifier(CRIT_MOD_ID, "chance");
+    private static final Identifier CRIT_DAMAGE_ID = new Identifier(CRIT_MOD_ID, "damage");
 
     public static final float berserker_atkspeed_T1 = 0.02F;
     public static final float berserker_rage_T1 = 0.025F;
@@ -71,46 +68,47 @@ public class Armors {
     private static final float warlord_crit_damage = 0.08F;
 
 
-    public static RegistryEntry<ArmorMaterial> material(String name,
-                                                        int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
-                                                        int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {
-        var material = new ArmorMaterial(
+    /// 1.20.1 `ArmorMaterial` is a plain interface: there is no armor-material registry and no
+    /// `ArmorMaterial.Layer` list -- the material's own id doubles as the (single) layer id.
+    public static ArmorMaterial material(String name,
+                                         int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
+                                         int enchantability, SoundEvent equipSound, Supplier<Ingredient> repairIngredient) {
+        return Armor.material(
+                new Identifier(MOD_ID, name),
                 Map.of(
                         ArmorItem.Type.HELMET, protectionHead,
                         ArmorItem.Type.CHESTPLATE, protectionChest,
                         ArmorItem.Type.LEGGINGS, protectionLegs,
                         ArmorItem.Type.BOOTS, protectionFeet),
                 enchantability, equipSound, repairIngredient,
-                List.of(new ArmorMaterial.Layer(Identifier.of(MOD_ID, name))),
-                0,0
+                0, 0
         );
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(MOD_ID, name), material);
     }
 
-    public static RegistryEntry<ArmorMaterial> material_wildling = material(
+    public static ArmorMaterial material_wildling = material(
             "wildling",
             1, 3, 3, 1,
             9,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, WILDLING_INGREDIENTS);
 
-    public static RegistryEntry<ArmorMaterial> material_northling = material(
+    public static ArmorMaterial material_northling = material(
             "northling",
             2, 4, 4, 2,
             11,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, NORTHLING_INGREDIENTS);
-    public static RegistryEntry<ArmorMaterial> material_netherite_northling = material(
+    public static ArmorMaterial material_netherite_northling = material(
             "netherite_northling",
             2, 4, 4, 2,
             20,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> material_warlord = material(
+    public static ArmorMaterial material_warlord = material(
             "warlord",
             2, 4, 4, 2,
             20,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
+    private static Armor.Entry create(ArmorMaterial material, Identifier id, int durability,
                                       Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier, Armor.ItemSettingsTweaker settings) {
         var entry = Armor.Entry.create(
                 material,
@@ -135,7 +133,7 @@ public class Armors {
     public static final Armor.Entry wildlingArmorSet =
             create(
                     material_wildling,
-                    Identifier.of(MOD_ID, "wildling"),
+                    new Identifier(MOD_ID, "wildling"),
                     15,
                     WildlingArmor::new,
                     ArmorSetConfig.with(
@@ -165,7 +163,7 @@ public class Armors {
     public static final Armor.Entry northlingArmorSet =
             create(
                     material_northling,
-                    Identifier.of(MOD_ID, "northling"),
+                    new Identifier(MOD_ID, "northling"),
                     25,
                     NorthlingArmor::new,
                     ArmorSetConfig.with(
@@ -215,7 +213,7 @@ public class Armors {
     public static final Armor.Entry netheriteNorthlingArmorSet =
             create(
                     material_netherite_northling,
-                    Identifier.of(MOD_ID, "netherite_northling"),
+                    new Identifier(MOD_ID, "netherite_northling"),
                     30,
                     NorthlingArmor::new,
                     ArmorSetConfig.with(
@@ -267,7 +265,7 @@ public class Armors {
         if (armoryLoadCheck()) {
             warlordArmorSet = groupKey(create(
                     material_warlord,
-                    Identifier.of(MOD_ID, "warlord"),
+                    new Identifier(MOD_ID, "warlord"),
                     40,
                     Armor.CustomItem::new,
                     ArmorSetConfig.with(

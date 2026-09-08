@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "more_rpg_classes:polar_bear_fur"
+    },
+    "Z": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "R R",
+    "Z Z"
+  ],
+  "result": {
+    "item": "berserker_rpg:northling_feet"
+  },
+  "show_notification": true
+}

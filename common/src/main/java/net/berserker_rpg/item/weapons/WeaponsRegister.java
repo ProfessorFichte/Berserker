@@ -53,7 +53,7 @@ public class WeaponsRegister {
     }
 
     private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
-        var id = Identifier.of(idString);
+        var id = new Identifier(idString);
         if (requirement) {
             return () -> {
                 return Ingredient.ofItems(fallback);
@@ -173,11 +173,11 @@ public class WeaponsRegister {
                     .rarity = Rarity.RARE;
 // ADD THIS IN LNE OR BERSERKER LNE MOD
             /*
-            Identifier itemIdG = Identifier.of("loot_n_explore", "elder_guardian_axe");
-            Identifier itemId0 = Identifier.of("berserker_rpg", "ender_dragon_berserker_axe");
-            Identifier itemId1 = Identifier.of("berserker_rpg", "glacial_berserker_axe");
-            Identifier itemId2 = Identifier.of("berserker_rpg", "wither_berserker_axe");
-            Identifier itemId3 = Identifier.of("berserker_rpg", "elder_guardian_berserker_axe");
+            Identifier itemIdG = new Identifier("loot_n_explore", "elder_guardian_axe");
+            Identifier itemId0 = new Identifier("berserker_rpg", "ender_dragon_berserker_axe");
+            Identifier itemId1 = new Identifier("berserker_rpg", "glacial_berserker_axe");
+            Identifier itemId2 = new Identifier("berserker_rpg", "wither_berserker_axe");
+            Identifier itemId3 = new Identifier("berserker_rpg", "elder_guardian_berserker_axe");
 
 
             ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {

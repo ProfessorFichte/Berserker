@@ -73,7 +73,7 @@ public class BerserkerSpells {
     ///MODIFIERS
     public static Entry improved_bloody_strike = add(improved_bloody_strike());
     private static Entry improved_bloody_strike() {
-        var id = Identifier.of(MOD_ID, "improved_bloody_strike");
+        var id = new Identifier(MOD_ID, "improved_bloody_strike");
         var title = "Improved Bloody Strike";
         var description = "Increases power multiplier of Bloody Strike by {power_multiplier}";
         var spell = modifierSpellBase();
@@ -90,13 +90,13 @@ public class BerserkerSpells {
 
     public static final Entry wild_rage = add(wild_rage());
     private static Entry wild_rage() {
-        var id = Identifier.of(MOD_ID, "wild_rage");
+        var id = new Identifier(MOD_ID, "wild_rage");
         var title = "Wild Rage";
         var effect = BerserkerEffects.RAGE;
         var description = "Enter a wild rage, increases rage by "
-                + TooltipTokens.effect(effect.id, 0, Identifier.of(MRPGCEntityAttributes.RAGE_MODIFIER.getIdAsString()))
+                + TooltipTokens.effect(effect.id, 0, new Identifier(BerserkerEffects.attributeId(MRPGCEntityAttributes.RAGE_MODIFIER)))
                 + " and attack speed by "
-                + TooltipTokens.effect(effect.id, 0, Identifier.of(EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString()))
+                + TooltipTokens.effect(effect.id, 0, new Identifier(BerserkerEffects.attributeId(EntityAttributes.GENERIC_ATTACK_SPEED)))
                 + ", stacking up to {effect_amplifier_cap} times.";
         var spell = SpellBuilder.createSpellActive();
         spell.range = 0;
@@ -141,13 +141,14 @@ public class BerserkerSpells {
     }
     public static final Entry bloody_strike = add(bloody_strike());
     private static Entry bloody_strike() {
-        var id = Identifier.of(MOD_ID, "bloody_strike");
+        var id = new Identifier(MOD_ID, "bloody_strike");
         var title = "Bloody Strike";
         var effect = BerserkerEffects.BLOOD_SACRIFICE;
-        // `Blood Sacrifice` has a single modifier (max absorption, flat), so the sole-modifier
-        // fallback is unambiguous here.
+        // On 1.21.1 this read `Blood Sacrifice`'s sole attribute modifier (flat max absorption) through
+        // `TooltipTokens.effect`. 1.20.1 has no max-absorption attribute, so the effect carries no modifier
+        // and the token would stay unresolved -- the number is substituted by `registerTooltipTokens` instead.
         var description = "Deals {damage} physical damage, costing {self_damage} of it back as self-damage in exchange for "
-                + TooltipTokens.effect(effect.id)
+                + "{absorption}"
                 + " absorption. Skipped entirely below half a heart.";
         var debuffEffect = SpellEngineEffects.BLEED;
         var spell = SpellBuilder.createSpellActive();
@@ -195,7 +196,7 @@ public class BerserkerSpells {
     }
     public static final Entry apprehend = add(apprehend());
     private static Entry apprehend() {
-        var id = Identifier.of(MOD_ID, "apprehend");
+        var id = new Identifier(MOD_ID, "apprehend");
         var title = "Apprehend";
         var effect = BerserkerEffects.APPREHEND;
         // Single modifier (armor, flat, stored negative) — `ABS` matches the "lowering ... by" phrasing.
@@ -239,7 +240,7 @@ public class BerserkerSpells {
     }
     public static final Entry blood_reckoning = add(blood_reckoning());
     private static Entry blood_reckoning() {
-        var id = Identifier.of(MOD_ID, "blood_reckoning");
+        var id = new Identifier(MOD_ID, "blood_reckoning");
         var title = "Blood Reckoning";
         var description = "Grants absorption equal to {absorption_ratio} of your missing health. When the effect ends, converts {heal_ratio} of your remaining absorption into a heal.";
         var effect = BerserkerEffects.BLOOD_RECKONING;
@@ -279,11 +280,11 @@ public class BerserkerSpells {
     }
     public static final Entry outrage = add(outrage());
     private static Entry outrage() {
-        var id = Identifier.of(MOD_ID, "outrage");
+        var id = new Identifier(MOD_ID, "outrage");
         var title = "Outrage";
         var effect = BerserkerEffects.OUTRAGE;
         var description = "Clears harmful effects and increases attack damage by "
-                + TooltipTokens.effect(effect.id, 0, Identifier.of(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString()))
+                + TooltipTokens.effect(effect.id, 0, new Identifier(BerserkerEffects.attributeId(EntityAttributes.GENERIC_ATTACK_DAMAGE)))
                 + " for {effect_duration_1}. If Rage is active, extends the duration by an additional {rage_bonus_duration}.";
         var spell = SpellBuilder.createSpellActive();
         spell.school = MoreSpellSchools.RAGE_MELEE;
@@ -325,7 +326,7 @@ public class BerserkerSpells {
 
     public static final Entry northerners_guillotine = add(northerners_guillotine());
     private static Entry northerners_guillotine() {
-        var id = Identifier.of(MOD_ID, "northerners_guillotine");
+        var id = new Identifier(MOD_ID, "northerners_guillotine");
         var title = "Northerners Guillotine";
         // `BASE_DAMAGE_MULTIPLIER` is a compile-time constant, so its percentage is baked straight into
         // the description. Baked literals must escape `%` as `%%` (the lang value goes through
@@ -390,7 +391,8 @@ public class BerserkerSpells {
     /// percentage baked into a description literal, which uses `TooltipTokens.bakedPercent`.
     public static void registerTooltipTokens() {
         TooltipTokens.registerCustom(bloody_strike.id(), args -> args.description()
-                .replace("{self_damage}", TooltipTokens.percent(tweaksConfig.value.bloody_strike_self_damage)));
+                .replace("{self_damage}", TooltipTokens.percent(tweaksConfig.value.bloody_strike_self_damage))
+                .replace("{absorption}", TooltipTokens.formattedNumber(BerserkerEffects.BLOOD_SACRIFICE_ABSORPTION)));
 
         TooltipTokens.registerCustom(blood_reckoning.id(), args -> args.description()
                 .replace("{absorption_ratio}", TooltipTokens.percent(tweaksConfig.value.blood_reckoning_missing_health_to_absorption))

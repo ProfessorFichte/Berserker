@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:leather_from_smelting_wildling_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wildling_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "berserker_rpg:wildling_chest"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wildling_chest",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:leather_from_smelting_wildling_chest"
+    ]
+  },
+  "sends_telemetry_event": false
+}
