@@ -3,6 +3,7 @@ package net.berserker_rpg.effect;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -14,6 +15,7 @@ import net.spell_engine.api.effect.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 import static net.berserker_rpg.BerserkerClassMod.tweaksConfig;
@@ -106,7 +108,9 @@ public class BerserkerEffects {
             ))
     ));
 
-    public static void register(ConfigFile.Effects config) {
+    /// Behaviour installed on the effect instances themselves. Reads `Entry#effect`, which is populated at
+    /// construction time, so it does not depend on the effects being in the registry yet.
+    public static void configureBehaviours() {
         OnRemoval.configure(BLOOD_RECKONING.effect, (context) -> {
             var entity = context.entity();
             float heal = entity.getAbsorptionAmount() * tweaksConfig.value.blood_reckoning_absorption_to_heal_on_expire;
@@ -117,7 +121,18 @@ public class BerserkerEffects {
         for (var entry: entries) {
             Synchronized.configure(entry.effect, true);
         }
+    }
 
+    /// Configures the effects and returns them keyed by the id they register under. Creation only - nothing is
+    /// written into the STATUS_EFFECT registry here, so Forge iterates this from its own `RegisterEvent`
+    /// window (then calls `Effects.linkEntries(entries)`) instead of calling {@link #register}.
+    public static Map<Identifier, StatusEffect> effectsToRegister(ConfigFile.Effects config) {
+        configureBehaviours();
+        return Effects.effectsToRegister(entries, config.effects);
+    }
+
+    public static void register(ConfigFile.Effects config) {
+        configureBehaviours();
         Effects.register(entries, config.effects);
     }
 }

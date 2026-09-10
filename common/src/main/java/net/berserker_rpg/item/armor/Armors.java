@@ -3,6 +3,7 @@ package net.berserker_rpg.item.armor;
 import net.berserker_rpg.item.BerserkerGroup;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -261,7 +262,15 @@ public class Armors {
                     .translatedName("Netherite Northling Head", "Netherite Northling Suit", "Netherite Northling Pants", "Netherite Northling Boots");
 
     public static Armor.Entry warlordArmorSet;
-    public static void register(Map<String, ArmorSetConfig> configs) {
+
+    private static boolean conditionalEntriesCreated = false;
+
+    /// The Armory-tiered Warlord set is appended to {@link #entries} here, *before* the Spell Engine helper is
+    /// ever handed the list. Calling `Armor.itemsToRegister` directly would silently drop its four pieces, so
+    /// both {@link #register} and {@link #itemsToRegister} run this first.
+    private static void createConditionalEntries() {
+        if (conditionalEntriesCreated) { return; }
+        conditionalEntriesCreated = true;
         if (armoryLoadCheck()) {
             warlordArmorSet = groupKey(create(
                     material_warlord,
@@ -313,7 +322,20 @@ public class Armors {
                     commonSettings(warlord_passive)
             ).translatedName("Norse Warlord Head", "Norse Warlord Suit", "Norse Warlord Pants", "Norse Warlord Boots"), MRPGCItemGroups.ARMORY_KEY);
         }
+    }
+
+    public static void register(Map<String, ArmorSetConfig> configs) {
+        createConditionalEntries();
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
+    }
+
+    /// Every armor piece of this mod keyed by the id it registers under, the Armory-tiered set included.
+    /// Creation only - nothing is written into the ITEM registry here, so Forge iterates this from its own
+    /// `RegisterEvent` window instead of calling {@link #register}. **Must run inside the ITEM registration
+    /// window** (item constructors create intrusive registry holders).
+    public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
+        createConditionalEntries();
+        return Armor.itemsToRegister(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 
     /// Sets pushed into a different creative tab (e.g. Armory RPGs compat) still land in the
