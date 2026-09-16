@@ -6,6 +6,8 @@
   (2.7.2) and Armor Model API (1.0.0).
 - Every registry write goes through Forge's `RegisterEvent` window, so the mod also boots on Forge 47.0-47.3
   and on NeoForge 1.20.1, which never unlock the vanilla registries.
+- The Norse Warlord armor is now always registered, so a server without Armory RPGs starts (its set bonus
+  used to fail to load and abort the startup). Crafting it still requires Armory RPGs.
 
 ### Accepted 1.20.1 limitations
 

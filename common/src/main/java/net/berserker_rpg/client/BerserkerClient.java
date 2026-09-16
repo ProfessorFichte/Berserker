@@ -12,8 +12,6 @@ import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.rpg_series.item.Armor;
 
-import static net.berserker_rpg.compat.CompatLoadingCheck.armoryLoadCheck;
-
 public class BerserkerClient {
     public static void  init(){
         BerserkerSpells.registerTooltipTokens();
@@ -21,9 +19,7 @@ public class BerserkerClient {
         registerArmorRenderer(Armors.wildlingArmorSet.armorSet(), CustomArmorRenderer.wildling_armor());
         registerArmorRenderer(Armors.northlingArmorSet.armorSet(), CustomArmorRenderer.northling_armor());
         registerArmorRenderer(Armors.netheriteNorthlingArmorSet.armorSet(), CustomArmorRenderer.netherite_northling_armor());
-        if (armoryLoadCheck()) {
-            registerArmorRenderer(Armors.warlordArmorSet.armorSet(), CustomArmorRenderer.warlord_armor());
-        }
+        registerArmorRenderer(Armors.warlordArmorSet.armorSet(), CustomArmorRenderer.warlord_armor());
         CustomParticleStatusEffect.register(BerserkerEffects.RAGE.effect, new RageParticles(1));
         CustomModelStatusEffect.register(BerserkerEffects.RAGE.effect, new RageRenderer());
     }
