@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-23T00:57:59.7581776	Berserker Class Mod/Tags for minecraft:spell
-50cbf592da89254db4d67c5a4cc6107f81097a09 data\berserker_rpg\tags\spell\spell_scroll\berserker.json
-50cbf592da89254db4d67c5a4cc6107f81097a09 data\berserker_rpg\tags\spell\spell_book\berserker.json
-039fe4915ab542f001ac57b694a81f72bc631c9c data\spell_engine\tags\spell\treasure.json
+// 1.20.1	2026-09-08T11:14:54.756369	Berserker Class Mod/Tags for minecraft:spell
+e3b00287f8bd91681ac0a16bc0c4ad6799f574ea data/berserker_rpg/tags/spell/spell_book/berserker.json
+76e1b47385d13bcce0175f489e3043062cb591a9 data/spell_engine/tags/spell/treasure.json
+e3b00287f8bd91681ac0a16bc0c4ad6799f574ea data/berserker_rpg/tags/spell/spell_scroll/berserker.json

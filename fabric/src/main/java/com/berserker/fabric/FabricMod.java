@@ -5,17 +5,15 @@ import net.berserker_rpg.item.BerserkerGroup;
 import net.berserker_rpg.item.armor.Armors;
 import net.berserker_rpg.item.weapons.WeaponsRegister;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 
 public final class FabricMod implements ModInitializer {
     @Override
     public void onInitialize() {
         BerserkerClassMod.init();
-        registerItemGroup();
+        // The `berserker_rpg:generic` group is created inside registerItems() (see BerserkerGroup), so that
+        // both loaders build it the same way and it exists before the weapon/armor registrations fill it.
         BerserkerClassMod.registerItems();
         BerserkerClassMod.registerSounds();
         BerserkerClassMod.registerEffects();
@@ -39,13 +37,5 @@ public final class FabricMod implements ModInitializer {
             });
             ItemGroupEvents.modifyEntriesEvent(key).register(content -> content.add(item));
         });
-    }
-
-    private void registerItemGroup() {
-        BerserkerGroup.BERSERKER = FabricItemGroup.builder()
-                .icon(BerserkerGroup::icon)
-                .displayName(BerserkerGroup.displayName())
-                .build();
-        Registry.register(Registries.ITEM_GROUP, BerserkerGroup.BERSERKER_KEY, BerserkerGroup.BERSERKER);
     }
 }

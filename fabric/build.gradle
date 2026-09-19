@@ -70,9 +70,6 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
-    maven { url 'https://maven.wispforest.io/releases' }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -81,28 +78,32 @@ dependencies {
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 
-    modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${project.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
-    modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
-    modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}")
-    //modImplementation(files("run/mods/dev/more_rpg_library-fabric-2.5.9+1.21.1.jar"))
+    // Ecosystem libraries: all resolved from the Modrinth maven.
+    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}") { transitive = false }
+    // More RPG Library: resolves from the Modrinth maven once Fichte's release tier 1 publishes it.
+    modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}") { transitive = false }
 
-    // Trinkets
-    modImplementation("maven.modrinth:trinkets:${project.trinkets_version}")
-    // Cardinal Components API (required by Trinkets)
-    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.3"
-    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.3"
-
-    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+    // Trinkets (SpellEngine's Fabric accessory integration) JiJs Cardinal Components; Loom does not
+    // load nested jars of classpath mods, so the dev runtime needs them explicitly.
+    modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.cardinal_components_version}")
+    modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.cardinal_components_version}")
+    modLocalRuntime("maven.modrinth:trinkets:${rootProject.trinkets_version}")
+    // Spell Engine hard-depends on the player animation library at runtime.
+    modLocalRuntime("dev.kosmx.player-anim:player-animation-lib-fabric:${rootProject.player_anim_version}")
+    // Dev-runtime only, both for More RPG Library's sake (see gradle.properties).
+    modLocalRuntime("maven.modrinth:runes:${rootProject.runes_version}-fabric") { transitive = false }
+    modLocalRuntime("maven.modrinth:critical-strike:${rootProject.critical_strike_version}-fabric") { transitive = false }
 }
 
 processResources {
     inputs.property 'version', project.version
 
     filesMatching("fabric.mod.json") {
-        expand(project.properties)
+        expand version: inputs.properties.version
     }
 }
 

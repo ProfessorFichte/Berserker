@@ -53,7 +53,7 @@ public class WeaponsRegister {
     }
 
     private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
-        var id = Identifier.of(idString);
+        var id = new Identifier(idString);
         if (requirement) {
             return () -> {
                 return Ingredient.ofItems(fallback);
@@ -116,8 +116,14 @@ public class WeaponsRegister {
     private static final String LNE = "loot_n_explore";
     private static final float lneWeaponSpellPower = 2.0F;
     private static final float lneAxeAttackDamage = 15.0F;
-    //Registration
-    public static void register(Map<String, WeaponConfig> configs) {
+    private static boolean conditionalEntriesCreated = false;
+
+    /// Mod-gated weapons are appended to {@link #entries} here, *before* the Spell Engine helper is ever
+    /// handed the list. Calling `Weapon.itemsToRegister` directly would silently drop all ten of them, so both
+    /// {@link #register} and {@link #itemsToRegister} run this first.
+    private static void createConditionalEntries() {
+        if (conditionalEntriesCreated) { return; }
+        conditionalEntriesCreated = true;
         if(Platform.util().isModLoaded(BETTER_NETHER) || BerserkerClassMod.tweaksConfig.value.ignore_items_required_mods){
             var repair = ingredient("betternether:nether_ruby", Platform.util().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             berserker_axes("ruby_berserker_axe",
@@ -173,11 +179,11 @@ public class WeaponsRegister {
                     .rarity = Rarity.RARE;
 // ADD THIS IN LNE OR BERSERKER LNE MOD
             /*
-            Identifier itemIdG = Identifier.of("loot_n_explore", "elder_guardian_axe");
-            Identifier itemId0 = Identifier.of("berserker_rpg", "ender_dragon_berserker_axe");
-            Identifier itemId1 = Identifier.of("berserker_rpg", "glacial_berserker_axe");
-            Identifier itemId2 = Identifier.of("berserker_rpg", "wither_berserker_axe");
-            Identifier itemId3 = Identifier.of("berserker_rpg", "elder_guardian_berserker_axe");
+            Identifier itemIdG = new Identifier("loot_n_explore", "elder_guardian_axe");
+            Identifier itemId0 = new Identifier("berserker_rpg", "ender_dragon_berserker_axe");
+            Identifier itemId1 = new Identifier("berserker_rpg", "glacial_berserker_axe");
+            Identifier itemId2 = new Identifier("berserker_rpg", "wither_berserker_axe");
+            Identifier itemId3 = new Identifier("berserker_rpg", "elder_guardian_berserker_axe");
 
 
             ItemGroupEvents.modifyEntriesEvent(Group.RPG_LOOT_KEY).register((content) -> {
@@ -211,7 +217,21 @@ public class WeaponsRegister {
                     .loot(Equipment.LootProperties.of(5)), MRPGCItemGroups.ARSENAL_KEY);
             uniqueSword1.rarity = Rarity.RARE;
         }
+    }
+
+    //Registration
+    public static void register(Map<String, WeaponConfig> configs) {
+        createConditionalEntries();
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
+    }
+
+    /// Every weapon of this mod keyed by the id it registers under, mod-gated entries included. Creation only
+    /// - nothing is written into the ITEM registry here, so Forge iterates this from its own `RegisterEvent`
+    /// window instead of calling {@link #register}. **Must run inside the ITEM registration window** (item
+    /// constructors create intrusive registry holders).
+    public static Map<Identifier, Item> itemsToRegister(Map<String, WeaponConfig> configs) {
+        createConditionalEntries();
+        return Weapon.itemsToRegister(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 
     /// Same deal as {@link net.berserker_rpg.item.armor.Armors#forEachGroupOverride}: a weapon pushed

@@ -61,7 +61,7 @@
   "spell.berserker_rpg.apprehend.name": "Apprehend",
   "spell.berserker_rpg.blood_reckoning.description": "Grants absorption equal to {absorption_ratio} of your missing health. When the effect ends, converts {heal_ratio} of your remaining absorption into a heal.",
   "spell.berserker_rpg.blood_reckoning.name": "Blood Reckoning",
-  "spell.berserker_rpg.bloody_strike.description": "Deals {damage} physical damage, costing {self_damage} of it back as self-damage in exchange for {effect|berserker_rpg:blood_sacrifice} absorption. Skipped entirely below half a heart.",
+  "spell.berserker_rpg.bloody_strike.description": "Deals {damage} physical damage, costing {self_damage} of it back as self-damage in exchange for {absorption} absorption. Skipped entirely below half a heart.",
   "spell.berserker_rpg.bloody_strike.name": "Bloody Strike",
   "spell.berserker_rpg.improved_bloody_strike.description": "Increases power multiplier of Bloody Strike by {power_multiplier}",
   "spell.berserker_rpg.improved_bloody_strike.name": "Improved Bloody Strike",

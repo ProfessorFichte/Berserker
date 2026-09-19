@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.more_rpg_classes.util.CustomMethods;
 import net.spell_engine.api.spell.Spell;
@@ -30,7 +31,7 @@ public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
     ) {
         if (target instanceof LivingEntity livingTarget && caster instanceof PlayerEntity playerCaster) {
             int harmfulAmplifierSum = livingTarget.getStatusEffects().stream()
-                    .filter(instance -> instance.getEffectType().value().getCategory() == StatusEffectCategory.HARMFUL)
+                    .filter(instance -> instance.getEffectType().getCategory() == StatusEffectCategory.HARMFUL)
                     .mapToInt(instance -> instance.getAmplifier() + 1)
                     .sum();
 
@@ -52,7 +53,10 @@ public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
 
         var registry = SpellRegistry.from(caster.getWorld());
         var spellId = registry.getId(spell);
-        var spellEntry = spellId != null ? registry.getEntry(spellId).orElse(null) : null;
+        // 1.20.1 `Registry#getEntry(Identifier)` does not exist - go through the registry key.
+        var spellEntry = spellId != null
+                ? registry.getEntry(RegistryKey.of(SpellRegistry.KEY, spellId)).map(entry -> (RegistryEntry<Spell>) entry).orElse(null)
+                : null;
 
         if (spellEntry != null) {
             var bonusPower = 1F;

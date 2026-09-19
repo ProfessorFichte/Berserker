@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "berserker_rpg:golden_berserker_axe",
+      "required": false
+    }
+  ]
+}

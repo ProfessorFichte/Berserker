@@ -1,0 +1,56 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "ARR"
+
+[[mods]]
+modId = "berserker_rpg"
+version = "${version}"
+displayName = "Berserker"
+authors = "Fichte"
+description = '''
+Enter a wild, relentless battle trance as a Berserker! Spell Engine Add-On
+'''
+#logoFile = "icon.png"
+
+[[dependencies.berserker_rpg]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "armor_model_api"
+mandatory = true
+versionRange = "[1.0.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "spell_engine"
+mandatory = true
+versionRange = "[1.10.5,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "spell_power"
+mandatory = true
+versionRange = "[1.6.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.berserker_rpg]]
+modId = "more_rpg_classes"
+mandatory = true
+versionRange = "[2.7.2,)"
+ordering = "AFTER"
+side = "BOTH"
