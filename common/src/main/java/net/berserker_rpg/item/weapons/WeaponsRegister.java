@@ -118,9 +118,6 @@ public class WeaponsRegister {
     private static final float lneAxeAttackDamage = 15.0F;
     private static boolean conditionalEntriesCreated = false;
 
-    /// Mod-gated weapons are appended to {@link #entries} here, *before* the Spell Engine helper is ever
-    /// handed the list. Calling `Weapon.itemsToRegister` directly would silently drop all ten of them, so both
-    /// {@link #register} and {@link #itemsToRegister} run this first.
     private static void createConditionalEntries() {
         if (conditionalEntriesCreated) { return; }
         conditionalEntriesCreated = true;
@@ -219,16 +216,11 @@ public class WeaponsRegister {
         }
     }
 
-    //Registration
     public static void register(Map<String, WeaponConfig> configs) {
         createConditionalEntries();
         Weapon.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 
-    /// Every weapon of this mod keyed by the id it registers under, mod-gated entries included. Creation only
-    /// - nothing is written into the ITEM registry here, so Forge iterates this from its own `RegisterEvent`
-    /// window instead of calling {@link #register}. **Must run inside the ITEM registration window** (item
-    /// constructors create intrusive registry holders).
     public static Map<Identifier, Item> itemsToRegister(Map<String, WeaponConfig> configs) {
         createConditionalEntries();
         return Weapon.itemsToRegister(configs, entries, BerserkerGroup.BERSERKER_KEY);

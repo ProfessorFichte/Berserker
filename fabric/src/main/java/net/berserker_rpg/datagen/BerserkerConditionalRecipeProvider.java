@@ -97,7 +97,6 @@ public class BerserkerConditionalRecipeProvider implements DataProvider {
         key.add(key2, key2Obj);
         recipe.add("key", key);
 
-        // Result -- 1.20.1 recipe results are keyed by `item`, not `id`
         JsonObject resultObj = new JsonObject();
         resultObj.addProperty("item", net.minecraft.registry.Registries.ITEM.getId(result).toString());
         recipe.add("result", resultObj);
@@ -117,8 +116,6 @@ public class BerserkerConditionalRecipeProvider implements DataProvider {
         fabricCondition.add("values", modValues);
         fabricLoadConditions.add(fabricCondition);
 
-        // Forge 47 reads a plain top-level `conditions` array; `forge:conditions` / `neoforge:conditions`
-        // are keys it does not know, and the recipe would then parse and fail on the unloaded modded item.
         JsonArray forgeConditions = new JsonArray();
         JsonObject forgeCondition = new JsonObject();
         forgeCondition.addProperty("type", "forge:mod_loaded");

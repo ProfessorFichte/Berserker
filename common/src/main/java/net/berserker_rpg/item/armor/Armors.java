@@ -39,8 +39,6 @@ public class Armors {
 
     public static Identifier warlord_passive = new Identifier(MOD_ID, "warlord");
 
-    /// 1.20.1 has no data components: the equipment set is an item-level default served by SpellEngine's
-    /// `SpellItemData` NBT facade (the `Item.Settings#component` stand-in), and rarity is a plain settings call.
     private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
         return Armor.ItemSettingsTweaker.standard(itemSettings -> {
             itemSettings.rarity(Rarity.RARE);
@@ -68,8 +66,6 @@ public class Armors {
     private static final float warlord_crit_damage = 0.08F;
 
 
-    /// 1.20.1 `ArmorMaterial` is a plain interface: there is no armor-material registry and no
-    /// `ArmorMaterial.Layer` list -- the material's own id doubles as the (single) layer id.
     public static ArmorMaterial material(String name,
                                          int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
                                          int enchantability, SoundEvent equipSound, Supplier<Ingredient> repairIngredient) {
@@ -264,9 +260,6 @@ public class Armors {
 
     private static boolean conditionalEntriesCreated = false;
 
-    /// The Armory-tiered Warlord set is appended to {@link #entries} here, *before* the Spell Engine helper is
-    /// ever handed the list. Calling `Armor.itemsToRegister` directly would silently drop its four pieces, so
-    /// both {@link #register} and {@link #itemsToRegister} run this first.
     private static void createConditionalEntries() {
         if (conditionalEntriesCreated) { return; }
         conditionalEntriesCreated = true;
@@ -326,10 +319,6 @@ public class Armors {
         Armor.register(configs, entries, BerserkerGroup.BERSERKER_KEY);
     }
 
-    /// Every armor piece of this mod keyed by the id it registers under, the Armory-tiered set included.
-    /// Creation only - nothing is written into the ITEM registry here, so Forge iterates this from its own
-    /// `RegisterEvent` window instead of calling {@link #register}. **Must run inside the ITEM registration
-    /// window** (item constructors create intrusive registry holders).
     public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
         createConditionalEntries();
         return Armor.itemsToRegister(configs, entries, BerserkerGroup.BERSERKER_KEY);

@@ -21,17 +21,10 @@ import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 import static net.berserker_rpg.BerserkerClassMod.tweaksConfig;
 
 public class BerserkerEffects {
-    /// 1.20.1 `EntityAttribute` carries no id accessor (`getIdAsString()` is 1.21) - look it up instead.
     public static String attributeId(EntityAttribute attribute) {
         return Registries.ATTRIBUTE.getId(attribute).toString();
     }
 
-    /// The absorption granted by `Blood Sacrifice`, as the tooltip states it.
-    ///
-    /// On 1.21.1 this number came from the effect's `minecraft:generic.max_absorption` modifier, which the
-    /// spell tooltip's `{effect|...}` token read back. 1.20.1 has no max-absorption attribute at all (it is a
-    /// 1.20.5 addition) and absorption is uncapped, so the modifier is gone and the displayed value is this
-    /// constant instead of a config-driven one.
     public static final float BLOOD_SACRIFICE_ABSORPTION = 4F;
 
     public static final List<Effects.Entry> entries = new ArrayList<>();
@@ -63,9 +56,6 @@ public class BerserkerEffects {
             "Blood Sacrifice",
             "Converts your health to absorption hearts.",
             new BloodSacrificeEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
-            // No `minecraft:generic.max_absorption` attribute before 1.20.5 - absorption is uncapped here,
-            // so the 1.21.1 `+4` cap modifier has no 1.20.1 counterpart and is dropped. The effect itself
-            // sets the absorption amount directly (see BloodSacrificeEffect#onApplied).
             new EffectConfig(List.of())
     ));
     public static final Effects.Entry BLOOD_RECKONING = add(new Effects.Entry(
@@ -73,7 +63,6 @@ public class BerserkerEffects {
             "Blood Reckoning",
             "Grants absorption for missing health. Heals for a portion of your remaining absorption when the effect runs out.",
             new BloodReckoningEffect(StatusEffectCategory.BENEFICIAL, 0xf70000),
-            // Same as Blood Sacrifice: the 1.21.1 `+20` max-absorption cap has no 1.20.1 attribute to ride on.
             new EffectConfig(List.of())
     ));
     public static final Effects.Entry OUTRAGE = add(new Effects.Entry(
@@ -108,8 +97,6 @@ public class BerserkerEffects {
             ))
     ));
 
-    /// Behaviour installed on the effect instances themselves. Reads `Entry#effect`, which is populated at
-    /// construction time, so it does not depend on the effects being in the registry yet.
     public static void configureBehaviours() {
         OnRemoval.configure(BLOOD_RECKONING.effect, (context) -> {
             var entity = context.entity();
@@ -123,9 +110,6 @@ public class BerserkerEffects {
         }
     }
 
-    /// Configures the effects and returns them keyed by the id they register under. Creation only - nothing is
-    /// written into the STATUS_EFFECT registry here, so Forge iterates this from its own `RegisterEvent`
-    /// window (then calls `Effects.linkEntries(entries)`) instead of calling {@link #register}.
     public static Map<Identifier, StatusEffect> effectsToRegister(ConfigFile.Effects config) {
         configureBehaviours();
         return Effects.effectsToRegister(entries, config.effects);

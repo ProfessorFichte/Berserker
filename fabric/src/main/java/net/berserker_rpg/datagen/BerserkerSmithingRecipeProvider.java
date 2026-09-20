@@ -21,14 +21,6 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
-/// Smithing-transform recipes.
-///
-/// On 1.21.1 this extended `net.more_rpg_classes.datagen.SmithingRecipeGenerator`. That library class is
-/// still shipped on the 1.20.1 line but is written for the 1.21 datapack format (it writes to
-/// `data/<ns>/recipe/`, emits `"result": {"id": ...}` and tags conditions with `neoforge:conditions`), and
-/// nothing in the library itself exercises it — Berserker is its only consumer. Rather than change the
-/// library from a content-mod port, the (small) generator is inlined here with the 1.20.1 spellings:
-/// `recipes/`, `"result": {"item": ...}` and Forge 47's plain top-level `conditions` array.
 public class BerserkerSmithingRecipeProvider implements DataProvider {
 
     private final FabricDataOutput output;
@@ -44,11 +36,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
     }
 
     public void generate() {
-        // ==========================================
-        // VANILLA NETHERITE UPGRADES (No conditions)
-        // ==========================================
-
-        // Netherite Berserker Axe
         createSimpleSmithingRecipe(
                 "netherite_berserker_axe",
                 WeaponsRegister.diamond_berserker_axe.item(),
@@ -57,7 +44,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
                 WeaponsRegister.netherite_berserker_axe.item()
         );
 
-        // Netherite Northling Armor Set (4 pieces)
         createSimpleArmorSetUpgrade(
                 "netherite_northling",
                 Armors.northlingArmorSet.armorSet(),
@@ -65,10 +51,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
                 Items.NETHERITE_INGOT,
                 Armors.netheriteNorthlingArmorSet.armorSet()
         );
-
-        // ==========================================
-        // BETTER NETHER MOD - Ruby Berserker Axe
-        // ==========================================
 
         Item rubyAxe = WeaponsRegister.entries.stream()
                 .filter(e -> e.id().getPath().equals("ruby_berserker_axe"))
@@ -87,15 +69,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             );
         }
 
-        // ==========================================
-        // BETTER END MOD - Aeternium Berserker Axe (CRAFTING ONLY - No smithing recipe needed)
-        // ==========================================
-
-        // ==========================================
-        // LOOT N EXPLORE MOD - Boss Berserker Axes
-        // ==========================================
-
-        // Glacial Berserker Axe (Frost Monarch)
         Item glacialAxe = WeaponsRegister.entries.stream()
                 .filter(e -> e.id().getPath().equals("glacial_berserker_axe"))
                 .findFirst()
@@ -113,7 +86,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             );
         }
 
-        // Ender Dragon Berserker Axe
         Item enderDragonAxe = WeaponsRegister.entries.stream()
                 .filter(e -> e.id().getPath().equals("ender_dragon_berserker_axe"))
                 .findFirst()
@@ -131,7 +103,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             );
         }
 
-        // Elder Guardian Berserker Axe
         Item elderGuardianAxe = WeaponsRegister.entries.stream()
                 .filter(e -> e.id().getPath().equals("elder_guardian_berserker_axe"))
                 .findFirst()
@@ -149,7 +120,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             );
         }
 
-        // Wither Berserker Axe
         Item witherAxe = WeaponsRegister.entries.stream()
                 .filter(e -> e.id().getPath().equals("wither_berserker_axe"))
                 .findFirst()
@@ -167,12 +137,7 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             );
         }
 
-        // ==========================================
-        // ARMORY RPGS MOD - Warlord Armor Set
-        // ==========================================
-
         if (Armors.warlordArmorSet != null) {
-            // From Northling to Warlord
             createArmorSetUpgrade(
                     "smithing_northling",
                     Armors.northlingArmorSet.armorSet(),
@@ -182,7 +147,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
                     "armory_rpgs"
             );
 
-            // From Netherite Northling to Warlord
             createArmorSetUpgrade(
                     "smithing_netherite_northling",
                     Armors.netheriteNorthlingArmorSet.armorSet(),
@@ -193,10 +157,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             );
         }
     }
-
-    // ==========================================
-    // BUILDERS
-    // ==========================================
 
     private void createSimpleSmithingRecipe(String name, Item base, Object template, Object addition, Item result) {
         recipes.add(new RecipeData(name, base, template, addition, result, null));
@@ -239,10 +199,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
         return path;
     }
 
-    // ==========================================
-    // INTERNAL LOGIC
-    // ==========================================
-
     @Override
     public CompletableFuture<?> run(DataWriter writer) {
         generate();
@@ -269,9 +225,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
             fabricLoadConditions.add(fabricCondition);
             recipe.add("fabric:load_conditions", fabricLoadConditions);
 
-            // Forge 47 reads a plain top-level `conditions` array (neither `forge:conditions` nor
-            // `neoforge:conditions` is a key it knows) - otherwise the recipe parses and then fails on
-            // the item of the absent mod.
             JsonArray forgeConditions = new JsonArray();
             JsonObject forgeCondition = new JsonObject();
             forgeCondition.addProperty("type", "forge:mod_loaded");
@@ -294,7 +247,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
         additionObj.addProperty("item", getItemId(data.addition));
         recipe.add("addition", additionObj);
 
-        // 1.20.1 recipe results are keyed by `item`, not `id`
         JsonObject resultObj = new JsonObject();
         resultObj.addProperty("item", Registries.ITEM.getId(data.result).toString());
         resultObj.addProperty("count", 1);
@@ -303,8 +255,6 @@ public class BerserkerSmithingRecipeProvider implements DataProvider {
         return recipe;
     }
 
-    /// Item id from either an `Item` or an `Identifier`/`String` (the latter for items of mods that may
-    /// not be loaded, which would otherwise resolve to `minecraft:air`).
     private static String getItemId(Object itemOrId) {
         if (itemOrId instanceof Identifier id) {
             return id.toString();

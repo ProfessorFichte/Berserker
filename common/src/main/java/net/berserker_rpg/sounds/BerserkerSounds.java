@@ -87,9 +87,6 @@ public class BerserkerSounds {
         linkEntries();
     }
 
-    /// Every entry's sound event keyed by the id it registers under. Creation only - nothing is written into
-    /// the SOUND_EVENT registry here, so Forge iterates this from its own `RegisterEvent` window and registers
-    /// through the helper it is handed, instead of calling {@link #register}.
     public static Map<Identifier, SoundEvent> soundsToRegister() {
         var sounds = new LinkedHashMap<Identifier, SoundEvent>();
         for (var entry: entries) {
@@ -98,9 +95,6 @@ public class BerserkerSounds {
         return sounds;
     }
 
-    /// Reads each entry's `RegistryEntry` back out of the registry. `RegisterEvent`'s helper returns void
-    /// where `Registry.registerReference` returned the entry, so the Forge path calls this right after its
-    /// registration loop and {@link Entry#entry()} means the same thing on both loaders.
     public static void linkEntries() {
         for (var entry: entries) {
             entry.entry = Registries.SOUND_EVENT

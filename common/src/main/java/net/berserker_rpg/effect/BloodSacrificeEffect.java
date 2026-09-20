@@ -17,13 +17,6 @@ public class BloodSacrificeEffect extends StatusEffect {
         this.healthPerStack = 2  ;
     }
 
-    /// 1.20.1 `applyUpdateEffect` returns **void**: the 1.21 `boolean` result (whose `false` ends the effect
-    /// early) does not exist, and a status effect cannot remove itself from inside the tick loop
-    /// (`LivingEntity#tickStatusEffects` iterates the live map). The 1.21.1 body was
-    /// `entity.getAbsorptionAmount() > 0.0F || entity.getWorld().isClient` -- i.e. the effect ended as soon
-    /// as the granted absorption was chewed through. **Port sacrifice:** here it always runs its full
-    /// duration. Nothing rides on it besides the HUD icon (its max-absorption modifier has no 1.20.1
-    /// counterpart, see BerserkerEffects), so the only visible difference is the icon lingering.
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
     }

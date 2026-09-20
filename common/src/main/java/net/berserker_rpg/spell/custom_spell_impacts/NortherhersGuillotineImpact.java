@@ -53,7 +53,6 @@ public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
 
         var registry = SpellRegistry.from(caster.getWorld());
         var spellId = registry.getId(spell);
-        // 1.20.1 `Registry#getEntry(Identifier)` does not exist - go through the registry key.
         var spellEntry = spellId != null
                 ? registry.getEntry(RegistryKey.of(SpellRegistry.KEY, spellId)).map(entry -> (RegistryEntry<Spell>) entry).orElse(null)
                 : null;

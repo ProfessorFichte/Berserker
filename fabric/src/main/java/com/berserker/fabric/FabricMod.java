@@ -12,8 +12,6 @@ public final class FabricMod implements ModInitializer {
     @Override
     public void onInitialize() {
         BerserkerClassMod.init();
-        // The `berserker_rpg:generic` group is created inside registerItems() (see BerserkerGroup), so that
-        // both loaders build it the same way and it exists before the weapon/armor registrations fill it.
         BerserkerClassMod.registerItems();
         BerserkerClassMod.registerSounds();
         BerserkerClassMod.registerEffects();

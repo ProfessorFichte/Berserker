@@ -144,9 +144,6 @@ public class BerserkerSpells {
         var id = new Identifier(MOD_ID, "bloody_strike");
         var title = "Bloody Strike";
         var effect = BerserkerEffects.BLOOD_SACRIFICE;
-        // On 1.21.1 this read `Blood Sacrifice`'s sole attribute modifier (flat max absorption) through
-        // `TooltipTokens.effect`. 1.20.1 has no max-absorption attribute, so the effect carries no modifier
-        // and the token would stay unresolved -- the number is substituted by `registerTooltipTokens` instead.
         var description = "Deals {damage} physical damage, costing {self_damage} of it back as self-damage in exchange for "
                 + "{absorption}"
                 + " absorption. Skipped entirely below half a heart.";

@@ -23,17 +23,10 @@ public class BerserkerGroup {
         return Text.translatable("itemGroup." + BerserkerClassMod.MOD_ID + ".general");
     }
 
-    /// The group is built here rather than per platform: `ItemGroup.builder()` is a Fabric injection and
-    /// `FabricItemGroup` is Fabric-only, but the vanilla `ItemGroup.Builder` constructor works on both
-    /// loaders. This is the Fabric path; Forge registers {@link #createItemGroup()} from its own
-    /// `RegisterEvent` window for `creative_mode_tab`.
     public static void registerItemGroups() {
         Registry.register(Registries.ITEM_GROUP, BERSERKER_KEY, createItemGroup());
     }
 
-    /// Builds the group instance without registering it. Creation only, so Forge can register it through the
-    /// helper it is handed in the ITEM_GROUP (`creative_mode_tab`) window - which is event 65, long after ITEM
-    /// (event 7), so this must NOT ride along in the item pass.
     public static ItemGroup createItemGroup() {
         BerserkerClassMod.LOGGER.info("Registering Item Groups for " + BerserkerClassMod.MOD_ID);
         BERSERKER = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)

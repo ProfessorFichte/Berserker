@@ -87,10 +87,6 @@ public class BerserkerVanillaAdvancementProvider extends FabricAdvancementProvid
         }
     }
 
-    /// `Advancement.Builder#build` refuses to build unless the parent *object* resolved
-    /// (`findParent(id -> null)`), and a cross-mod parent (`more_rpg_content:root`) never resolves during
-    /// datagen. A stub carrying only the id satisfies it, and `toJson` serialises `parent` from that id -
-    /// so the emitted JSON is identical to a hand-written `"parent": "..."`.
     private static Advancement parentStub(Identifier parentId) {
         return new Advancement(parentId, null, null, AdvancementRewards.NONE, Map.of(), new String[0][], false);
     }
@@ -120,8 +116,6 @@ public class BerserkerVanillaAdvancementProvider extends FabricAdvancementProvid
             builder.rewards(AdvancementRewards.Builder.experience(entry.experienceReward()));
         }
 
-        // `build(Consumer, String)` already hands the advancement to the consumer; accepting it a second
-        // time trips Fabric API 0.92's duplicate-id guard in FabricAdvancementProvider#run.
         builder.build(consumer, entry.id().toString());
     }
 
