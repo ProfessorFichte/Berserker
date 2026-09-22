@@ -1,3 +1,6 @@
+# 3.1.2+1.20.1
+- Fixed Better Combat Animations being in the wrong folder path
+
 # 3.1.1+1.20.1
 
 > ### ⚠️ Read this before updating
