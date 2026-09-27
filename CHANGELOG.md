@@ -1,3 +1,6 @@
+# 3.1.3+1.20.1
+- Fixed wrong data format for Berserkers Raid Axe's
+
 # 3.1.2+1.20.1
 - Fixed Better Combat Animations being in the wrong folder path
 
