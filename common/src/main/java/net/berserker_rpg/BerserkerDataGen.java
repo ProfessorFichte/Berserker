@@ -151,6 +151,15 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
                 }
             }
         }
+        public void generateLootAffiliation(List<Armor.Entry> armors) {
+            var tag = this.getOrCreateTagBuilder(ModItemTags.LOOT_AFFILIATION_BERSERKER);
+            tag.addOptionalTag(ModItemTags.BERSERKER_AXES);
+            for (Armor.Entry armor : armors) {
+                for (var id : armor.armorSet().pieceIds()) {
+                    tag.addOptional((Identifier) id);
+                }
+            }
+        }
         public void generateGeneralWeaponTags(List<Weapon.Entry> weapons) {
             Iterator var2 = weapons.iterator();
 
@@ -188,6 +197,9 @@ public class BerserkerDataGen implements DataGeneratorEntrypoint {
                     Armors.entries.stream().filter(entry -> armoryKeywords.stream().noneMatch(entry.name()::contains)).toList(),
                     RPGSeriesItemTags.ArmorMetaType.MELEE,
                     armorTagOptions2
+            );
+            generateLootAffiliation(
+                    Armors.entries.stream().filter(entry -> armoryKeywords.stream().noneMatch(entry.name()::contains)).toList()
             );
 
             var spellInfinityTag = getOrCreateTagBuilder(SpellEngineItemTags.ENCHANTABLE_SPELL_INFINITY);
