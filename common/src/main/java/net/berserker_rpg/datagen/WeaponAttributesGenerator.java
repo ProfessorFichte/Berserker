@@ -7,7 +7,7 @@ import net.minecraft.data.DataOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.DataWriter;
 import net.minecraft.registry.RegistryWrapper;
-import net.more_rpg_classes.datagen.BetterCombatWeaponAttributeGenerator;
+import com.mrpg_lib.datagen.BetterCombatWeaponAttributeGenerator;
 import net.spell_engine.rpg_series.item.Weapon;
 
 import java.nio.file.Path;

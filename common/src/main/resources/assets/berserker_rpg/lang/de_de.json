@@ -59,10 +59,10 @@
   "effect.berserker_rpg.blood_sacrifice": "Blutopfer",
   "effect.berserker_rpg.blood_sacrifice.description": "Wandelt deine Absorbation in Leben um.",
 
-  "advancements.more_rpg_content.raid_axe.title": "Zu den Schiffen!",
-  "advancements.more_rpg_content.raid_axe.description": "Erhalte eine Eisenaxt des Plünderers!",
-  "advancements.more_rpg_content.berserker_spells.title": "Weg des Berserkers",
-  "advancements.more_rpg_content.berserker_spells.description": "Erhalte alle Berserker Zaubersprüche",
+  "advancements.mrpg_lib.raid_axe.title": "Zu den Schiffen!",
+  "advancements.mrpg_lib.raid_axe.description": "Erhalte eine Eisenaxt des Plünderers!",
+  "advancements.mrpg_lib.berserker_spells.title": "Weg des Berserkers",
+  "advancements.mrpg_lib.berserker_spells.description": "Erhalte alle Berserker Zaubersprüche",
   "advancements.rpg_classes.northling.title": "Wilde Wut auf der Haut",
   "advancements.rpg_classes.northling.description": "Erhalte alle  Nordling Rüstungsteile."
 }

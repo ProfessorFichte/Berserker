@@ -7,6 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 
 public class ModItemTags {
     public static final TagKey<Item> BERSERKER_AXES = register("berserker_axes");
+    public static final TagKey<Item> LOOT_AFFILIATION_BERSERKER = register("loot_affiliation/berserker");
 
     private static TagKey<Item> register(String id) {
         return TagKey.of(RegistryKeys.ITEM, BerserkerClassMod.id(id));

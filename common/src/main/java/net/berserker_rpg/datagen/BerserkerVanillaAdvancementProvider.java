@@ -64,7 +64,7 @@ public class BerserkerVanillaAdvancementProvider extends FabricAdvancementProvid
                 id("equipment/northling_armor_set"),
                 "For the North!",
                 "Obtain the full Northling Armor Set",
-                Identifier.of("more_rpg_content", "root"),
+                Identifier.of("mrpg_lib", "root"),
                 (Item) northling.chest,
                 AdvancementFrame.GOAL,
                 true, true, false, null,

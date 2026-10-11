@@ -12,15 +12,19 @@ import net.minecraft.item.Item;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.item.MRPGCItems;
 
 import java.util.concurrent.CompletableFuture;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
 public class BerserkerRecipeProvider extends FabricRecipeProvider {
+
+    private static final TagKey<Item> WOLF_FUR_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("mrpg_lib", "wolf_fur"));
+    private static final TagKey<Item> POLAR_BEAR_FUR_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("mrpg_lib", "polar_bear_fur"));
 
     private static Item getOrFallback(Identifier id, Item fallback) {
         var item = Registries.ITEM.get(id);
@@ -109,8 +113,8 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .pattern("WRW")
                 .pattern("   ")
                 .input('W', Items.LEATHER)
-                .input('R', MRPGCItems.WOLF_FUR)
-                .criterion(hasItem(MRPGCItems.WOLF_FUR), conditionsFromItem(MRPGCItems.WOLF_FUR))
+                .input('R', WOLF_FUR_TAG)
+                .criterion("has_wolf_fur", conditionsFromTag(WOLF_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "wildling_head"));
 
         // Wildling Chest
@@ -119,9 +123,9 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .pattern("WRW")
                 .pattern("WZW")
                 .input('W', Items.LEATHER)
-                .input('R', MRPGCItems.WOLF_FUR)
+                .input('R', WOLF_FUR_TAG)
                 .input('Z', Items.CHAIN)
-                .criterion(hasItem(MRPGCItems.WOLF_FUR), conditionsFromItem(MRPGCItems.WOLF_FUR))
+                .criterion("has_wolf_fur", conditionsFromTag(WOLF_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "wildling_chest"));
 
         // Wildling Legs
@@ -130,18 +134,18 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .pattern("R R")
                 .pattern("Z Z")
                 .input('W', Items.LEATHER)
-                .input('R', MRPGCItems.WOLF_FUR)
+                .input('R', WOLF_FUR_TAG)
                 .input('Z', Items.CHAIN)
-                .criterion(hasItem(MRPGCItems.WOLF_FUR), conditionsFromItem(MRPGCItems.WOLF_FUR))
+                .criterion("has_wolf_fur", conditionsFromTag(WOLF_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "wildling_legs"));
 
         // Wildling Feet
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, Armors.wildlingArmorSet.armorSet().feet)
                 .pattern("R R")
                 .pattern("Z Z")
-                .input('R', MRPGCItems.WOLF_FUR)
+                .input('R', WOLF_FUR_TAG)
                 .input('Z', Items.CHAIN)
-                .criterion(hasItem(MRPGCItems.WOLF_FUR), conditionsFromItem(MRPGCItems.WOLF_FUR))
+                .criterion("has_wolf_fur", conditionsFromTag(WOLF_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "wildling_feet"));
 
         // ==========================================
@@ -154,8 +158,8 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .pattern("WRW")
                 .pattern("   ")
                 .input('W', Items.LEATHER)
-                .input('R', MRPGCItems.POLAR_BEAR_FUR)
-                .criterion(hasItem(MRPGCItems.POLAR_BEAR_FUR), conditionsFromItem(MRPGCItems.POLAR_BEAR_FUR))
+                .input('R', POLAR_BEAR_FUR_TAG)
+                .criterion("has_polar_bear_fur", conditionsFromTag(POLAR_BEAR_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "northling_head"));
 
         // Northling Chest
@@ -164,9 +168,9 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .pattern("WRW")
                 .pattern("ZZZ")
                 .input('W', Items.LEATHER)
-                .input('R', MRPGCItems.POLAR_BEAR_FUR)
+                .input('R', POLAR_BEAR_FUR_TAG)
                 .input('Z', Items.CHAIN)
-                .criterion(hasItem(MRPGCItems.POLAR_BEAR_FUR), conditionsFromItem(MRPGCItems.POLAR_BEAR_FUR))
+                .criterion("has_polar_bear_fur", conditionsFromTag(POLAR_BEAR_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "northling_chest"));
 
         // Northling Legs
@@ -175,18 +179,18 @@ public class BerserkerRecipeProvider extends FabricRecipeProvider {
                 .pattern("R R")
                 .pattern("Z Z")
                 .input('W', Items.LEATHER)
-                .input('R', MRPGCItems.POLAR_BEAR_FUR)
+                .input('R', POLAR_BEAR_FUR_TAG)
                 .input('Z', Items.CHAIN)
-                .criterion(hasItem(MRPGCItems.POLAR_BEAR_FUR), conditionsFromItem(MRPGCItems.POLAR_BEAR_FUR))
+                .criterion("has_polar_bear_fur", conditionsFromTag(POLAR_BEAR_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "northling_legs"));
 
         // Northling Feet
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, Armors.northlingArmorSet.armorSet().feet)
                 .pattern("R R")
                 .pattern("Z Z")
-                .input('R', MRPGCItems.POLAR_BEAR_FUR)
+                .input('R', POLAR_BEAR_FUR_TAG)
                 .input('Z', Items.CHAIN)
-                .criterion(hasItem(MRPGCItems.POLAR_BEAR_FUR), conditionsFromItem(MRPGCItems.POLAR_BEAR_FUR))
+                .criterion("has_polar_bear_fur", conditionsFromTag(POLAR_BEAR_FUR_TAG))
                 .offerTo(exporter, Identifier.of(MOD_ID, "northling_feet"));
     }
 }

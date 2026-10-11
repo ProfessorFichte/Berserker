@@ -73,12 +73,12 @@
   
   "equipment_set.berserker_rpg.warlord": "Розлючений полководець",
 
-  "advancements.more_rpg_content.path_choose_berserker.title": "Шлях Берсерка"
-  "advancements.more_rpg_content.path_choose_berserker.description": "Створіть Стародавній том рун"
-  "advancements.more_rpg_content.spell_novice_berserker.title": "До кораблів!"
-  "advancements.more_rpg_content.spell_novice_berserker.description": "Отримайте свою першу навичку Берсерка"
-  "advancements.more_rpg_content.spell_master_berserker.title": "Невблаганний рейдер"
-  "advancements.more_rpg_content.spell_master_berserker.description": "Заповніть Стародавній том рун"
-  "advancements.more_rpg_content.spell_cast_berserker_book.title": "Берсеркінг"
-  "advancements.more_rpg_content.spell_cast_berserker_book.description": "Використайте навичку зі Стародавнього тому рун"
+  "advancements.mrpg_lib.path_choose_berserker.title": "Шлях Берсерка"
+  "advancements.mrpg_lib.path_choose_berserker.description": "Створіть Стародавній том рун"
+  "advancements.mrpg_lib.spell_novice_berserker.title": "До кораблів!"
+  "advancements.mrpg_lib.spell_novice_berserker.description": "Отримайте свою першу навичку Берсерка"
+  "advancements.mrpg_lib.spell_master_berserker.title": "Невблаганний рейдер"
+  "advancements.mrpg_lib.spell_master_berserker.description": "Заповніть Стародавній том рун"
+  "advancements.mrpg_lib.spell_cast_berserker_book.title": "Берсеркінг"
+  "advancements.mrpg_lib.spell_cast_berserker_book.description": "Використайте навичку зі Стародавнього тому рун"
 }

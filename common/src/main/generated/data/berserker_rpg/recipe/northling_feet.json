@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "R": {
-      "item": "more_rpg_classes:polar_bear_fur"
+      "tag": "mrpg_lib:polar_bear_fur"
     },
     "Z": {
       "item": "minecraft:chain"

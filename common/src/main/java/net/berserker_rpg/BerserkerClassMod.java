@@ -22,14 +22,14 @@ public class BerserkerClassMod {
 	public static final Identifier ARMORY_COMPAT_PACK_ID = Identifier.of(MOD_ID, "berserker_armory_compat");
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
-			("equipment_v1", Default.itemConfig)
+			("equipment_v2", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
 			.build();
 
 	public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
-			("effects_v5", new ConfigFile.Effects())
+			("effects_v6", new ConfigFile.Effects())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)

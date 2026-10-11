@@ -8,7 +8,7 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.DataWriter;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.datagen.SpellEngineAdvancementHelper;
+import com.mrpg_lib.datagen.SpellEngineAdvancementHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
@@ -67,7 +67,7 @@ public class BerserkerAdvancementDataGen implements DataProvider {
                 id("path_choose_berserker"),
                 "Path of the Berserker",
                 "Create the Ancient Rune Tome",
-                Identifier.of("more_rpg_content", "root"),
+                Identifier.of("mrpg_lib", "root"),
                 MOD_ID + ":item/spell_scroll/berserker",
                 AdvancementFrame.TASK,
                 true, true, false, null,

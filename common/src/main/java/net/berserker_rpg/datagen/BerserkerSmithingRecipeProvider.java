@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.datagen.SmithingRecipeGenerator;
+import com.mrpg_lib.datagen.SmithingRecipeGenerator;
 
 import static net.berserker_rpg.BerserkerClassMod.MOD_ID;
 
@@ -156,7 +156,7 @@ public class BerserkerSmithingRecipeProvider extends SmithingRecipeGenerator {
                     "smithing_northling",
                     Armors.northlingArmorSet.armorSet(),
                     Identifier.of("armory_rpgs", "epic_armor_upgrade"),
-                    Identifier.of("more_rpg_classes", "ravager_upgrade_crystal"),
+                    Identifier.of("mrpg_lib", "ravager_upgrade_crystal"),
                     Armors.warlordArmorSet.armorSet(),
                     "armory_rpgs"
             );
@@ -166,7 +166,7 @@ public class BerserkerSmithingRecipeProvider extends SmithingRecipeGenerator {
                     "smithing_netherite_northling",
                     Armors.netheriteNorthlingArmorSet.armorSet(),
                     Identifier.of("armory_rpgs", "epic_armor_upgrade"),
-                    Identifier.of("more_rpg_classes", "ravager_upgrade_crystal"),
+                    Identifier.of("mrpg_lib", "ravager_upgrade_crystal"),
                     Armors.warlordArmorSet.armorSet(),
                     "armory_rpgs"
             );

@@ -7,7 +7,7 @@
   "active": {},
   "release": {
     "animation": {
-      "id": "more_rpg_classes:two_handed_roar"
+      "id": "mrpg_lib:two_handed_roar"
     },
     "visuals": {
       "particles": [
@@ -24,7 +24,7 @@
           }
         },
         {
-          "id": "more_rpg_classes:rage_particle",
+          "id": "mrpg_lib:rage_particle",
           "appearance": {},
           "batch": {
             "count": 4.0,

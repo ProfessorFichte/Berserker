@@ -5,7 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.more_rpg_classes.util.CustomMethods;
+import com.mrpg_lib.compat.spell_engine.SpellEngineMethods;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.event.SpellHandlers;
 import net.spell_engine.api.spell.registry.SpellRegistry;
@@ -40,7 +40,7 @@ public class NortherhersGuillotineImpact implements SpellHandlers.CustomImpact {
             if (executeThreshold) {
                 forcedCriticalDamage(spell.value(), damageMultiplier, livingTarget, playerCaster);
             } else {
-                CustomMethods.spellSchoolDamageCalculation(spell.value(), damageMultiplier, livingTarget, playerCaster);
+                SpellEngineMethods.spellSchoolDamageCalculation(spell.value(), damageMultiplier, livingTarget, playerCaster);
             }
         }
         return new SpellHandlers.ImpactResult(true, false);

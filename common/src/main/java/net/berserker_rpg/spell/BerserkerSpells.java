@@ -6,13 +6,13 @@ import net.berserker_rpg.spell.custom_spell_impacts.NortherhersGuillotineImpact;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.custom.MoreSpellSchools;
-import net.more_rpg_classes.entity.attribute.MRPGCEntityAttributes;
+import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
+import com.mrpg_lib.entity.attribute.MRPGCEntityAttributes;
 import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_power.api.SpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.Spell;
-import net.more_rpg_classes.client.particle.MoreParticles;
+import com.mrpg_lib.compat.spell_engine.particle.MoreSpellParticles;
 import net.spell_engine.api.spell.fx.Fx;
 import net.spell_engine.api.spell.fx.ParticleGroup;
 import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
@@ -104,14 +104,14 @@ public class BerserkerSpells {
         spell.school = MoreSpellSchools.RAGE_MELEE;
         spell.group = FANATIC;
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.WILD_RAGE.id());
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of("minecraft:angry_villager")
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .count(2).speed(0.01F, 0.1F)
                                 .preTravel(7)),
-                ParticleGroupBuilder.of(MoreParticles.RAGE_PAR)
+                ParticleGroupBuilder.of(MoreSpellParticles.RAGE_PAR)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(4).speed(0.01F, 0.2F)
                                 .preTravel(7)),
@@ -174,7 +174,7 @@ public class BerserkerSpells {
                 ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(10).speed(0.05F, 0.3F)),
-                ParticleGroupBuilder.of(MoreParticles.BLOOD_DROP)
+                ParticleGroupBuilder.of(MoreSpellParticles.BLOOD_DROP)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .verticalOrigin(0.1F)
                                 .count(10).speed(0.2F, 0.4F)));
@@ -249,10 +249,10 @@ public class BerserkerSpells {
         spell.group = FANATIC;
         spell.school = MoreSpellSchools.RAGE_MELEE;
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.BLOOD_RECKONING.id());
         spell.release.visuals = Fx.Visuals.of(
-                ParticleGroupBuilder.of(MoreParticles.RAGE_PAR)
+                ParticleGroupBuilder.of(MoreSpellParticles.RAGE_PAR)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(4).speed(0.01F, 0.2F)
                                 .preTravel(7F)),
@@ -292,7 +292,7 @@ public class BerserkerSpells {
         spell.tier = 3;
         spell.group = BRUTE;
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_roar");
         spell.release.sound = new Sound(BerserkerSounds.OUTRAGE.id());
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of("crimson_spore")

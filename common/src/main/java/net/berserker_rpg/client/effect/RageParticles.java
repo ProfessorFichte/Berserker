@@ -1,7 +1,7 @@
 package net.berserker_rpg.client.effect;
 
 import net.minecraft.entity.LivingEntity;
-import net.more_rpg_classes.client.particle.MoreParticles;
+import com.mrpg_lib.compat.spell_engine.particle.MoreSpellParticles;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.spell.fx.ParticleGroup;
 import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
@@ -11,7 +11,7 @@ public class RageParticles implements CustomParticleStatusEffect.Spawner {
     private final ParticleGroup particles;
 
     public RageParticles(int particleCount) {
-        this.particles = ParticleGroupBuilder.of(MoreParticles.RAGE_PAR)
+        this.particles = ParticleGroupBuilder.of(MoreSpellParticles.RAGE_PAR)
                 .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
                         .count(particleCount).speed(0.1F, 0.3F));
     }

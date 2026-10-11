@@ -44,10 +44,10 @@
   "spell.berserker_rpg.outrage.name": "Бесчинство",
   "spell.berserker_rpg.outrage.description": "Наносит дикий удар, накладывает эффект ярости, нанося {damage} физического урона.",
 
-  "advancements.more_rpg_content.raid_axe.title": "К кораблям!",
-  "advancements.more_rpg_content.raid_axe.description": "Получить Железную Секиру",
-  "advancements.more_rpg_content.berserker_spells.title": "Путь Берсерка",
-  "advancements.more_rpg_content.berserker_spells.description": "Получите все заклинания Берсерка",
+  "advancements.mrpg_lib.raid_axe.title": "К кораблям!",
+  "advancements.mrpg_lib.raid_axe.description": "Получить Железную Секиру",
+  "advancements.mrpg_lib.berserker_spells.title": "Путь Берсерка",
+  "advancements.mrpg_lib.berserker_spells.description": "Получите все заклинания Берсерка",
   "advancements.rpg_classes.northling.title": "Дикая Ярость на коже",
   "advancements.rpg_classes.northling.description": "Получите все части набора Северянина."
 }

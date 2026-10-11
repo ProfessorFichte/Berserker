@@ -46,10 +46,10 @@
   "spell.berserker_rpg.outrage.name": "Indignazione",
   "spell.berserker_rpg.outrage.description": "Colpisci selvaggiamente, scala con l'effetto rabbia, infligge {damage} danni fisici.",
 
-  "advancements.more_rpg_content.raid_axe.title": "Alle navi!",
-  "advancements.more_rpg_content.raid_axe.description": "Ottieni un'ascia barbuta di ferro",
-  "advancements.more_rpg_content.berserker_spells.title": "Via del berserker",
-  "advancements.more_rpg_content.berserker_spells.description": "Ottieni un incantesimo del berserker",
+  "advancements.mrpg_lib.raid_axe.title": "Alle navi!",
+  "advancements.mrpg_lib.raid_axe.description": "Ottieni un'ascia barbuta di ferro",
+  "advancements.mrpg_lib.berserker_spells.title": "Via del berserker",
+  "advancements.mrpg_lib.berserker_spells.description": "Ottieni un incantesimo del berserker",
   "advancements.rpg_classes.northling.title": "Rabbia selvaggia sulla pelle",
   "advancements.rpg_classes.northling.description": "Ottieni tutte le parti del set da berserker."
 }

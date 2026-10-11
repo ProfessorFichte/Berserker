@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": "more_rpg_classes:wolf_fur"
+            "items": "#mrpg_lib:wolf_fur"
           }
         ]
       },

@@ -62,10 +62,10 @@
   "spell.berserker_rpg.blood_reckoning.name": "Reckoning Sangriento",
   "spell.berserker_rpg.blood_reckoning.description": "Inflige {damage} de daño físico en área y convierte la absorción en salud. También extiende la duración de Furia.",
 
-  "advancements.more_rpg_content.raid_axe.title": "¡A los barcos!",
-  "advancements.more_rpg_content.raid_axe.description": "Obtené un Hacha de Saqueo de Hierro",
-  "advancements.more_rpg_content.berserker_spells.title": "Sendero del Berserker",
-  "advancements.more_rpg_content.berserker_spells.description": "Conseguí todos los Hechizos para Berserker",
+  "advancements.mrpg_lib.raid_axe.title": "¡A los barcos!",
+  "advancements.mrpg_lib.raid_axe.description": "Obtené un Hacha de Saqueo de Hierro",
+  "advancements.mrpg_lib.berserker_spells.title": "Sendero del Berserker",
+  "advancements.mrpg_lib.berserker_spells.description": "Conseguí todos los Hechizos para Berserker",
   "advancements.rpg_classes.northling.title": "Furia salvaje sobre la piel",
   "advancements.rpg_classes.northling.description": "Obtené todas las piezas del conjunto Norteño."
 }

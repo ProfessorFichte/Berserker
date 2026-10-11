@@ -8,7 +8,7 @@
   "active": {},
   "release": {
     "animation": {
-      "id": "more_rpg_classes:two_handed_roar"
+      "id": "mrpg_lib:two_handed_roar"
     },
     "visuals": {
       "particles": [

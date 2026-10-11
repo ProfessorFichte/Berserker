@@ -38,7 +38,7 @@
 		"armor_model_api": ">=${armor_model_api_version}",
 		"spell_engine": ">=${spell_engine_version}",
 		"spell_power": ">=${spell_power_version}",
-		"more_rpg_classes": ">=${more_rpg_library_version}"
+		"mrpg_lib": ">=${more_rpg_library_version}"
 	},
 	"suggests": {
 		"better_combat": "*"

@@ -9,7 +9,7 @@
   ],
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "more_rpg_classes:ravager_upgrade_crystal"
+    "item": "mrpg_lib:ravager_upgrade_crystal"
   },
   "base": {
     "item": "berserker_rpg:northling_feet"

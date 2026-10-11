@@ -15,8 +15,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.more_rpg_classes.item.MRPGCItemGroups;
-import net.more_rpg_classes.item.MRPGCItems;
+import com.mrpg_lib.item.MRPGCItemGroups;
+import com.mrpg_lib.item.MRPGCItems;
 import net.spell_engine.rpg_series.config.ArmorSetConfig;
 import net.spell_engine.rpg_series.config.AttributeModifier;
 import net.spell_engine.rpg_series.item.Equipment;
@@ -142,22 +142,22 @@ public class Armors {
                             new ArmorSetConfig.Piece(1)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T1),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T1 )
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T1),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T1 )
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T1),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T1 )
                                     )),
                             new ArmorSetConfig.Piece(1)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T1),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T1 )
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T1 )
                                     ))
                     ),1,null)
                     .translatedName("Wildling Head", "Wildling Suit", "Wildling Legs", "Wildling Boots");
@@ -172,41 +172,41 @@ public class Armors {
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T2),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t2_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T2),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t2_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T2),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t2_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T2),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t2_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T2 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T2 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T2)
                                     ))
                     ),2,null)
@@ -222,41 +222,41 @@ public class Armors {
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T3),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t3_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T3),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t3_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T3),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t3_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),berserker_atkspeed_T3),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,berserker_t3_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),berserker_rage_T3 ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),berserker_rage_T3 ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),berserker_atkdamage_T3)
                                     ))
                     ),3,null)
@@ -274,41 +274,41 @@ public class Armors {
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,warlord_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,warlord_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,warlord_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_speed")),warlord_atkspeed),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,warlord_crit_damage),
-                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("more_rpg_classes:rage_modifier")),warlord_rage ),
+                                            AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("mrpg_lib:rage_modifier")),warlord_rage ),
                                             AttributeModifier.multiply(Objects.requireNonNull(Identifier.tryParse("minecraft:generic.attack_damage")),warlord_atkdamage)
                                     ))
                     ),5,
